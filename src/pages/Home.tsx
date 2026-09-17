@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router'
 
 /* ---------- content ---------- */
 
@@ -62,7 +63,7 @@ const PARTY_TRACKS = [
 
 const NAV = [
   { label: 'Attractions', href: '#attractions' },
-  { label: 'Parties & events', href: '#parties' },
+  { label: 'Parties & events', href: '/parties' },
   { label: 'Specials', href: '#specials' },
   { label: 'Visit us', href: '#visit' },
 ]
@@ -203,9 +204,15 @@ export default function Home() {
           </a>
           <nav className="hidden md:flex items-center gap-8 font-mono-label text-[11px] text-white/90">
             {NAV.map((n) => (
-              <a key={n.href} href={n.href} className="u-link">
-                {n.label}
-              </a>
+              n.href === '/parties' ? (
+                <Link key={n.href} to="/parties" className="u-link">
+                  {n.label}
+                </Link>
+              ) : (
+                <a key={n.href} href={n.href} className="u-link">
+                  {n.label}
+                </a>
+              )
             ))}
             <a href={PHONE_TEL} className="u-link">
               {PHONE_DISPLAY}
@@ -242,14 +249,25 @@ export default function Home() {
         {menuOpen && (
           <div className="md:hidden bg-[#050505] border-t border-white/10 px-6 py-6 flex flex-col gap-5">
             {NAV.map((n) => (
-              <a
-                key={n.href}
-                href={n.href}
-                onClick={() => setMenuOpen(false)}
-                className="font-display text-3xl text-white"
-              >
-                {n.label}
-              </a>
+              n.href === '/parties' ? (
+                <Link
+                  key={n.href}
+                  to="/parties"
+                  onClick={() => setMenuOpen(false)}
+                  className="font-display text-3xl text-white"
+                >
+                  {n.label}
+                </Link>
+              ) : (
+                <a
+                  key={n.href}
+                  href={n.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="font-display text-3xl text-white"
+                >
+                  {n.label}
+                </a>
+              )
             ))}
             <a href={PHONE_TEL} className="font-mono-label text-xs text-[#ebff4b] pt-2">
               Call {PHONE_DISPLAY}
@@ -431,6 +449,12 @@ export default function Home() {
             >
               Book your event <ArrowIcon />
             </a>
+            <Link
+              to="/parties"
+              className="acid-link u-link inline-flex items-center gap-2 font-mono-label text-[11px] font-bold text-black"
+            >
+              Explore party options & FAQs <ArrowIcon className="w-3.5 h-3.5" />
+            </Link>
             <span className="font-mono-label text-[11px] text-black/60">
               or talk to a human: <a href={PHONE_TEL} className="underline">{PHONE_DISPLAY}</a>
             </span>
@@ -532,9 +556,15 @@ export default function Home() {
             </div>
             <div className="flex gap-6">
               {NAV.map((n) => (
-                <a key={n.href} href={n.href} className="u-link text-white/60">
-                  {n.label}
-                </a>
+                n.href === '/parties' ? (
+                  <Link key={n.href} to="/parties" className="u-link text-white/60">
+                    {n.label}
+                  </Link>
+                ) : (
+                  <a key={n.href} href={n.href} className="u-link text-white/60">
+                    {n.label}
+                  </a>
+                )
               ))}
             </div>
           </div>

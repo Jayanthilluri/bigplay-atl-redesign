@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router'
+import { PlayersClubPopup } from '../chrome'
 
 /* ---------- content ---------- */
 
@@ -598,6 +599,8 @@ export default function Home() {
           </a>
         </div>
       </nav>
+
+      <PlayersClubPopup />
     </div>
   )
 }

@@ -173,6 +173,89 @@ export function TicketIcon({ className = 'w-5 h-5' }: { className?: string }) {
   )
 }
 
+/* ---------- Player's Club popup ---------- */
+
+export function PlayersClubPopup({ delay = 2500 }: { delay?: number }) {
+  const [visible, setVisible] = useState(false)
+  const [closing, setClosing] = useState(false)
+
+  useEffect(() => {
+    if (sessionStorage.getItem('bp-popup-dismissed')) return
+    const t = setTimeout(() => setVisible(true), delay)
+    return () => clearTimeout(t)
+  }, [delay])
+
+  const dismiss = () => {
+    sessionStorage.setItem('bp-popup-dismissed', '1')
+    setClosing(true)
+    setTimeout(() => setVisible(false), 350)
+  }
+
+  if (!visible) return null
+
+  return (
+    <div
+      className={`fixed inset-0 z-[100] flex items-end sm:items-center justify-center transition-opacity duration-300 ${closing ? 'opacity-0' : 'opacity-100'}`}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Join the Player's Club"
+    >
+      {/* backdrop */}
+      <button
+        className="absolute inset-0 bg-black/75 backdrop-blur-sm cursor-default"
+        onClick={dismiss}
+        aria-label="Close"
+        tabIndex={-1}
+      />
+      {/* panel */}
+      <div
+        className={`relative w-full sm:max-w-md bg-[#0d0d0d] border-t-2 sm:border-2 border-[#ebff4b] p-7 sm:p-9 pb-safe transition-transform duration-350 ${closing ? 'translate-y-8 sm:translate-y-4' : 'translate-y-0'}`}
+        style={{ transitionDuration: '350ms' }}
+      >
+        <button
+          onClick={dismiss}
+          aria-label="Close popup"
+          className="absolute top-3 right-3 w-11 h-11 flex items-center justify-center text-white/70 hover:text-[#ebff4b] text-2xl leading-none"
+        >
+          ×
+        </button>
+
+        <p className="font-mono-label text-[10px] text-[#ff8e4d]">Free to join · No spam, just perks</p>
+        <h2 className="font-display text-4xl sm:text-5xl leading-[0.9] text-white mt-3">
+          Join the <span className="text-[#ebff4b]">Player’s Club</span>
+        </h2>
+        <p className="mt-4 text-white/70 text-sm leading-relaxed">
+          VIP access, members-only deals, exclusive event invites, and first dibs on our
+          hottest specials — straight to your inbox.
+        </p>
+        <ul className="mt-4 space-y-2 text-sm text-white/85">
+          {['Insider discounts & daily-special alerts', 'First access to events & new attractions', 'Birthday perks for your crew'].map((p) => (
+            <li key={p} className="flex gap-2">
+              <span className="text-[#ebff4b]" aria-hidden>✦</span>
+              <span>{p}</span>
+            </li>
+          ))}
+        </ul>
+
+        <a
+          href={VIP_URL}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-6 flex items-center justify-center gap-2 whitespace-nowrap bg-[#ebff4b] text-black font-mono-label text-[10px] sm:text-xs font-bold px-4 sm:px-6 py-4 hover:bg-white transition-colors"
+        >
+          Join the Player’s Club — free <ArrowIcon />
+        </a>
+        <button
+          onClick={dismiss}
+          className="mt-3 w-full text-center font-mono-label text-[10px] text-white/40 hover:text-white/70 py-2"
+        >
+          Maybe later
+        </button>
+      </div>
+    </div>
+  )
+}
+
 /* ---------- chrome ---------- */
 
 export function Header() {

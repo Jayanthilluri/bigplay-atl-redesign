@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import {
-  Header, Footer, ActionBar, KineticLine, ArrowIcon, PhoneIcon,
+  Header, Footer, ActionBar, KineticLine, ArrowIcon, PhoneIcon, PlayersClubPopup,
   useReveal, useHeroParallax, BOOK_URL, PHONE_DISPLAY, PHONE_TEL, IMG,
 } from '../chrome'
 
@@ -249,6 +249,7 @@ export default function Parties() {
 
       <Footer />
       <ActionBar />
+      <PlayersClubPopup />
     </div>
   )
 }

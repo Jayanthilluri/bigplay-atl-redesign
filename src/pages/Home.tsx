@@ -6,7 +6,6 @@ import { PlayersClubPopup } from '../chrome'
 
 const BOOK_URL = 'https://bigplayusa.intercardinc.com/OnlineScheduler/home/NjU2OQ%3D%3D/l/1011'
 const VIP_URL = 'https://bigplayatl.com/vip/'
-const SPECIALS_URL = 'https://bigplayatl.com/specials/'
 const PHONE_DISPLAY = '(470) 359-5724'
 const PHONE_TEL = 'tel:+14703595724'
 const MAPS_URL = 'https://maps.app.goo.gl/WyT2gj3aWcTminr89'
@@ -63,10 +62,11 @@ const PARTY_TRACKS = [
 ]
 
 const NAV = [
-  { label: 'Attractions', href: '#attractions' },
+  { label: 'Attractions', href: '/attractions' },
   { label: 'Parties & events', href: '/parties' },
-  { label: 'Specials', href: '#specials' },
-  { label: 'Visit us', href: '#visit' },
+  { label: 'Specials', href: '/specials' },
+  { label: 'Eat & drink', href: '/eat' },
+  { label: 'Visit us', href: '/visit' },
 ]
 
 /* ---------- hooks ---------- */
@@ -205,8 +205,8 @@ export default function Home() {
           </a>
           <nav className="hidden md:flex items-center gap-8 font-mono-label text-[11px] text-white/90">
             {NAV.map((n) => (
-              n.href === '/parties' ? (
-                <Link key={n.href} to="/parties" className="u-link">
+              n.href.startsWith('/') ? (
+                <Link key={n.href} to={n.href} className="u-link">
                   {n.label}
                 </Link>
               ) : (
@@ -250,10 +250,10 @@ export default function Home() {
         {menuOpen && (
           <div className="md:hidden bg-[#050505] border-t border-white/10 px-6 py-6 flex flex-col gap-5">
             {NAV.map((n) => (
-              n.href === '/parties' ? (
+              n.href.startsWith('/') ? (
                 <Link
                   key={n.href}
-                  to="/parties"
+                  to={n.href}
                   onClick={() => setMenuOpen(false)}
                   className="font-display text-3xl text-white"
                 >
@@ -379,7 +379,10 @@ export default function Home() {
               Pick your game
             </h2>
           </div>
-          <p className="reveal hidden md:block font-mono-label text-[10px] text-white/40">Swipe →</p>
+          <div className="reveal hidden md:flex items-center gap-6">
+            <p className="font-mono-label text-[10px] text-white/40">Swipe →</p>
+            <Link to="/attractions" className="u-link font-mono-label text-[10px] text-[#ebff4b]">View all →</Link>
+          </div>
         </div>
 
         <div className="snap-gallery flex gap-4 overflow-x-auto px-5 sm:px-8 pb-4 md:grid md:grid-cols-3 md:overflow-visible">
@@ -477,14 +480,12 @@ export default function Home() {
             </p>
           </div>
           <div className="reveal flex flex-col sm:flex-row md:flex-col gap-3">
-            <a
-              href={SPECIALS_URL}
-              target="_blank"
-              rel="noreferrer"
+            <Link
+              to="/specials"
               className="inline-flex items-center justify-center gap-2 border border-white/40 text-white font-mono-label text-xs px-7 py-4 hover:border-[#ebff4b] hover:text-[#ebff4b] transition-colors"
             >
               See this week’s deals
-            </a>
+            </Link>
             <a
               href={VIP_URL}
               target="_blank"
@@ -522,6 +523,11 @@ export default function Home() {
             >
               <PhoneIcon /> {PHONE_DISPLAY}
             </a>
+            <div className="reveal mt-5">
+              <Link to="/visit" className="u-link font-mono-label text-[11px] text-[#ebff4b]">
+                Hours, directions & contact →
+              </Link>
+            </div>
           </div>
           <div className="reveal border border-white/10">
             {HOURS.map((d, i) => {
@@ -557,8 +563,8 @@ export default function Home() {
             </div>
             <div className="flex gap-6">
               {NAV.map((n) => (
-                n.href === '/parties' ? (
-                  <Link key={n.href} to="/parties" className="u-link text-white/60">
+                n.href.startsWith('/') ? (
+                  <Link key={n.href} to={n.href} className="u-link text-white/60">
                     {n.label}
                   </Link>
                 ) : (

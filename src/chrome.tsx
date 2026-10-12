@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 
 /* Internal router link for /parties (avoids full reload to a sub-route in static preview) */
+const INTERNAL_ROUTES = ['/parties', '/attractions', '/specials', '/eat', '/visit']
+
 export function NavAnchor({ href, className, children, onClick }: { href: string; className?: string; children: React.ReactNode; onClick?: () => void }) {
-  if (href === '/parties') {
+  if (INTERNAL_ROUTES.includes(href)) {
     return (
-      <Link to="/parties" className={className} onClick={onClick}>
+      <Link to={href} className={className} onClick={onClick}>
         {children}
       </Link>
     )
@@ -51,10 +53,11 @@ export const HOURS: { day: string; open: number | null; close: number | null; la
 ]
 
 export const NAV = [
-  { label: 'Attractions', href: '/#attractions' },
+  { label: 'Attractions', href: '/attractions' },
   { label: 'Parties & events', href: '/parties' },
-  { label: 'Specials', href: '/#specials' },
-  { label: 'Visit us', href: '/#visit' },
+  { label: 'Specials', href: '/specials' },
+  { label: 'Eat & drink', href: '/eat' },
+  { label: 'Visit us', href: '/visit' },
 ]
 
 /* ---------- hooks ---------- */

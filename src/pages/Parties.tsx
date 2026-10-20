@@ -1,8 +1,21 @@
 import { useEffect, useRef, useState } from 'react'
 import {
   Header, Footer, ActionBar, KineticLine, ArrowIcon, PlayersClubPopup,
-  useReveal, useHeroParallax, useOpenStatus, BOOK_URL, PHONE_DISPLAY, PHONE_TEL, IMG,
+  useReveal, useHeroParallax, useOpenStatus, BOOK_URL, PHONE_DISPLAY, PHONE_TEL,
 } from '../chrome'
+
+/* Real photos from Big Play ATL parties */
+const GALLERY = [
+  { src: '/photos/party-banner-wide.jpg', alt: 'Birthday party table under the Happy Birthday banner' },
+  { src: '/photos/party-table-setup.jpg', alt: 'Party table set with hats, cups and plates' },
+  { src: '/photos/party-kids-table.jpg', alt: 'Kids eating pizza at a birthday party' },
+  { src: '/photos/party-birthday-pin.jpg', alt: 'Take-home birthday bowling pin' },
+  { src: '/photos/party-host-kids.jpg', alt: 'Party host with birthday guests' },
+  { src: '/photos/party-room-balloons.jpg', alt: 'Party area decorated with balloons' },
+  { src: '/photos/party-banner-table.jpg', alt: 'Full party table with guests and banner' },
+  { src: '/photos/party-table-host.jpg', alt: 'Host serving a birthday table' },
+  { src: '/photos/party-cup-close.jpg', alt: 'Happy Birthday cup detail' },
+]
 
 /* Real content from birthday.bigplayatl.com — packages, prices, terms, reviews */
 
@@ -147,7 +160,7 @@ export default function Parties() {
       {/* ===== hero ===== */}
       <section className="relative h-[82svh] min-h-[540px] overflow-hidden flex items-end">
         <div ref={heroImg} className="absolute inset-0 -top-[20%] h-[140%]">
-          <img src={IMG.arcade} alt="" className="w-full h-full object-cover" />
+          <img src="/photos/party-kids-pizza.jpg" alt="Kids celebrating a birthday party at Big Play ATL" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/45 to-[#050505]/30" />
         </div>
         <div className="relative px-5 sm:px-8 pb-12 max-w-6xl mx-auto w-full">
@@ -239,6 +252,30 @@ export default function Parties() {
         </div>
       </section>
 
+      {/* ===== gallery ===== */}
+      <section className="py-16 md:py-24 border-b border-white/10">
+        <div className="px-5 sm:px-8 max-w-6xl mx-auto flex items-end justify-between gap-6">
+          <div>
+            <p className="reveal font-mono-label text-[10px] text-[#ff8e4d]">Real parties, real photos</p>
+            <h2 className="reveal font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white mt-2">
+              Inside a <span className="text-[#ebff4b]">Big Play party</span>
+            </h2>
+          </div>
+          <p className="reveal hidden sm:block font-mono-label text-[10px] text-white/40">Swipe →</p>
+        </div>
+        <div className="reveal mt-10 flex gap-3 overflow-x-auto snap-x snap-mandatory px-5 sm:px-8 pb-4">
+          {GALLERY.map((g) => (
+            <img
+              key={g.src}
+              src={g.src}
+              alt={g.alt}
+              loading="lazy"
+              className="h-64 sm:h-80 md:h-96 w-auto shrink-0 snap-center border border-white/10 object-cover"
+            />
+          ))}
+        </div>
+      </section>
+
       {/* ===== packages ===== */}
       <section className="px-5 sm:px-8 py-16 md:py-24">
         <div className="max-w-6xl mx-auto">
@@ -293,7 +330,7 @@ export default function Parties() {
                   href={BOOK_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className={`mt-5 inline-flex items-center justify-center gap-2 font-mono-label text-[11px] font-bold px-5 py-3.5 transition-colors ${
+                  className={`mt-5 inline-flex items-center justify-center gap-2 whitespace-nowrap font-mono-label text-[11px] font-bold px-4 py-3.5 transition-colors ${
                     p.tag
                       ? 'bg-black text-[#ebff4b] hover:bg-[#0d0d0d]'
                       : 'bg-[#ebff4b] text-black hover:bg-white'
@@ -361,7 +398,7 @@ export default function Parties() {
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 md:gap-14 items-center">
           <div className="reveal relative overflow-hidden group order-2 md:order-1">
             <img
-              src={IMG.vrSolo}
+              src="/photos/party-room-wide.jpg"
               alt="Group event at Big Play"
               loading="lazy"
               className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105"
@@ -466,13 +503,13 @@ export default function Parties() {
               href={BOOK_URL}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-black text-[#ebff4b] font-mono-label text-xs font-bold px-7 py-4 hover:bg-[#0d0d0d] transition-colors"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap bg-black text-[#ebff4b] font-mono-label text-xs font-bold px-7 py-4 hover:bg-[#0d0d0d] transition-colors"
             >
               Check dates & book <ArrowIcon />
             </a>
             <a
               href={PHONE_TEL}
-              className="inline-flex items-center justify-center gap-2 border-2 border-black text-black font-mono-label text-xs font-bold px-7 py-4 hover:bg-black hover:text-[#ebff4b] transition-colors"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap border-2 border-black text-black font-mono-label text-xs font-bold px-7 py-4 hover:bg-black hover:text-[#ebff4b] transition-colors"
             >
               {PHONE_DISPLAY}
             </a>

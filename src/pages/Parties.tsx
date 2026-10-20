@@ -17,6 +17,17 @@ const GALLERY = [
   { src: '/photos/party-cup-close.jpg', alt: 'Happy Birthday cup detail' },
 ]
 
+/* Real photos from corporate events & group buyouts at Big Play ATL */
+const CORP_GALLERY = [
+  { src: '/photos/corp-pin-op.jpg', alt: 'Corporate team at the Big Play bowling pin photo op' },
+  { src: '/photos/corp-team-lineup.jpg', alt: 'Corporate team lineup at a Big Play group event' },
+  { src: '/photos/corp-table-80s.jpg', alt: 'Company team dinner at the long event table' },
+  { src: '/photos/corp-buffet-line.jpg', alt: 'Guests serving themselves at a catered buffet line' },
+  { src: '/photos/food-sliders.jpg', alt: 'Pulled pork slider catering station' },
+  { src: '/photos/food-fruit-platter.jpg', alt: 'Fresh fruit platter for a catered event' },
+  { src: '/photos/food-cocktails.jpg', alt: 'Signature cocktails lined up on the bar' },
+]
+
 /* Real content from birthday.bigplayatl.com — packages, prices, terms, reviews */
 
 const STEPS = [
@@ -398,8 +409,8 @@ export default function Parties() {
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 md:gap-14 items-center">
           <div className="reveal relative overflow-hidden group order-2 md:order-1">
             <img
-              src="/photos/party-room-wide.jpg"
-              alt="Group event at Big Play"
+              src="/photos/corp-banquet.jpg"
+              alt="Corporate banquet event filling the event space at Big Play ATL"
               loading="lazy"
               className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105"
             />
@@ -433,6 +444,20 @@ export default function Parties() {
                 Plan an event: {PHONE_DISPLAY} <ArrowIcon />
               </a>
             </div>
+          </div>
+        </div>
+        <div className="max-w-6xl mx-auto mt-10">
+          <p className="reveal font-mono-label text-[10px] text-white/40">Recent group events — swipe →</p>
+          <div className="reveal mt-4 flex gap-3 overflow-x-auto snap-x snap-mandatory pb-4">
+            {CORP_GALLERY.map((g) => (
+              <img
+                key={g.src}
+                src={g.src}
+                alt={g.alt}
+                loading="lazy"
+                className="h-56 sm:h-72 md:h-80 w-auto shrink-0 snap-center border border-white/10 object-cover"
+              />
+            ))}
           </div>
         </div>
       </section>

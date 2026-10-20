@@ -1,8 +1,20 @@
 import { useEffect, useRef } from 'react'
 import {
   Header, Footer, ActionBar, KineticLine, ArrowIcon, NavAnchor, PlayersClubPopup,
-  useReveal, useHeroParallax, PHONE_DISPLAY, PHONE_TEL, IMG,
+  useReveal, useHeroParallax, PHONE_DISPLAY, PHONE_TEL,
 } from '../chrome'
+
+/* Real photos from Woody’s kitchen & event catering */
+const FOOD_GALLERY = [
+  { src: '/photos/food-sliders.jpg', alt: 'Pulled pork slider station with dipping sauces' },
+  { src: '/photos/food-salmon.jpg', alt: 'Chargrilled salmon fresh from the kitchen' },
+  { src: '/photos/food-fruit-platter.jpg', alt: 'Fresh fruit platter for a catered event' },
+  { src: '/photos/food-hummus.jpg', alt: 'Hummus and veggie platter' },
+  { src: '/photos/food-cupcakes.jpg', alt: 'Assorted cupcakes for a party' },
+  { src: '/photos/food-cookies.jpg', alt: 'Chocolate chip and s’mores cookies' },
+  { src: '/photos/food-mimosas.jpg', alt: 'Mimosas lined up for an event' },
+  { src: '/photos/food-cocktails.jpg', alt: 'Signature cocktails on the bar at Woody’s' },
+]
 
 /* Placeholder menu — final items & prices to be provided by the client */
 
@@ -45,7 +57,7 @@ export default function Eat() {
       {/* Hero */}
       <section className="relative h-[82svh] min-h-[520px] overflow-hidden flex items-end">
         <div ref={heroImg} className="absolute inset-0 -top-[20%] h-[140%]">
-          <img src={IMG.food} alt="" className="w-full h-full object-cover" />
+          <img src="/photos/food-fruit-platter.jpg" alt="Fresh catering spread from Woody’s kitchen" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-[#050505]/30" />
         </div>
         <div className="relative px-5 sm:px-8 pb-12 max-w-6xl mx-auto w-full">
@@ -116,6 +128,30 @@ export default function Eat() {
             Planning around a meal? Call <a href={PHONE_TEL} className="text-[#ebff4b] u-link">{PHONE_DISPLAY}</a> and
             we’ll confirm what’s cooking.
           </p>
+        </div>
+      </section>
+
+      {/* Food gallery */}
+      <section className="py-16 md:py-24 border-t border-white/10">
+        <div className="px-5 sm:px-8 max-w-6xl mx-auto flex items-end justify-between gap-6">
+          <div>
+            <p className="reveal font-mono-label text-[10px] text-[#ff8e4d]">Real plates, real events</p>
+            <h2 className="reveal font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white mt-2">
+              Fresh from the <span className="text-[#ebff4b]">kitchen</span>
+            </h2>
+          </div>
+          <p className="reveal hidden sm:block font-mono-label text-[10px] text-white/40">Swipe →</p>
+        </div>
+        <div className="reveal mt-10 flex gap-3 overflow-x-auto snap-x snap-mandatory px-5 sm:px-8 pb-4">
+          {FOOD_GALLERY.map((g) => (
+            <img
+              key={g.src}
+              src={g.src}
+              alt={g.alt}
+              loading="lazy"
+              className="h-64 sm:h-80 md:h-96 w-auto shrink-0 snap-center border border-white/10 object-cover"
+            />
+          ))}
         </div>
       </section>
 

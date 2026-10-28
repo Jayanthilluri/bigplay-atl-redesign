@@ -168,12 +168,18 @@ export default function Eat() {
               thing for you to carry.
             </p>
           </div>
-          <div className="reveal">
+          <div className="reveal flex flex-col sm:flex-row md:flex-col gap-3">
             <NavAnchor
               href="/parties"
-              className="inline-flex items-center justify-center gap-2 bg-black text-[#ebff4b] font-mono-label text-xs font-bold px-7 py-4 hover:bg-[#0d0d0d] transition-colors"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap bg-black text-[#ebff4b] font-mono-label text-xs font-bold px-7 py-4 hover:bg-[#0d0d0d] transition-colors"
             >
               See party packages <ArrowIcon />
+            </NavAnchor>
+            <NavAnchor
+              href="/events"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap border-2 border-black text-black font-mono-label text-xs font-bold px-7 py-4 hover:bg-black hover:text-[#ebff4b] transition-colors"
+            >
+              Plan a group event <ArrowIcon />
             </NavAnchor>
           </div>
         </div>

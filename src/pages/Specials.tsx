@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import {
   Header, Footer, ActionBar, KineticLine, ArrowIcon, NavAnchor, PlayersClubPopup,
-  useReveal, useHeroParallax, BOOK_URL, VIP_URL, PHONE_DISPLAY, PHONE_TEL, IMG,
+  useReveal, useHeroParallax, VIP_URL, PHONE_DISPLAY, PHONE_TEL, IMG,
 } from '../chrome'
 
 /* Placeholder copy — final specials & pricing to be provided by the client */
@@ -26,8 +26,8 @@ const STANDING = [
   {
     name: 'Group & team rates',
     desc: 'Corporate outings, team celebrations, school groups — the more players, the better the rate.',
-    cta: 'Book a group',
-    href: BOOK_URL,
+    cta: 'Plan a group event',
+    href: '/events',
   },
   {
     name: 'Party bundles',

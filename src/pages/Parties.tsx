@@ -17,17 +17,6 @@ const GALLERY = [
   { src: '/photos/party-cup-close.jpg', alt: 'Happy Birthday cup detail' },
 ]
 
-/* Real photos from corporate events & group buyouts at Big Play ATL */
-const CORP_GALLERY = [
-  { src: '/photos/corp-pin-op.jpg', alt: 'Corporate team at the Big Play bowling pin photo op' },
-  { src: '/photos/corp-team-lineup.jpg', alt: 'Corporate team lineup at a Big Play group event' },
-  { src: '/photos/corp-table-80s.jpg', alt: 'Company team dinner at the long event table' },
-  { src: '/photos/corp-buffet-line.jpg', alt: 'Guests serving themselves at a catered buffet line' },
-  { src: '/photos/food-sliders.jpg', alt: 'Pulled pork slider catering station' },
-  { src: '/photos/food-fruit-platter.jpg', alt: 'Fresh fruit platter for a catered event' },
-  { src: '/photos/food-cocktails.jpg', alt: 'Signature cocktails lined up on the bar' },
-]
-
 /* Real content from birthday.bigplayatl.com — packages, prices, terms, reviews */
 
 const STEPS = [
@@ -161,7 +150,7 @@ export default function Parties() {
   const status = useOpenStatus()
 
   useEffect(() => {
-    document.title = 'Birthday Parties & Events — Big Play ATL Redesign Concept'
+    document.title = 'Birthday Parties — Big Play ATL Redesign Concept'
   }, [])
 
   return (
@@ -177,7 +166,7 @@ export default function Parties() {
         <div className="relative px-5 sm:px-8 pb-12 max-w-6xl mx-auto w-full">
           <p className="font-mono-label text-[10px] sm:text-xs text-[#ff8e4d] flex items-center gap-2">
             <span className={`w-2 h-2 rounded-full ${status.open ? 'bg-[#ebff4b] pulse-dot' : 'bg-[#ff8e4d]'}`} />
-            Birthday parties · group events · team building
+            Birthday parties · kids & teens · hosted start to finish
           </p>
           <h1 className="font-display text-[13vw] sm:text-7xl md:text-8xl leading-[0.9] mt-4 text-white">
             <KineticLine text="Every celebration," />{' '}
@@ -401,64 +390,6 @@ export default function Parties() {
             We do not provide birthday cakes. Prices include gratuity but not taxes.
             Attractions may be substituted for a $10 game card.
           </p>
-        </div>
-      </section>
-
-      {/* ===== corporate / groups ===== */}
-      <section className="px-5 sm:px-8 pb-16 md:pb-24">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 md:gap-14 items-center">
-          <div className="reveal relative overflow-hidden group order-2 md:order-1">
-            <img
-              src="/photos/corp-banquet.jpg"
-              alt="Corporate banquet event filling the event space at Big Play ATL"
-              loading="lazy"
-              className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <span className="absolute top-3 left-3 bg-[#050505]/85 backdrop-blur px-3 py-1.5 font-mono-label text-[10px] text-[#ebff4b]">
-              Corporate & private events
-            </span>
-          </div>
-          <div className="order-1 md:order-2">
-            <p className="reveal font-mono-label text-[10px] text-[#ff8e4d]">Not just birthdays</p>
-            <h2 className="reveal font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white mt-2">
-              Where Dunwoody’s <span className="text-[#ebff4b]">best gather</span>
-            </h2>
-            <p className="reveal mt-4 text-white/70 text-sm sm:text-base leading-relaxed max-w-md">
-              The premier destination for corporate events, team building, and private parties.
-              42,000 square feet, a full restaurant and bar, and an events team that plans
-              it all with you.
-            </p>
-            <ul className="reveal mt-5 space-y-2 text-sm text-white/85">
-              {['Corporate outings & team building', 'Holiday parties & celebrations', 'School, team & group events', 'Full buyouts available'].map((p) => (
-                <li key={p} className="flex gap-2">
-                  <span className="text-[#ebff4b]" aria-hidden>✦</span>
-                  <span>{p}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="reveal mt-7 flex flex-col sm:flex-row gap-3">
-              <a
-                href={PHONE_TEL}
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap bg-[#ebff4b] text-black font-mono-label text-[10px] sm:text-xs font-bold px-5 sm:px-7 py-4 hover:bg-white transition-colors"
-              >
-                Plan an event: {PHONE_DISPLAY} <ArrowIcon />
-              </a>
-            </div>
-          </div>
-        </div>
-        <div className="max-w-6xl mx-auto mt-10">
-          <p className="reveal font-mono-label text-[10px] text-white/40">Recent group events — swipe →</p>
-          <div className="reveal mt-4 flex gap-3 overflow-x-auto snap-x snap-mandatory pb-4">
-            {CORP_GALLERY.map((g) => (
-              <img
-                key={g.src}
-                src={g.src}
-                alt={g.alt}
-                loading="lazy"
-                className="h-56 sm:h-72 md:h-80 w-auto shrink-0 snap-center border border-white/10 object-cover"
-              />
-            ))}
-          </div>
         </div>
       </section>
 

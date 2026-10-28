@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router'
 import Home from './pages/Home'
 import Parties from './pages/Parties'
+import Events from './pages/Events'
 import Attractions from './pages/Attractions'
 import Specials from './pages/Specials'
 import Eat from './pages/Eat'
@@ -11,6 +12,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/parties" element={<Parties />} />
+      <Route path="/events" element={<Events />} />
       <Route path="/attractions" element={<Attractions />} />
       <Route path="/specials" element={<Specials />} />
       <Route path="/eat" element={<Eat />} />

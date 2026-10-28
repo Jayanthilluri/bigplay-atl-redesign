@@ -58,12 +58,14 @@ const PARTY_TRACKS = [
     name: 'Corporate & groups',
     desc: 'Team outings people actually want to attend. 42,000 square feet, five attractions and catering from Woody’s kitchen.',
     points: ['Team-building that isn’t trust falls', 'Food & beverage packages', 'Planned start to finish by our events team'],
+    internal: true,
   },
 ]
 
 const NAV = [
   { label: 'Attractions', href: '/attractions' },
-  { label: 'Parties & events', href: '/parties' },
+  { label: 'Parties', href: '/parties' },
+  { label: 'Group events', href: '/events' },
   { label: 'Specials', href: '/specials' },
   { label: 'Eat & drink', href: '/eat' },
   { label: 'Visit us', href: '/visit' },
@@ -432,14 +434,23 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <a
-                  href={BOOK_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="acid-link u-link mt-6 inline-flex items-center gap-2 font-mono-label text-[11px] font-bold self-start"
-                >
-                  Check availability <ArrowIcon className="w-3.5 h-3.5" />
-                </a>
+                {'internal' in t && t.internal ? (
+                  <Link
+                    to="/events"
+                    className="acid-link u-link mt-6 inline-flex items-center gap-2 font-mono-label text-[11px] font-bold self-start"
+                  >
+                    Explore group events <ArrowIcon className="w-3.5 h-3.5" />
+                  </Link>
+                ) : (
+                  <a
+                    href={BOOK_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="acid-link u-link mt-6 inline-flex items-center gap-2 font-mono-label text-[11px] font-bold self-start"
+                  >
+                    Check availability <ArrowIcon className="w-3.5 h-3.5" />
+                  </a>
+                )}
               </div>
             ))}
           </div>

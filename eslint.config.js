@@ -6,7 +6,7 @@ import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores(['dist', 'dist-ssr']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
@@ -19,5 +19,11 @@ export default defineConfig([
       ecmaVersion: 2020,
       globals: globals.browser,
     },
+  },
+  {
+    // Shared layout/helpers module, SSR entry and the generated shadcn UI kit
+    // intentionally export non-components; Fast Refresh only matters in dev.
+    files: ['src/chrome.tsx', 'src/entry-server.tsx', 'src/components/ui/**'],
+    rules: { 'react-refresh/only-export-components': 'off' },
   },
 ])

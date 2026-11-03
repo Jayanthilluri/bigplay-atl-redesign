@@ -35,12 +35,12 @@ const HOURS: { day: string; open: number | null; close: number | null; label: st
 ]
 
 const ATTRACTIONS = [
-  { img: IMG.bowling, tag: '16 lanes', name: 'Bowling', desc: 'Modern lanes, lounge seating, and lane-side food and drinks from Woody’s.' },
-  { img: IMG.kidsArcade, tag: 'All ages', name: 'Arcade', desc: 'Racing, shooters, classics and prize games — reloadable play cards, no tokens.' },
-  { img: IMG.golf, tag: 'Glow in the dark', name: 'Glow mini-golf', desc: 'Our nostalgic 80s glow course. Nine holes of neon, music and bragging rights.' },
+  { img: '/photos/bowl-action-man.jpg', tag: '16 lanes', name: 'Bowling', desc: 'Modern lanes, lounge seating, and lane-side food and drinks from Woody’s.' },
+  { img: '/photos/race-kids.jpg', tag: 'All ages', name: 'Arcade', desc: 'Racing, shooters, classics and prize games — reloadable play cards, no tokens.' },
+  { img: '/photos/golf-cube.jpg', tag: 'Glow in the dark', name: 'Glow mini-golf', desc: 'Our nostalgic 80s glow course. Nine holes of neon, music and bragging rights.' },
   { img: IMG.vr, tag: 'ValoArena', name: 'Mixed reality', desc: 'Heart-pumping adventures and mind-bending puzzles in immersive virtual worlds.' },
-  { img: IMG.vrSolo, tag: 'Multi-level arena', name: 'Laser tag', desc: 'Suit up for team battles in our glow arena. Every mission is a new story.' },
-  { img: IMG.food, tag: 'Full kitchen & bar', name: 'Woody’s', desc: 'Chef-crafted burgers, loaded nachos and 32oz margaritas with every game on the screens.' },
+  { img: '/photos/laser-tag.jpg', tag: 'Multi-level arena', name: 'Laser tag', desc: 'Suit up for team battles in our glow arena. Every mission is a new story.' },
+  { img: '/photos/woodys-dining.jpg', tag: 'Full kitchen & bar', name: 'Woody’s', desc: 'Chef-crafted burgers, loaded nachos and 32oz margaritas with every game on the screens.' },
 ]
 
 const PARTY_TRACKS = [

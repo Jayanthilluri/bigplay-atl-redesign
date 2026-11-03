@@ -69,7 +69,7 @@ export default function Attractions() {
       {/* Hero */}
       <section className="relative h-[70svh] min-h-[480px] overflow-hidden flex items-end">
         <div ref={heroImg} className="absolute inset-0 -top-[20%] h-[140%]">
-          <img src="/photos/bowl-lanes-wide.jpg" alt="" className="w-full h-full object-cover" />
+          <img src="/photos/bowl-hero-attr.jpg" alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-[#050505]/30" />
         </div>
         <div className="relative px-5 sm:px-8 pb-12 max-w-6xl mx-auto w-full">

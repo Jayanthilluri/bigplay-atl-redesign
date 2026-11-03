@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import {
   Header, Footer, ActionBar, KineticLine, ArrowIcon, PhoneIcon, PinIcon, TicketIcon, PlayersClubPopup,
-  useReveal, useHeroParallax, useOpenStatus, BOOK_URL, PHONE_DISPLAY, PHONE_TEL, MAPS_URL, ADDRESS, HOURS, IMG,
+  useReveal, useHeroParallax, useOpenStatus, BOOK_URL, PHONE_DISPLAY, PHONE_TEL, MAPS_URL, ADDRESS, HOURS,
 } from '../chrome'
 
 const CONTACTS = [
@@ -53,7 +53,7 @@ export default function Visit() {
       {/* Hero */}
       <section className="relative h-[60svh] min-h-[420px] overflow-hidden flex items-end">
         <div ref={heroImg} className="absolute inset-0 -top-[20%] h-[140%]">
-          <img src={IMG.bowling} alt="" className="w-full h-full object-cover" />
+          <img src="/photos/venue-exterior.jpg" alt="Big Play Entertainment building exterior" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/50 to-[#050505]/40" />
         </div>
         <div className="relative px-5 sm:px-8 pb-12 max-w-6xl mx-auto w-full">

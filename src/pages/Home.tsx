@@ -283,7 +283,7 @@ export default function Home() {
       <section id="top" className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
         <div ref={heroImgRef} className="hero-parallax absolute inset-0 -top-[20%] h-[120%]">
           <img
-            src={IMG.hero}
+            src="/photos/bowl-lanes-wide.jpg"
             alt="Friends bowling under neon lights at Big Play ATL"
             className="w-full h-full object-cover"
           />

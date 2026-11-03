@@ -43,7 +43,7 @@ const ATTRACTIONS = [
     points: ['Latest immersive experiences', 'Solo & multiplayer', 'Staff-guided first sessions'],
   },
   {
-    img: '/photos/food-sliders.jpg',
+    img: '/photos/woodys-dining.jpg',
     tag: 'Woody’s',
     name: 'Restaurant & bar',
     desc: 'Fuel for the fun. Woody’s kitchen serves the kind of food you actually look forward to — and a full bar for the grown-ups keeping score.',

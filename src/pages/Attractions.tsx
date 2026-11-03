@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import {
-  Header, Footer, ActionBar, KineticLine, ArrowIcon, NavAnchor, PlayersClubPopup,
+  Header, photo, Footer, ActionBar, KineticLine, ArrowIcon, NavAnchor, PlayersClubPopup,
   useReveal, useHeroParallax, useOpenStatus, BOOK_URL, PHONE_DISPLAY, PHONE_TEL, IMG,
 } from '../chrome'
 
@@ -58,18 +58,16 @@ export default function Attractions() {
   useReveal()
   const status = useOpenStatus()
 
-  useEffect(() => {
-    document.title = 'Attractions — Big Play ATL Redesign Concept'
-  }, [])
 
   return (
     <div className="bg-[#050505] text-[#ededed] min-h-screen font-body">
       <Header />
+      <main id="main">
 
       {/* Hero */}
       <section className="relative h-[70svh] min-h-[480px] overflow-hidden flex items-end">
         <div ref={heroImg} className="absolute inset-0 -top-[20%] h-[140%]">
-          <img src="/photos/bowl-hero-attr.jpg" alt="" className="w-full h-full object-cover" />
+          <img {...photo('/photos/bowl-hero-attr.jpg')} fetchPriority="high" alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-[#050505]/30" />
         </div>
         <div className="relative px-5 sm:px-8 pb-12 max-w-6xl mx-auto w-full">
@@ -82,7 +80,7 @@ export default function Attractions() {
             <span className="text-[#ebff4b]"><KineticLine text="adventure" base={0.15} /></span>
           </h1>
           <p className="mt-5 max-w-xl text-white/70 text-sm sm:text-base leading-relaxed">
-            Six ways to play under one roof — from classic lanes to mixed reality.
+            Five attractions and a full restaurant under one roof — from classic lanes to mixed reality.
             Come for one, stay for all of them.
           </p>
         </div>
@@ -98,7 +96,7 @@ export default function Attractions() {
             >
               <div className="relative overflow-hidden group">
                 <img
-                  src={a.img}
+                  {...photo(a.img, '(min-width: 768px) 33vw, 80vw')}
                   alt={a.name}
                   loading="lazy"
                   className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105"
@@ -163,6 +161,8 @@ export default function Attractions() {
           </div>
         </div>
       </section>
+
+      </main>
 
       <Footer />
       <ActionBar />

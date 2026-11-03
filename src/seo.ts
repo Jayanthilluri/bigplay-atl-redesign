@@ -1,0 +1,114 @@
+/* Per-route SEO metadata + structured data.
+   Used by the client (title updates on navigation) and by scripts/prerender.mjs
+   (static <head> tags written into each page's HTML at build time). */
+
+import { PARTY_FAQS } from './content/partyFaqs'
+
+export const SITE_URL = 'https://bigplayatl.com'
+export const SITE_NAME = 'Big Play ATL'
+export const OG_IMAGE = '/photos/bowl-lanes-wide.webp'
+
+export type PageMeta = { path: string; title: string; description: string }
+
+export const PAGES: PageMeta[] = [
+  {
+    path: '/',
+    title: 'Big Play ATL | Bowling, Laser Tag, Arcade & Glow Golf in Dunwoody, GA',
+    description:
+      'Dunwoody’s 42,000 sq ft entertainment center: 16 bowling lanes, laser tag, arcade, glow mini-golf, mixed reality and Woody’s Restaurant & Bar. Minutes from Perimeter, I-285 and GA-400.',
+  },
+  {
+    path: '/attractions',
+    title: 'Attractions: Bowling, Laser Tag, Arcade & Glow Golf | Big Play ATL Dunwoody',
+    description:
+      'Bowling on 16 modern lanes, a multi-level laser tag arena, arcade with reloadable play cards, glow mini-golf and mixed reality — all under one roof in Dunwoody, GA.',
+  },
+  {
+    path: '/parties',
+    title: 'Kids Birthday Parties in Dunwoody, GA | Packages from $350 | Big Play ATL',
+    description:
+      'Hosted birthday parties with bowling, laser tag, arcade and glow golf. Packages from $350 include a party host, pizza, drinks and 90 minutes of play. Book online.',
+  },
+  {
+    path: '/events',
+    title: 'Corporate Events & Team Building near Perimeter Center | Big Play ATL',
+    description:
+      'Team building, holiday parties and full venue buyouts in Dunwoody. Bowling, laser tag, catering from Woody’s kitchen and a full bar — planned by our events team.',
+  },
+  {
+    path: '/specials',
+    title: 'Weekly Specials & Deals | Big Play ATL Dunwoody',
+    description:
+      'Weekday play deals, family night, glow night and Player’s Club exclusives at Big Play ATL in Dunwoody, GA.',
+  },
+  {
+    path: '/eat',
+    title: 'Woody’s Restaurant & Bar at Big Play ATL | Dunwoody, GA',
+    description:
+      'Shareables, pizza, burgers and a full bar inside Big Play ATL. Lane-side service and party catering from Woody’s kitchen in Dunwoody.',
+  },
+  {
+    path: '/visit',
+    title: 'Hours, Directions & Parking | Big Play ATL, 2480 Mt Vernon Rd, Dunwoody',
+    description:
+      'Big Play ATL hours, address and directions: 2480 Mt Vernon Rd, Dunwoody, GA 30338. Free on-site parking, minutes from I-285 and GA-400. Call (470) 359-5724.',
+  },
+]
+
+export const NOT_FOUND: PageMeta = {
+  path: '/404',
+  title: 'Page not found | Big Play ATL',
+  description: 'This page doesn’t exist. Find bowling, laser tag, parties and more at Big Play ATL in Dunwoody, GA.',
+}
+
+export function metaFor(path: string): PageMeta {
+  const clean = path.replace(/\/+$/, '') || '/'
+  return PAGES.find((p) => p.path === clean) ?? NOT_FOUND
+}
+
+/* schema.org LocalBusiness data — keep in sync with HOURS in chrome.tsx */
+export const BUSINESS_JSONLD = {
+  '@context': 'https://schema.org',
+  '@type': 'EntertainmentBusiness',
+  '@id': `${SITE_URL}/#business`,
+  name: SITE_NAME,
+  url: SITE_URL,
+  image: `${SITE_URL}${OG_IMAGE}`,
+  telephone: '+1-470-359-5724',
+  priceRange: '$$',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '2480 Mt Vernon Rd',
+    addressLocality: 'Dunwoody',
+    addressRegion: 'GA',
+    postalCode: '30338',
+    addressCountry: 'US',
+  },
+  openingHoursSpecification: [
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday'], opens: '15:00', closes: '22:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '15:00', closes: '23:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '11:00', closes: '23:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Sunday', opens: '11:00', closes: '22:00' },
+  ],
+  amenityFeature: ['Bowling', 'Laser tag', 'Arcade', 'Glow mini-golf', 'Mixed reality', 'Restaurant & bar'].map((name) => ({
+    '@type': 'LocationFeatureSpecification',
+    name,
+    value: true,
+  })),
+}
+
+export function jsonLdFor(path: string): object[] {
+  const out: object[] = [BUSINESS_JSONLD]
+  if (path === '/parties') {
+    out.push({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: PARTY_FAQS.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    })
+  }
+  return out
+}

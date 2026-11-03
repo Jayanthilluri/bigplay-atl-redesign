@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
+import { PARTY_FAQS } from '../content/partyFaqs'
 import {
-  Header, Footer, ActionBar, KineticLine, ArrowIcon, PlayersClubPopup,
+  Header, photo, Footer, ActionBar, KineticLine, ArrowIcon, PlayersClubPopup,
   useReveal, useHeroParallax, useOpenStatus, BOOK_URL, PHONE_DISPLAY, PHONE_TEL,
 } from '../chrome'
 
@@ -101,23 +102,6 @@ const UPGRADES = [
   { name: 'Extra food & drinks', desc: 'More from Woody’s kitchen — just ask our sales associate when booking.', price: 'Ask us' },
 ]
 
-const REVIEWS = [
-  { quote: 'My daughter had the most amazing 8th birthday here! The party host was incredible — she kept all 20 kids entertained the whole time. We’ll definitely be back next year!', name: 'Tiffany R.', pkg: 'Gold Package' },
-  { quote: 'Stress-free from start to finish. Booking was easy, the staff handled everything, and the kids absolutely loved the laser tag. Best birthday decision we ever made.', name: 'Marcus D.', pkg: 'Silver Package' },
-  { quote: 'The venue is huge and so clean. Pizza was delicious, tokens were a hit, and the private party room made everything feel so special. Highly recommend Big Play!', name: 'Priya K.', pkg: 'Gold Package' },
-  { quote: 'Our son’s bowling party was a total blast. The staff brought so much energy and the kids never stopped laughing. Loved every minute of it!', name: 'Jerome & Lisa W.', pkg: 'Bowling Party' },
-  { quote: 'We did the Arcade package and wow — the game card value is incredible. Every kid left with a smile and a bag full of prizes. Will 100% be booking again!', name: 'Ashley M.', pkg: 'Arcade Package' },
-  { quote: 'As a parent, I was able to actually relax at my kid’s party for once! The dedicated host took care of everything. The whole experience was top-notch.', name: 'David T.', pkg: 'Gold Package' },
-]
-
-const FAQS = [
-  { q: 'How long does a party last?', a: 'Every party runs 90 minutes of hosted play — your party host keeps the schedule moving so you fit in the attractions, food, and cake without watching the clock.' },
-  { q: 'What’s included in every package?', a: 'Every package includes a dedicated party host, 2 pizzas, ice cream, soft drinks, paper supplies, 1,000 redemption points for the birthday child, and up to 12 birthday guests.' },
-  { q: 'Can we bring a birthday cake?', a: 'Yes — cake is the one outside food item allowed. We don’t provide birthday cakes, so bring your favorite and we’ll handle the rest.' },
-  { q: 'What if we have more than 12 guests?', a: 'No problem — extra guests join for a per-guest fee depending on your package: $15 (Bowling), $30 (Arcade), $35 (Silver), or $40 (Gold).' },
-  { q: 'Can we add more attractions or food?', a: 'Yes. Add an hour of bowling for 12 people with shoes for $80, add attractions to any package for $7 per guest, or order extra food and drinks from Woody’s kitchen.' },
-  { q: 'How do taxes and gratuity work?', a: 'Package prices include gratuity but not taxes. What you see is close to what you pay — no surprise service charges at checkout.' },
-]
 
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false)
@@ -149,18 +133,16 @@ export default function Parties() {
   useReveal()
   const status = useOpenStatus()
 
-  useEffect(() => {
-    document.title = 'Birthday Parties — Big Play ATL Redesign Concept'
-  }, [])
 
   return (
     <div className="bg-[#050505] text-[#ededed] min-h-screen font-body">
       <Header />
+      <main id="main">
 
       {/* ===== hero ===== */}
       <section className="relative h-[82svh] min-h-[540px] overflow-hidden flex items-end">
         <div ref={heroImg} className="absolute inset-0 -top-[20%] h-[140%]">
-          <img src="/photos/party-kids-pizza.jpg" alt="Kids celebrating a birthday party at Big Play ATL" className="w-full h-full object-cover" />
+          <img {...photo('/photos/party-kids-pizza.jpg')} fetchPriority="high" alt="Kids celebrating a birthday party at Big Play ATL" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/45 to-[#050505]/30" />
         </div>
         <div className="relative px-5 sm:px-8 pb-12 max-w-6xl mx-auto w-full">
@@ -199,9 +181,9 @@ export default function Parties() {
       <div className="border-y border-white/10 bg-[#0d0d0d]">
         <div className="max-w-6xl mx-auto grid grid-cols-3 divide-x divide-white/10">
           {[
-            ['4.9★', 'Parent rating'],
-            ['500+', 'Parties hosted'],
-            ['7 days', 'Weekend & weekday slots'],
+            ['$350', 'Packages from'],
+            ['90 min', 'Hosted play'],
+            ['12', 'Guests included'],
           ].map(([v, l]) => (
             <div key={l} className="reveal py-6 sm:py-8 text-center px-2">
               <p className="font-display text-3xl sm:text-5xl text-[#ebff4b]">{v}</p>
@@ -261,13 +243,13 @@ export default function Parties() {
               Inside a <span className="text-[#ebff4b]">Big Play party</span>
             </h2>
           </div>
-          <p className="reveal hidden sm:block font-mono-label text-[10px] text-white/40">Swipe →</p>
+          <p className="reveal hidden sm:block font-mono-label text-[10px] text-white/60">Swipe →</p>
         </div>
-        <div className="reveal mt-10 flex gap-3 overflow-x-auto snap-x snap-mandatory px-5 sm:px-8 pb-4">
+        <div tabIndex={0} role="region" aria-label="Party photo gallery, scroll sideways" className="reveal mt-10 flex gap-3 overflow-x-auto snap-x snap-mandatory px-5 sm:px-8 pb-4">
           {GALLERY.map((g) => (
             <img
               key={g.src}
-              src={g.src}
+              {...photo(g.src, '600px')}
               alt={g.alt}
               loading="lazy"
               className="h-64 sm:h-80 md:h-96 w-auto shrink-0 snap-center border border-white/10 object-cover"
@@ -311,7 +293,7 @@ export default function Parties() {
                   <span className={`font-display text-5xl ${p.tag ? 'text-black' : 'text-[#ebff4b]'}`}>
                     ${p.price}
                   </span>
-                  <span className={`font-mono-label text-[10px] ${p.tag ? 'text-black/60' : 'text-white/40'}`}>
+                  <span className={`font-mono-label text-[10px] ${p.tag ? 'text-black/60' : 'text-white/60'}`}>
                     / party
                   </span>
                 </p>
@@ -323,7 +305,7 @@ export default function Parties() {
                     </li>
                   ))}
                 </ul>
-                <p className={`mt-4 font-mono-label text-[10px] ${p.tag ? 'text-black/60' : 'text-white/40'}`}>
+                <p className={`mt-4 font-mono-label text-[10px] ${p.tag ? 'text-black/60' : 'text-white/60'}`}>
                   +${p.addl} per additional guest
                 </p>
                 <a
@@ -345,7 +327,7 @@ export default function Parties() {
           {/* compare table */}
           <div className="reveal mt-14">
             <h3 className="font-display text-2xl sm:text-3xl text-white">Compare side-by-side</h3>
-            <div className="mt-5 overflow-x-auto border border-white/10">
+            <div tabIndex={0} role="region" aria-label="Package comparison table, scroll sideways" className="mt-5 overflow-x-auto border border-white/10">
               <table className="w-full min-w-[640px] text-sm">
                 <thead>
                   <tr className="bg-[#0d0d0d] font-mono-label text-[10px] text-white/50">
@@ -385,40 +367,11 @@ export default function Parties() {
             ))}
           </div>
 
-          <p className="reveal mt-8 text-[11px] text-white/35 leading-relaxed max-w-3xl font-mono-label">
+          <p className="reveal mt-8 text-[11px] text-white/60 leading-relaxed max-w-3xl font-mono-label">
             All parties are 1 hour 30 minutes. No outside food or drink other than cake.
             We do not provide birthday cakes. Prices include gratuity but not taxes.
             Attractions may be substituted for a $10 game card.
           </p>
-        </div>
-      </section>
-
-      {/* ===== reviews ===== */}
-      <section className="px-5 sm:px-8 pb-16 md:pb-24">
-        <div className="max-w-6xl mx-auto">
-          <p className="reveal font-mono-label text-[10px] text-[#ff8e4d]">Happy families</p>
-          <h2 className="reveal font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white mt-2">
-            What parents <span className="text-[#ebff4b]">are saying</span>
-          </h2>
-          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {REVIEWS.map((r) => (
-              <figure key={r.name} className="reveal bg-[#0d0d0d] border border-white/10 p-6 flex flex-col">
-                <p className="text-[#ebff4b] text-sm tracking-widest" aria-label="5 stars">★★★★★</p>
-                <blockquote className="mt-3 text-sm text-white/75 leading-relaxed flex-1">
-                  “{r.quote}”
-                </blockquote>
-                <figcaption className="mt-5 flex items-center gap-3">
-                  <span className="w-9 h-9 flex items-center justify-center bg-[#ebff4b]/15 text-[#ebff4b] font-mono-label text-[10px] font-bold rounded-full">
-                    {r.name.split(' ').map((w) => w[0]).slice(0, 2).join('')}
-                  </span>
-                  <span>
-                    <span className="block text-sm text-white">{r.name}</span>
-                    <span className="block font-mono-label text-[9px] text-white/40 mt-0.5">{r.pkg}</span>
-                  </span>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -430,7 +383,7 @@ export default function Parties() {
             Parents ask, <span className="text-[#ebff4b]">we answer</span>
           </h2>
           <div className="mt-8 border-t border-white/10">
-            {FAQS.map((f) => (
+            {PARTY_FAQS.map((f) => (
               <FaqItem key={f.q} q={f.q} a={f.a} />
             ))}
           </div>
@@ -472,6 +425,8 @@ export default function Parties() {
           </div>
         </div>
       </section>
+
+      </main>
 
       <Footer />
       <ActionBar />

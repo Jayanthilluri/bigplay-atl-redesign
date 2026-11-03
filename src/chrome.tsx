@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router'
+import { PHOTO_SIZES } from './photos'
 
 /* Internal router link for /parties (avoids full reload to a sub-route in static preview) */
 const INTERNAL_ROUTES = ['/parties', '/events', '/attractions', '/specials', '/eat', '/visit']
@@ -21,6 +22,9 @@ export function NavAnchor({ href, className, children, onClick }: { href: string
 
 /* Shared constants, hooks and chrome (header/footer/action bar) for Big Play ATL redesign */
 
+/* Set to false on launch day to drop the "redesign concept" footer label. */
+export const STAGING = true
+
 export const BOOK_URL = 'https://bigplayusa.intercardinc.com/OnlineScheduler/home/NjU2OQ%3D%3D/l/1011'
 export const VIP_URL = 'https://bigplayatl.com/vip/'
 export const SPECIALS_URL = 'https://bigplayatl.com/specials/'
@@ -28,6 +32,21 @@ export const PHONE_DISPLAY = '(470) 359-5724'
 export const PHONE_TEL = 'tel:+14703595724'
 export const MAPS_URL = 'https://maps.app.goo.gl/WyT2gj3aWcTminr89'
 export const ADDRESS = '2480 Mt Vernon Rd, Dunwoody, GA 30338'
+
+/* Responsive props for local photos: WebP, 800w/1600w srcset, intrinsic size (no layout shift).
+   External URLs pass through unchanged. */
+export function photo(src: string, sizes = '100vw') {
+  const m = src.match(/^\/photos\/(.+)\.(?:jpg|webp)$/)
+  if (!m) return { src }
+  const [width, height] = PHOTO_SIZES[m[1]] ?? [undefined, undefined]
+  return {
+    src: `/photos/${m[1]}.webp`,
+    srcSet: `/photos/${m[1]}-800.webp 800w, /photos/${m[1]}.webp 1600w`,
+    sizes,
+    width,
+    height,
+  }
+}
 
 export const CDN = 'https://pub-2b78141871694e5facc5a50443bed6f5.r2.dev'
 export const IMG = {
@@ -83,28 +102,58 @@ export function useReveal() {
   }, [])
 }
 
-export function useOpenStatus() {
-  const [status, setStatus] = useState<{ open: boolean; text: string }>({ open: false, text: '' })
-  useEffect(() => {
-    const now = new Date()
-    const today = HOURS[now.getDay()]
-    const h = now.getHours() + now.getMinutes() / 60
-    if (today.open !== null && today.close !== null && h >= today.open && h < today.close) {
-      const closeH = (today.close as number) > 12 ? (today.close as number) - 12 : today.close
-      setStatus({ open: true, text: `Open now · until ${closeH} PM` })
-    } else {
-      for (let i = 0; i < 7; i++) {
-        const idx = (now.getDay() + i) % 7
-        const d = HOURS[idx]
-        if (d.open !== null && (i > 0 || h < (d.open as number))) {
-          const openH = (d.open as number) > 12 ? (d.open as number) - 12 : d.open
-          const when = i === 0 ? 'today' : d.day
-          setStatus({ open: false, text: `Opens ${when} at ${openH} PM` })
-          return
-        }
-      }
-      setStatus({ open: false, text: 'Closed today' })
+/* The venue's clock, not the visitor's: everything is computed in Atlanta time. */
+export const VENUE_TZ = 'America/New_York'
+const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+
+export function venueNow(date = new Date()): { day: number; hour: number } {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: VENUE_TZ,
+    weekday: 'short',
+    hour: 'numeric',
+    minute: 'numeric',
+    hourCycle: 'h23',
+  }).formatToParts(date)
+  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? ''
+  return { day: WEEKDAYS.indexOf(get('weekday')), hour: Number(get('hour')) + Number(get('minute')) / 60 }
+}
+
+export function formatHour(h: number) {
+  const suffix = h >= 12 && h < 24 ? 'PM' : 'AM'
+  const h12 = h % 12 === 0 ? 12 : h % 12
+  return `${h12} ${suffix}`
+}
+
+export function getOpenStatus(now: { day: number; hour: number }): { open: boolean; text: string } {
+  const today = HOURS[now.day]
+  if (today.open !== null && today.close !== null && now.hour >= today.open && now.hour < today.close) {
+    return { open: true, text: `Open now · until ${formatHour(today.close)}` }
+  }
+  for (let i = 0; i < 7; i++) {
+    const d = HOURS[(now.day + i) % 7]
+    if (d.open !== null && (i > 0 || now.hour < d.open)) {
+      const when = i === 0 ? 'today' : i === 1 ? 'tomorrow' : d.day
+      return { open: false, text: `Closed now · opens ${when} at ${formatHour(d.open)}` }
     }
+  }
+  return { open: false, text: 'Closed today' }
+}
+
+/* `today` is null during prerender/first paint so server HTML and hydration match. */
+export function useOpenStatus() {
+  const [status, setStatus] = useState<{ open: boolean; text: string; today: number | null }>({
+    open: false,
+    text: '',
+    today: null,
+  })
+  useEffect(() => {
+    const update = () => {
+      const now = venueNow()
+      setStatus({ ...getOpenStatus(now), today: now.day })
+    }
+    update()
+    const t = setInterval(update, 60_000)
+    return () => clearInterval(t)
   }, [])
   return status
 }
@@ -133,9 +182,9 @@ export function useHeroParallax(ref: React.RefObject<HTMLElement | null>) {
 
 export function KineticLine({ text, base = 0, className = '' }: { text: string; base?: number; className?: string }) {
   return (
-    <span className={className} aria-label={text}>
+    <span className={className}>
       {text.split(' ').map((w, i) => (
-        <span className="kinetic-word" key={i} aria-hidden>
+        <span className="kinetic-word" key={i}>
           <span style={{ animationDelay: `${base + i * 0.05}s` }}>{w}&nbsp;</span>
         </span>
       ))}
@@ -179,21 +228,64 @@ export function TicketIcon({ className = 'w-5 h-5' }: { className?: string }) {
 
 /* ---------- Player's Club popup ---------- */
 
-export function PlayersClubPopup({ delay = 2500 }: { delay?: number }) {
+const POPUP_KEY = 'bp-popup-dismissed-at'
+const POPUP_SNOOZE_MS = 30 * 24 * 60 * 60 * 1000 // 30 days
+
+function popupSnoozed() {
+  try {
+    const at = Number(localStorage.getItem(POPUP_KEY))
+    return Number.isFinite(at) && at > 0 && Date.now() - at < POPUP_SNOOZE_MS
+  } catch {
+    return false
+  }
+}
+
+/* Shows once the visitor is engaged (scrolled 40% of the page, or 25s on site),
+   never on first paint, and stays away for 30 days after it's closed. */
+export function PlayersClubPopup({ delay = 25_000 }: { delay?: number }) {
   const [visible, setVisible] = useState(false)
   const [closing, setClosing] = useState(false)
+  const closeRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    if (sessionStorage.getItem('bp-popup-dismissed')) return
-    const t = setTimeout(() => setVisible(true), delay)
-    return () => clearTimeout(t)
+    if (popupSnoozed()) return
+    let shown = false
+    const show = () => {
+      if (shown) return
+      shown = true
+      setVisible(true)
+      cleanup()
+    }
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      if (max > 0 && window.scrollY / max > 0.4) show()
+    }
+    const t = setTimeout(show, delay)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    const cleanup = () => {
+      clearTimeout(t)
+      window.removeEventListener('scroll', onScroll)
+    }
+    return cleanup
   }, [delay])
 
   const dismiss = () => {
-    sessionStorage.setItem('bp-popup-dismissed', '1')
+    try {
+      localStorage.setItem(POPUP_KEY, String(Date.now()))
+    } catch {
+      /* storage blocked — popup simply may show again next visit */
+    }
     setClosing(true)
     setTimeout(() => setVisible(false), 350)
   }
+
+  useEffect(() => {
+    if (!visible) return
+    closeRef.current?.focus()
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && dismiss()
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [visible])
 
   if (!visible) return null
 
@@ -213,10 +305,11 @@ export function PlayersClubPopup({ delay = 2500 }: { delay?: number }) {
       />
       {/* panel */}
       <div
-        className={`relative w-full sm:max-w-md bg-[#0d0d0d] border-t-2 sm:border-2 border-[#ebff4b] p-7 sm:p-9 pb-safe transition-transform duration-350 ${closing ? 'translate-y-8 sm:translate-y-4' : 'translate-y-0'}`}
+        className={`relative w-full sm:max-w-md bg-[#0d0d0d] border-t-2 sm:border-2 border-[#ebff4b] p-6 sm:p-9 pb-safe transition-transform duration-350 ${closing ? 'translate-y-8 sm:translate-y-4' : 'translate-y-0'}`}
         style={{ transitionDuration: '350ms' }}
       >
         <button
+          ref={closeRef}
           onClick={dismiss}
           aria-label="Close popup"
           className="absolute top-3 right-3 w-11 h-11 flex items-center justify-center text-white/70 hover:text-[#ebff4b] text-2xl leading-none"
@@ -225,14 +318,14 @@ export function PlayersClubPopup({ delay = 2500 }: { delay?: number }) {
         </button>
 
         <p className="font-mono-label text-[10px] text-[#ff8e4d]">Free to join · No spam, just perks</p>
-        <h2 className="font-display text-4xl sm:text-5xl leading-[0.9] text-white mt-3">
+        <h2 className="font-display text-3xl sm:text-5xl leading-[0.9] text-white mt-3 pr-10">
           Join the <span className="text-[#ebff4b]">Player’s Club</span>
         </h2>
-        <p className="mt-4 text-white/70 text-sm leading-relaxed">
+        <p className="mt-3 sm:mt-4 text-white/70 text-sm leading-relaxed">
           VIP access, members-only deals, exclusive event invites, and first dibs on our
           hottest specials — straight to your inbox.
         </p>
-        <ul className="mt-4 space-y-2 text-sm text-white/85">
+        <ul className="hidden sm:block mt-4 space-y-2 text-sm text-white/85">
           {['Insider discounts & daily-special alerts', 'First access to events & new attractions', 'Birthday perks for your crew'].map((p) => (
             <li key={p} className="flex gap-2">
               <span className="text-[#ebff4b]" aria-hidden>✦</span>
@@ -245,13 +338,14 @@ export function PlayersClubPopup({ delay = 2500 }: { delay?: number }) {
           href={VIP_URL}
           target="_blank"
           rel="noreferrer"
-          className="mt-6 flex items-center justify-center gap-2 whitespace-nowrap bg-[#ebff4b] text-black font-mono-label text-[10px] sm:text-xs font-bold px-4 sm:px-6 py-4 hover:bg-white transition-colors"
+          onClick={dismiss}
+          className="mt-5 sm:mt-6 flex items-center justify-center gap-2 whitespace-nowrap bg-[#ebff4b] text-black font-mono-label text-[11px] sm:text-xs font-bold px-4 sm:px-6 py-4 hover:bg-white transition-colors"
         >
           Join the Player’s Club — free <ArrowIcon />
         </a>
         <button
           onClick={dismiss}
-          className="mt-3 w-full text-center font-mono-label text-[10px] text-white/40 hover:text-white/70 py-2"
+          className="mt-2 w-full min-h-[44px] text-center font-mono-label text-[11px] text-white/70 hover:text-white py-2"
         >
           Maybe later
         </button>
@@ -266,10 +360,16 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   return (
     <header className="fixed top-0 inset-x-0 z-50">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:bg-[#ebff4b] focus:text-black focus:px-4 focus:py-3 font-mono-label text-xs"
+      >
+        Skip to content
+      </a>
       <div className="flex items-center justify-between px-4 sm:px-6 h-16 bg-gradient-to-b from-black/80 to-transparent">
-        <a href="/" className="flex items-center">
-          <img src={IMG.logo} alt="Big Play Entertainment" className="h-9 w-auto" />
-        </a>
+        <Link to="/" className="flex items-center min-h-[44px]" aria-label="Big Play ATL home">
+          <img src={IMG.logo} alt="Big Play Entertainment" className="h-7 sm:h-9 w-auto max-w-[150px] sm:max-w-none" width={186} height={36} />
+        </Link>
         <nav className="hidden md:flex items-center gap-8 font-mono-label text-[11px] text-white/90">
           {NAV.map((n) => (
             <NavAnchor key={n.href} href={n.href} className="u-link">
@@ -285,14 +385,14 @@ export function Header() {
             href={BOOK_URL}
             target="_blank"
             rel="noreferrer"
-            className="bg-[#ebff4b] text-black font-mono-label text-[11px] font-bold px-4 py-2.5 hover:bg-white transition-colors"
+            className="inline-flex items-center whitespace-nowrap min-h-[44px] bg-[#ebff4b] text-black font-mono-label text-[11px] font-bold px-4 hover:bg-white transition-colors"
           >
             Book a party
           </a>
           <button
-            className="md:hidden p-2 text-white"
+            className="md:hidden p-2.5 text-white"
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Menu"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
           >
             {menuOpen ? (
@@ -353,18 +453,29 @@ export function Footer() {
             Let’s play <span className="text-[#ff8e4d] group-hover:text-white transition-colors">→</span>
           </p>
         </a>
-        <div className="mt-10 flex flex-col md:flex-row justify-between gap-6 font-mono-label text-[10px] text-white/40">
+        <address className="mt-10 not-italic grid sm:grid-cols-3 gap-4 text-sm text-white/75">
+          <a href={MAPS_URL} target="_blank" rel="noreferrer" className="u-link self-start">
+            {ADDRESS}
+          </a>
+          <a href={PHONE_TEL} className="u-link self-start">
+            {PHONE_DISPLAY}
+          </a>
+          <Link to="/visit" className="u-link self-start">
+            Hours & directions
+          </Link>
+        </address>
+        <div className="mt-8 flex flex-col md:flex-row justify-between gap-6 font-mono-label text-[11px] text-white/60">
           <div className="flex items-center gap-3">
-            <img src={IMG.logo} alt="" className="h-7 w-auto" />
-            <span>© {new Date().getFullYear()} Big Play Entertainment — redesign concept</span>
+            <img src={IMG.logo} alt="" className="h-7 w-auto" width={145} height={28} />
+            <span>© {new Date().getFullYear()} Big Play Entertainment{STAGING ? ' — redesign concept' : ''}</span>
           </div>
-          <div className="flex gap-6">
+          <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-1">
             {NAV.map((n) => (
-              <NavAnchor key={n.href} href={n.href} className="u-link text-white/60">
+              <NavAnchor key={n.href} href={n.href} className="u-link text-white/70 py-2">
                 {n.label}
               </NavAnchor>
             ))}
-          </div>
+          </nav>
         </div>
       </div>
     </footer>

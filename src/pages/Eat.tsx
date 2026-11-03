@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import {
-  Header, Footer, ActionBar, KineticLine, ArrowIcon, NavAnchor, PlayersClubPopup,
+  Header, photo, Footer, ActionBar, KineticLine, ArrowIcon, NavAnchor, PlayersClubPopup,
   useReveal, useHeroParallax, PHONE_DISPLAY, PHONE_TEL,
 } from '../chrome'
 
@@ -46,18 +46,16 @@ export default function Eat() {
   useHeroParallax(heroImg)
   useReveal()
 
-  useEffect(() => {
-    document.title = 'Woody’s Restaurant & Bar — Big Play ATL Redesign Concept'
-  }, [])
 
   return (
     <div className="bg-[#050505] text-[#ededed] min-h-screen font-body">
       <Header />
+      <main id="main">
 
       {/* Hero */}
       <section className="relative h-[82svh] min-h-[520px] overflow-hidden flex items-end">
         <div ref={heroImg} className="absolute inset-0 -top-[20%] h-[140%]">
-          <img src="/photos/food-fruit-platter.jpg" alt="Fresh catering spread from Woody’s kitchen" className="w-full h-full object-cover" />
+          <img {...photo('/photos/food-fruit-platter.jpg')} fetchPriority="high" alt="Fresh catering spread from Woody’s kitchen" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-[#050505]/30" />
         </div>
         <div className="relative px-5 sm:px-8 pb-12 max-w-6xl mx-auto w-full">
@@ -103,7 +101,7 @@ export default function Eat() {
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white">
               On the <span className="text-[#ebff4b]">menu</span>
             </h2>
-            <p className="font-mono-label text-[10px] text-white/40 max-w-[260px] md:text-right">
+            <p className="font-mono-label text-[10px] text-white/60 max-w-[260px] md:text-right">
               Sample lineup — full menu with prices is on its way
             </p>
           </div>
@@ -140,13 +138,13 @@ export default function Eat() {
               Fresh from the <span className="text-[#ebff4b]">kitchen</span>
             </h2>
           </div>
-          <p className="reveal hidden sm:block font-mono-label text-[10px] text-white/40">Swipe →</p>
+          <p className="reveal hidden sm:block font-mono-label text-[10px] text-white/60">Swipe →</p>
         </div>
-        <div className="reveal mt-10 flex gap-3 overflow-x-auto snap-x snap-mandatory px-5 sm:px-8 pb-4">
+        <div tabIndex={0} role="region" aria-label="Food photo gallery, scroll sideways" className="reveal mt-10 flex gap-3 overflow-x-auto snap-x snap-mandatory px-5 sm:px-8 pb-4">
           {FOOD_GALLERY.map((g) => (
             <img
               key={g.src}
-              src={g.src}
+              {...photo(g.src, '600px')}
               alt={g.alt}
               loading="lazy"
               className="h-64 sm:h-80 md:h-96 w-auto shrink-0 snap-center border border-white/10 object-cover"
@@ -184,6 +182,8 @@ export default function Eat() {
           </div>
         </div>
       </section>
+
+      </main>
 
       <Footer />
       <ActionBar />

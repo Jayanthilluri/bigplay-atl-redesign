@@ -8,28 +8,28 @@ import {
 
 const ATTRACTIONS = [
   {
-    img: IMG.bowling,
+    img: '/photos/bowl-glow-girl.jpg',
     tag: '16 lanes',
     name: 'Bowling',
     desc: 'Sleek lanes, big screens, and music that keeps the energy up. Whether it’s a family grudge match or a league night with coworkers, this is the heart of Big Play.',
     points: ['Open bowling all week', 'Glow bowling after dark', 'Leagues & group rates'],
   },
   {
-    img: IMG.hero,
+    img: '/photos/laser-tag.jpg',
     tag: 'Multi-level arena',
     name: 'Laser tag',
     desc: 'Suit up and step into the arena. Blacklights, fog, and heart-pounding rounds that turn friends into rivals — and rivals into legends.',
     points: ['Team & free-for-all modes', 'Great for groups & parties', 'Scoreboards for bragging rights'],
   },
   {
-    img: IMG.arcade,
+    img: '/photos/arcade-cards.jpg',
     tag: 'Arcade & prizes',
     name: 'The arcade',
     desc: 'Wall-to-wall games from retro classics to the newest releases. Rack up points, hit the prize counter, and leave with something to show for it.',
     points: ['Dozens of games for every age', 'Reloadable play cards', 'Prize counter for winners'],
   },
   {
-    img: IMG.golf,
+    img: '/photos/glow-golf.jpg',
     tag: 'Glow course',
     name: 'Glow mini-golf',
     desc: 'Nine holes under the blacklights. A course that glows as hard as you play — easy enough for kids, competitive enough to start arguments.',
@@ -43,7 +43,7 @@ const ATTRACTIONS = [
     points: ['Latest immersive experiences', 'Solo & multiplayer', 'Staff-guided first sessions'],
   },
   {
-    img: IMG.food,
+    img: '/photos/food-sliders.jpg',
     tag: 'Woody’s',
     name: 'Restaurant & bar',
     desc: 'Fuel for the fun. Woody’s kitchen serves the kind of food you actually look forward to — and a full bar for the grown-ups keeping score.',
@@ -69,7 +69,7 @@ export default function Attractions() {
       {/* Hero */}
       <section className="relative h-[70svh] min-h-[480px] overflow-hidden flex items-end">
         <div ref={heroImg} className="absolute inset-0 -top-[20%] h-[140%]">
-          <img src={IMG.vr} alt="" className="w-full h-full object-cover" />
+          <img src="/photos/bowl-lanes-wide.jpg" alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-[#050505]/30" />
         </div>
         <div className="relative px-5 sm:px-8 pb-12 max-w-6xl mx-auto w-full">

@@ -41,10 +41,10 @@ const ATTRACTIONS = [
   },
   {
     img: IMG.vr,
-    tag: 'Immersive tech',
-    name: 'Mixed reality',
-    desc: 'The most futuristic thing in the building. Strap in, grab the controllers, and step into worlds that don’t fit in Dunwoody.',
-    points: ['Latest immersive experiences', 'Solo & multiplayer', 'Staff-guided first sessions'],
+    tag: 'Mixed reality',
+    name: 'Valo Arena',
+    desc: 'Our mixed reality arena: interactive games projected around you that react to how you move. Jump, dodge and race your friends — no controllers to figure out.',
+    points: ['Solo & multiplayer games', 'Great for groups & parties', 'Fun for kids and adults'],
     pricing: ATTRACTION_PRICES.mixedReality,
   },
   {
@@ -85,7 +85,7 @@ export default function Attractions() {
             <span className="text-[#ebff4b]"><KineticLine text="adventure" base={0.15} /></span>
           </h1>
           <p className="mt-5 max-w-xl text-white/70 text-sm sm:text-base leading-relaxed">
-            Five attractions and a full restaurant under one roof — from $2 Tuesday lanes to mixed reality.
+            Five attractions and a full restaurant under one roof — from $2 Tuesday lanes to the Valo Arena.
             Come for one, stay for all of them.
           </p>
         </div>

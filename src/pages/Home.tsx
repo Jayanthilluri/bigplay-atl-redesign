@@ -11,7 +11,7 @@ const ATTRACTIONS = [
   { img: '/photos/bowl-action-man.jpg', tag: '16 lanes', name: 'Bowling', desc: 'Modern lanes, lounge seating, and lane-side food and drinks from Woody’s.' },
   { img: '/photos/race-kids.jpg', tag: 'All ages', name: 'Arcade', desc: 'Racing, shooters, classics and prize games — reloadable play cards, no tokens.' },
   { img: '/photos/golf-cube.jpg', tag: 'Glow in the dark', name: 'Glow mini-golf', desc: 'Our nostalgic 80s glow course. Nine holes of neon, music and bragging rights.' },
-  { img: IMG.vr, tag: 'ValoArena', name: 'Mixed reality', desc: 'Heart-pumping adventures and mind-bending puzzles in immersive virtual worlds.' },
+  { img: IMG.vr, tag: 'Mixed reality', name: 'Valo Arena', desc: 'Interactive mixed reality games that react to how you move — team up or go head to head.' },
   { img: '/photos/laser-tag.jpg', tag: 'Multi-level arena', name: 'Laser tag', desc: 'Suit up for team battles in our glow arena. Every mission is a new story.' },
   { img: '/photos/woodys-dining.jpg', tag: 'Full kitchen & bar', name: 'Woody’s', desc: 'Smashburgers, wings, flatbreads and 18 oz margaritas — with every game on the screens.' },
 ]
@@ -100,7 +100,7 @@ export default function Home() {
         <div className="marquee-track font-display text-xl sm:text-2xl text-white/70">
           {[0, 1].map((r) => (
             <span key={r} className="flex shrink-0">
-              {['Bowling', 'Laser tag', 'Arcade', 'Glow mini-golf', 'Mixed reality', 'Woody’s kitchen & bar'].map(
+              {['Bowling', 'Laser tag', 'Arcade', 'Glow mini-golf', 'Valo Arena', 'Woody’s kitchen & bar'].map(
                 (w) => (
                   <span key={w} className="flex items-center">
                     <span className="px-5">{w}</span>

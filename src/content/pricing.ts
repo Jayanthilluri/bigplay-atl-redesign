@@ -32,7 +32,7 @@ export const ARCADE_BONUSES = [
 
 /* "Play With Your Food" — available all day, every day */
 export const PLAY_WITH_FOOD = {
-  items: ['Big Play Smashburger', 'Philly cheesesteak', 'Chicken tenders', 'Chicken quesadilla', 'Southwestern chicken salad'],
+  items: ['Big Play Smashburger', 'Philly cheesesteak', 'Chicken tenders', 'Fajita quesadilla', 'Southwestern chicken salad'],
   combos: [
     { card: '$10 game card', price: '$19.99' },
     { card: '$20 game card', price: '$27.99' },

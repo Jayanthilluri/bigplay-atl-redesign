@@ -15,13 +15,13 @@ export const PAGES: PageMeta[] = [
     path: '/',
     title: 'Big Play ATL | Bowling, Laser Tag, Arcade & Glow Golf in Dunwoody, GA',
     description:
-      'Dunwoody’s 42,000 sq ft entertainment center: 16 bowling lanes, laser tag, arcade, glow mini-golf, mixed reality and Woody’s Restaurant & Bar. Minutes from Perimeter, I-285 and GA-400.',
+      'Dunwoody’s 42,000 sq ft entertainment center: 16 bowling lanes, laser tag, arcade, glow mini-golf, Valo Arena mixed reality and Woody’s Restaurant & Bar. Minutes from Perimeter, I-285 and GA-400.',
   },
   {
     path: '/attractions',
     title: 'Attractions: Bowling, Laser Tag, Arcade & Glow Golf | Big Play ATL Dunwoody',
     description:
-      'Prices and info: bowling from $20 per lane/hour ($2 Tuesdays), laser tag $9, glow mini-golf $8, arcade game card bonuses and mixed reality — all under one roof in Dunwoody, GA.',
+      'Prices and info: bowling from $20 per lane/hour ($2 Tuesdays), laser tag $9, glow mini-golf $8, arcade game card bonuses and Valo Arena mixed reality — all under one roof in Dunwoody, GA.',
   },
   {
     path: '/parties',
@@ -91,7 +91,7 @@ export const BUSINESS_JSONLD = {
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '11:00', closes: '23:00' },
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Sunday', opens: '11:00', closes: '22:00' },
   ],
-  amenityFeature: ['Bowling', 'Laser tag', 'Arcade', 'Glow mini-golf', 'Mixed reality', 'Restaurant & bar'].map((name) => ({
+  amenityFeature: ['Bowling', 'Laser tag', 'Arcade', 'Glow mini-golf', 'Valo Arena mixed reality', 'Restaurant & bar'].map((name) => ({
     '@type': 'LocationFeatureSpecification',
     name,
     value: true,

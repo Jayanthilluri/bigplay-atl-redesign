@@ -6,5 +6,5 @@ export const PARTY_FAQS: { q: string; a: string }[] = [
   { q: 'Can we bring a birthday cake?', a: 'Yes — cake is the one outside food item allowed. We don’t provide birthday cakes, so bring your favorite and we’ll handle the rest.' },
   { q: 'What if we have more than 12 guests?', a: 'No problem — extra guests join for a per-guest fee depending on your package: $15 (Bowling), $30 (Arcade), $35 (Silver), or $40 (Gold).' },
   { q: 'Can we add more attractions or food?', a: 'Yes. Add an hour of bowling for 12 people with shoes for $80, add attractions to any package for $7 per guest, or order extra food and drinks from Woody’s kitchen.' },
-  { q: 'How do taxes and gratuity work?', a: 'Package prices include gratuity but not taxes. What you see is close to what you pay — no surprise service charges at checkout.' },
+  { q: 'How do taxes and gratuity work?', a: 'Package prices include gratuity but not sales tax (8%). Our events team will confirm your full total, including any card fees, when you book.' },
 ]

@@ -1,4 +1,6 @@
 import { useRef } from 'react'
+import { FOOD, DRINKS, MENU_FINE_PRINT, type MenuSection, type Tag } from '../content/menu'
+import { PLAY_WITH_FOOD } from '../content/pricing'
 import {
   Header, photo, Footer, ActionBar, KineticLine, ArrowIcon, NavAnchor, PlayersClubPopup,
   useReveal, useHeroParallax, PHONE_DISPLAY, PHONE_TEL,
@@ -16,30 +18,62 @@ const FOOD_GALLERY = [
   { src: '/photos/food-cocktails.jpg', alt: 'Signature cocktails on the bar at Woody’s' },
 ]
 
-/* Placeholder menu — final items & prices to be provided by the client */
+const TAG_LABEL: Record<Tag, string> = { V: 'Vegetarian', GF: 'Gluten-free option', FAV: 'House favorite' }
 
-const MENU = [
-  {
-    cat: 'Shareables',
-    note: 'Built for the lane, the table, or the lobby',
-    items: ['Loaded nachos', 'Bone-in & boneless wings', 'Pretzel bites with cheese', 'Crispy chicken tenders'],
-  },
-  {
-    cat: 'Pizza',
-    note: 'Hand-tossed, hot out of the oven',
-    items: ['Classic cheese', 'Pepperoni', 'Veggie supreme', 'Build your own'],
-  },
-  {
-    cat: 'Burgers & mains',
-    note: 'The serious hunger section',
-    items: ['The Big Play burger', 'Grilled chicken sandwich', 'Cheeseburger sliders', 'Kids’ meals'],
-  },
-  {
-    cat: 'Drinks & bar',
-    note: 'Full bar for the grown-ups',
-    items: ['Craft & domestic beer', 'Signature cocktails', 'Wine & seltzers', 'Sodas, lemonades & shakes'],
-  },
-]
+function TagBadges({ tags }: { tags?: Tag[] }) {
+  if (!tags?.length) return null
+  return (
+    <>
+      {tags.map((t) => (
+        <span
+          key={t}
+          title={TAG_LABEL[t]}
+          className={`ml-2 align-middle inline-block font-mono-label text-[9px] px-1.5 py-0.5 ${t === 'FAV' ? 'bg-[#ebff4b] text-black' : 'border border-[#ebff4b]/60 text-[#ebff4b]'}`}
+        >
+          {t === 'FAV' ? 'Fav' : t}
+          <span className="sr-only"> ({TAG_LABEL[t]})</span>
+        </span>
+      ))}
+    </>
+  )
+}
+
+function MenuBlock({ section }: { section: MenuSection }) {
+  return (
+    <section id={section.id} className="scroll-mt-24 bg-[#050505] p-6 sm:p-8">
+      <div className="flex items-baseline justify-between gap-4">
+        <h3 className="font-display text-2xl sm:text-3xl text-white">{section.title}</h3>
+        {section.note && <p className="font-mono-label text-[10px] text-[#ff8e4d] text-right">{section.note}</p>}
+      </div>
+      <ul className="mt-5 space-y-4">
+        {section.items.map((it) => (
+          <li key={it.name}>
+            <div className="flex items-baseline gap-3">
+              <span className="text-white font-medium text-sm sm:text-base">
+                {it.name}
+                <TagBadges tags={it.tags} />
+              </span>
+              {it.price && (
+                <>
+                  <span className="flex-1 border-b border-dotted border-white/20 translate-y-[-4px]" aria-hidden />
+                  <span className="font-mono-label text-xs text-[#ebff4b] whitespace-nowrap">{it.price}</span>
+                </>
+              )}
+            </div>
+            {it.desc && <p className="mt-1 text-sm text-white/60 leading-relaxed">{it.desc}</p>}
+          </li>
+        ))}
+      </ul>
+      {section.extras && (
+        <ul className="mt-5 pt-4 border-t border-white/10 space-y-1.5 text-xs text-white/60">
+          {section.extras.map((e) => (
+            <li key={e}>{e}</li>
+          ))}
+        </ul>
+      )}
+    </section>
+  )
+}
 
 export default function Eat() {
   const heroImg = useRef<HTMLDivElement>(null)
@@ -70,10 +104,18 @@ export default function Eat() {
           </p>
           <div className="mt-7 flex flex-col sm:flex-row gap-3">
             <a
-              href={PHONE_TEL}
+              href="#menu"
               className="inline-flex items-center justify-center gap-2 bg-[#ebff4b] text-black font-mono-label text-xs font-bold px-7 py-4 hover:bg-white transition-colors"
             >
-              Ask about today’s specials <ArrowIcon />
+              See the menu <ArrowIcon />
+            </a>
+            <a
+              href="/woodys-menu.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center gap-2 border border-white/40 text-white font-mono-label text-xs px-7 py-4 hover:border-[#ebff4b] hover:text-[#ebff4b] transition-colors"
+            >
+              Download menu (PDF)
             </a>
           </div>
         </div>
@@ -94,38 +136,68 @@ export default function Eat() {
         </div>
       </div>
 
-      {/* Menu preview */}
-      <section className="px-5 sm:px-8 py-16 md:py-24">
+      {/* Menu */}
+      <section id="menu" className="scroll-mt-16 px-5 sm:px-8 py-16 md:py-24">
         <div className="max-w-6xl mx-auto">
           <div className="reveal flex flex-col md:flex-row md:items-end justify-between gap-4">
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white">
               On the <span className="text-[#ebff4b]">menu</span>
             </h2>
-            <p className="font-mono-label text-[10px] text-white/60 max-w-[260px] md:text-right">
-              Sample lineup — full menu with prices is on its way
+            <p className="font-mono-label text-[10px] text-white/60 max-w-[300px] md:text-right">
+              V vegetarian · GF gluten-free option · Fav house favorite
             </p>
           </div>
-          <div className="mt-10 grid sm:grid-cols-2 gap-px bg-white/10 border border-white/10">
-            {MENU.map((m) => (
-              <div key={m.cat} className="reveal bg-[#050505] p-6 sm:p-8">
-                <h3 className="font-display text-2xl sm:text-3xl text-white">{m.cat}</h3>
-                <p className="font-mono-label text-[10px] text-[#ff8e4d] mt-1">{m.note}</p>
-                <ul className="mt-5 space-y-2.5 text-sm text-white/75">
-                  {m.items.map((it) => (
-                    <li key={it} className="flex gap-2">
-                      <span className="text-[#ebff4b]" aria-hidden>✦</span>
-                      <span>{it}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+
+          <nav aria-label="Menu sections" className="mt-8 flex flex-wrap gap-2">
+            {[...FOOD, ...DRINKS].map((m) => (
+              <a key={m.id} href={`#${m.id}`} className="font-mono-label text-[10px] border border-white/20 text-white/80 px-3 py-2.5 hover:border-[#ebff4b] hover:text-[#ebff4b]">
+                {m.title}
+              </a>
+            ))}
+          </nav>
+
+          {/* Play With Your Food combo */}
+          <div className="reveal mt-10 bg-[#ebff4b] text-black p-6 sm:p-8 grid md:grid-cols-[1.2fr_1fr] gap-6 items-center">
+            <div>
+              <p className="font-mono-label text-[10px] text-black/60">All day, every day</p>
+              <h3 className="font-display text-3xl sm:text-4xl leading-[0.95] mt-1">Play with your food</h3>
+              <p className="mt-3 text-sm text-black/75 leading-relaxed">
+                Order any of these and add a game card: {PLAY_WITH_FOOD.items.join(', ')}.
+              </p>
+            </div>
+            <ul className="grid grid-cols-2 gap-px bg-black border-2 border-black">
+              {PLAY_WITH_FOOD.combos.map((c) => (
+                <li key={c.card} className="bg-[#ebff4b] p-4 text-center">
+                  <p className="font-display text-3xl">{c.price}</p>
+                  <p className="font-mono-label text-[10px] text-black/70 mt-1">meal + {c.card}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <h3 className="reveal mt-14 font-mono-label text-xs text-[#ff8e4d]">Food</h3>
+          <div className="mt-4 grid md:grid-cols-2 gap-px bg-white/10 border border-white/10">
+            {FOOD.map((m) => (
+              <MenuBlock key={m.id} section={m} />
             ))}
           </div>
-          <p className="reveal mt-8 text-sm text-white/50 max-w-2xl leading-relaxed">
-            Kitchen hours can differ from attraction hours — especially on slower weeknights.
-            Planning around a meal? Call <a href={PHONE_TEL} className="text-[#ebff4b] u-link">{PHONE_DISPLAY}</a> and
-            we’ll confirm what’s cooking.
-          </p>
+
+          <h3 className="reveal mt-14 font-mono-label text-xs text-[#ff8e4d]">Drinks</h3>
+          <div className="mt-4 grid md:grid-cols-2 gap-px bg-white/10 border border-white/10">
+            {DRINKS.map((m) => (
+              <MenuBlock key={m.id} section={m} />
+            ))}
+          </div>
+
+          <div className="mt-8 space-y-2 text-xs text-white/60 max-w-3xl leading-relaxed">
+            {MENU_FINE_PRINT.map((t) => (
+              <p key={t}>{t}</p>
+            ))}
+            <p>
+              Kitchen hours can differ from attraction hours. Planning around a meal? Call{' '}
+              <a href={PHONE_TEL} className="text-[#ebff4b] u-link">{PHONE_DISPLAY}</a>.
+            </p>
+          </div>
         </div>
       </section>
 

@@ -3,8 +3,8 @@ import {
   Header, photo, Footer, ActionBar, KineticLine, ArrowIcon, NavAnchor, PlayersClubPopup,
   useReveal, useHeroParallax, useOpenStatus, BOOK_URL, PHONE_DISPLAY, PHONE_TEL, IMG,
 } from '../chrome'
+import { ATTRACTION_PRICES, BOWLING_RATES, SHOE_RENTAL } from '../content/pricing'
 
-/* Placeholder copy — final text to be provided by the client */
 
 const ATTRACTIONS = [
   {
@@ -12,7 +12,8 @@ const ATTRACTIONS = [
     tag: '16 lanes',
     name: 'Bowling',
     desc: 'Sleek lanes, big screens, and music that keeps the energy up. Whether it’s a family grudge match or a league night with coworkers, this is the heart of Big Play.',
-    points: ['Open bowling all week', 'Glow bowling after dark', 'Leagues & group rates'],
+    points: ['Open bowling every day we’re open', 'Glow bowling after dark', 'Leagues & group rates'],
+    pricing: ATTRACTION_PRICES.bowling,
   },
   {
     img: '/photos/laser-tag.jpg',
@@ -20,13 +21,15 @@ const ATTRACTIONS = [
     name: 'Laser tag',
     desc: 'Suit up and step into the arena. Blacklights, fog, and heart-pounding rounds that turn friends into rivals — and rivals into legends.',
     points: ['Team & free-for-all modes', 'Great for groups & parties', 'Scoreboards for bragging rights'],
+    pricing: ATTRACTION_PRICES.laserTag,
   },
   {
     img: '/photos/arcade-cards.jpg',
     tag: 'Arcade & prizes',
     name: 'The arcade',
     desc: 'Wall-to-wall games from retro classics to the newest releases. Rack up points, hit the prize counter, and leave with something to show for it.',
-    points: ['Dozens of games for every age', 'Reloadable play cards', 'Prize counter for winners'],
+    points: ['Dozens of games for every age', 'Reloadable game cards from the red kiosks', 'Prize counter for winners'],
+    pricing: ATTRACTION_PRICES.arcade,
   },
   {
     img: '/photos/glow-golf.jpg',
@@ -34,6 +37,7 @@ const ATTRACTIONS = [
     name: 'Glow mini-golf',
     desc: 'Nine holes under the blacklights. A course that glows as hard as you play — easy enough for kids, competitive enough to start arguments.',
     points: ['All-ages friendly', 'Perfect date-night move', 'Included in party packages'],
+    pricing: ATTRACTION_PRICES.miniGolf,
   },
   {
     img: IMG.vr,
@@ -41,6 +45,7 @@ const ATTRACTIONS = [
     name: 'Mixed reality',
     desc: 'The most futuristic thing in the building. Strap in, grab the controllers, and step into worlds that don’t fit in Dunwoody.',
     points: ['Latest immersive experiences', 'Solo & multiplayer', 'Staff-guided first sessions'],
+    pricing: ATTRACTION_PRICES.mixedReality,
   },
   {
     img: '/photos/woodys-dining.jpg',
@@ -80,7 +85,7 @@ export default function Attractions() {
             <span className="text-[#ebff4b]"><KineticLine text="adventure" base={0.15} /></span>
           </h1>
           <p className="mt-5 max-w-xl text-white/70 text-sm sm:text-base leading-relaxed">
-            Five attractions and a full restaurant under one roof — from classic lanes to mixed reality.
+            Five attractions and a full restaurant under one roof — from $2 Tuesday lanes to mixed reality.
             Come for one, stay for all of them.
           </p>
         </div>
@@ -119,6 +124,19 @@ export default function Attractions() {
                     </li>
                   ))}
                 </ul>
+                {'pricing' in a && a.pricing ? (
+                  <div className="mt-6 inline-flex flex-wrap items-baseline gap-x-4 gap-y-1 border border-[#ebff4b]/40 px-4 py-3">
+                    <span className="font-display text-3xl text-[#ebff4b]">{a.pricing.price}</span>
+                    <span className="font-mono-label text-[10px] text-white/70">{a.pricing.unit}</span>
+                    {a.pricing.notes.length > 0 && (
+                      <ul className="basis-full text-xs text-white/70 space-y-0.5 mt-1">
+                        {a.pricing.notes.map((n) => (
+                          <li key={n}>{n}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                ) : null}
                 {'href' in a && a.href ? (
                   <NavAnchor href={a.href} className="u-link mt-6 inline-flex items-center gap-2 font-mono-label text-[11px] text-[#ebff4b]">
                     See what’s cooking <ArrowIcon className="w-3.5 h-3.5" />
@@ -127,6 +145,43 @@ export default function Attractions() {
               </div>
             </article>
           ))}
+        </div>
+      </section>
+
+      {/* Bowling rates */}
+      <section id="prices" className="scroll-mt-20 px-5 sm:px-8 pb-16 md:pb-24">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-[1fr_1.2fr] gap-10 md:gap-16 items-start">
+          <div className="reveal">
+            <p className="font-mono-label text-[10px] text-[#ff8e4d]">Prices</p>
+            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white mt-2">
+              Bowling <span className="text-[#ebff4b]">rates</span>
+            </h2>
+            <p className="mt-4 text-sm text-white/70 leading-relaxed max-w-md">
+              Priced per lane, per hour. Shoe rental is{' '}
+              {SHOE_RENTAL}. Closed Mondays.
+            </p>
+          </div>
+          <div className="reveal border border-white/10 overflow-x-auto" tabIndex={0} role="region" aria-label="Bowling rates by day">
+            <table className="w-full text-sm">
+              <caption className="sr-only">Bowling price per lane per hour, by day and time</caption>
+              <thead>
+                <tr className="bg-[#0d0d0d] font-mono-label text-[10px] text-white/70">
+                  <th scope="col" className="text-left px-4 py-3 font-normal">Day</th>
+                  <th scope="col" className="text-right px-4 py-3 font-normal">Before 5 PM</th>
+                  <th scope="col" className="text-right px-4 py-3 font-normal">After 5 PM</th>
+                </tr>
+              </thead>
+              <tbody>
+                {BOWLING_RATES.map((r) => (
+                  <tr key={r.day} className="border-t border-white/10">
+                    <th scope="row" className="text-left px-4 py-3 font-mono-label text-[11px] text-white/85 font-normal">{r.day}</th>
+                    <td className="text-right px-4 py-3 text-white">{r.before5}</td>
+                    <td className="text-right px-4 py-3 text-white">{r.after5}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 

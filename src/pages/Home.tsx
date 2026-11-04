@@ -13,7 +13,7 @@ const ATTRACTIONS = [
   { img: '/photos/golf-cube.jpg', tag: 'Glow in the dark', name: 'Glow mini-golf', desc: 'Our nostalgic 80s glow course. Nine holes of neon, music and bragging rights.' },
   { img: IMG.vr, tag: 'ValoArena', name: 'Mixed reality', desc: 'Heart-pumping adventures and mind-bending puzzles in immersive virtual worlds.' },
   { img: '/photos/laser-tag.jpg', tag: 'Multi-level arena', name: 'Laser tag', desc: 'Suit up for team battles in our glow arena. Every mission is a new story.' },
-  { img: '/photos/woodys-dining.jpg', tag: 'Full kitchen & bar', name: 'Woody’s', desc: 'Chef-crafted burgers, loaded nachos and 32oz margaritas with every game on the screens.' },
+  { img: '/photos/woodys-dining.jpg', tag: 'Full kitchen & bar', name: 'Woody’s', desc: 'Smashburgers, wings, flatbreads and 18 oz margaritas — with every game on the screens.' },
 ]
 
 const PARTY_TRACKS = [
@@ -25,7 +25,7 @@ const PARTY_TRACKS = [
   {
     name: 'Teens & adults',
     desc: 'Birthdays, graduations, reunions or just a Friday that deserves better. Bowling, laser tag battles and glow golf — with a full bar steps away.',
-    points: ['Lanes, tags & game cards', '32oz margaritas & shareables', 'Flexible group sizes'],
+    points: ['Lanes, tags & game cards', '18 oz margaritas & shareables', 'Flexible group sizes'],
   },
   {
     name: 'Corporate & groups',
@@ -254,8 +254,8 @@ export default function Home() {
               Big fun. Bigger savings. All week long.
             </h2>
             <p className="reveal mt-4 text-white/70 leading-relaxed">
-              Food, drink and play deals every day we’re open — and Player’s Club members get
-              first dibs on the best ones.
+              $2 bowling and $2 domestic beers on Tuesdays, half-price cocktails and arcade on
+              Wednesdays, $5 Thursdays, a $60 Friday family night — and kids eat free on Sundays.
             </p>
           </div>
           <div className="reveal flex flex-col sm:flex-row md:flex-col gap-3">
@@ -263,7 +263,7 @@ export default function Home() {
               to="/specials"
               className="inline-flex items-center justify-center gap-2 border border-white/40 text-white font-mono-label text-xs px-7 py-4 hover:border-[#ebff4b] hover:text-[#ebff4b] transition-colors"
             >
-              See this week’s deals
+              See all specials
             </Link>
             <a
               href={VIP_URL}

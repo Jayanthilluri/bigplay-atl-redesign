@@ -8,7 +8,7 @@ import { pathToFileURL } from 'node:url'
 const DIST = path.resolve('dist')
 const SSR_ENTRY = path.resolve('dist-ssr/entry-server.js')
 
-const { render, PAGES, NOT_FOUND, SITE_URL, SITE_NAME, OG_IMAGE, jsonLdFor } = await import(pathToFileURL(SSR_ENTRY).href)
+const { render, STAGING, PAGES, NOT_FOUND, SITE_URL, SITE_NAME, OG_IMAGE, jsonLdFor } = await import(pathToFileURL(SSR_ENTRY).href)
 const template = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
 
 const attr = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
@@ -20,6 +20,8 @@ function head(meta, { indexable }) {
     `<title>${attr(meta.title)}</title>`,
     `<meta name="description" content="${attr(meta.description)}" />`,
     indexable ? `<link rel="canonical" href="${url}" />` : `<meta name="robots" content="noindex" />`,
+    // While STAGING (src/chrome.tsx) is true, keep preview hosts out of search results.
+    ...(STAGING && indexable ? [`<meta name="robots" content="noindex" />`] : []),
     `<meta property="og:type" content="website" />`,
     `<meta property="og:site_name" content="${SITE_NAME}" />`,
     `<meta property="og:title" content="${attr(meta.title)}" />`,

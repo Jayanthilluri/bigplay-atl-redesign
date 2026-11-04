@@ -18,9 +18,13 @@ Deploy the `dist/` folder to any static host. Each route is a real file
 (`dist/parties.html` → served at `/parties`), plus `404.html`, `sitemap.xml`, `robots.txt`
 and `_headers` (Cloudflare Pages: caching, security headers, and `noindex` on `*.pages.dev`).
 
-### Cloudflare Pages settings
-Framework preset **None** (or Vite) · Build command `npm run build` · Output directory `dist` ·
-Node version comes from `.node-version` (22).
+### Cloudflare settings
+- **Pages flow:** framework preset None · build command `npm run build` · output directory `dist`.
+- **Workers flow** (no output-directory field): build command `npm run build` · deploy command
+  `npx wrangler deploy` — `wrangler.jsonc` points it at `dist/`.
+
+Node version comes from `.node-version` (22). While `STAGING = true`, every page carries
+`<meta name="robots" content="noindex">` so preview URLs stay out of Google.
 
 ## Where things live
 
@@ -43,7 +47,8 @@ Export a JPG, then create `name.webp` (max 1600px wide) and `name-800.webp` (800
 
 ## Launch checklist
 
-- [ ] Set `STAGING = false` in `src/chrome.tsx` (removes "redesign concept" from the footer).
+- [ ] Set `STAGING = false` in `src/chrome.tsx` (removes "redesign concept" from the footer
+      and the staging `noindex` tag — **do not launch without this**).
 - [ ] Move the logo, favicon and the two remaining images still served from
       `pub-…r2.dev` (see `IMG` in `src/chrome.tsx` and the favicon in `index.html`) into
       `public/` — Cloudflare's `r2.dev` URLs are rate-limited and not meant for production.

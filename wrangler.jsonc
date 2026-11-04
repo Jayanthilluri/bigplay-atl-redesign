@@ -1,0 +1,15 @@
+// Cloudflare deploy config (used when the project is created through the
+// Workers flow: "Deploy command: npx wrangler deploy"). Serves the prerendered
+// static site from dist/ — no server code.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bigplay-atl-redesign",
+  "compatibility_date": "2025-09-01",
+  "assets": {
+    "directory": "./dist",
+    // /parties -> dist/parties.html, /parties/ and /parties.html redirect to /parties
+    "html_handling": "auto-trailing-slash",
+    // unknown URLs get dist/404.html with a real 404 status
+    "not_found_handling": "404-page"
+  }
+}

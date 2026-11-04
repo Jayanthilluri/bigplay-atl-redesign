@@ -40,8 +40,9 @@ function page(url, meta, opts) {
 }
 
 for (const meta of PAGES) {
-  const out = meta.path === '/' ? path.join(DIST, 'index.html') : path.join(DIST, meta.path.slice(1), 'index.html')
-  fs.mkdirSync(path.dirname(out), { recursive: true })
+  // /parties -> dist/parties.html: static hosts (Cloudflare Pages, Netlify) serve it at
+  // /parties with no trailing-slash redirect, matching the canonical URLs.
+  const out = meta.path === '/' ? path.join(DIST, 'index.html') : path.join(DIST, `${meta.path.slice(1)}.html`)
   fs.writeFileSync(out, page(meta.path, meta, { indexable: true }))
   console.log('prerendered', meta.path)
 }

@@ -14,9 +14,13 @@ npm run preview  # serve dist/ (note: SPA fallback hides the 404 page here)
 npm run lint
 ```
 
-Deploy the `dist/` folder to any static host (Vercel, Netlify, Cloudflare Pages).
-Each route is a real file (`dist/parties/index.html`, …), plus `404.html`, `sitemap.xml`
-and `robots.txt`.
+Deploy the `dist/` folder to any static host. Each route is a real file
+(`dist/parties.html` → served at `/parties`), plus `404.html`, `sitemap.xml`, `robots.txt`
+and `_headers` (Cloudflare Pages: caching, security headers, and `noindex` on `*.pages.dev`).
+
+### Cloudflare Pages settings
+Framework preset **None** (or Vite) · Build command `npm run build` · Output directory `dist` ·
+Node version comes from `.node-version` (22).
 
 ## Where things live
 

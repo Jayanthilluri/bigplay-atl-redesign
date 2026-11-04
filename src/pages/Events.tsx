@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import {
-  Header, Footer, ActionBar, KineticLine, ArrowIcon, NavAnchor, PlayersClubPopup,
+  Header, photo, Footer, ActionBar, KineticLine, ArrowIcon, NavAnchor, PlayersClubPopup,
   useReveal, useHeroParallax, useOpenStatus, PHONE_DISPLAY, PHONE_TEL,
 } from '../chrome'
 
@@ -46,18 +46,16 @@ export default function Events() {
   useReveal()
   const status = useOpenStatus()
 
-  useEffect(() => {
-    document.title = 'Corporate & Group Events — Big Play ATL Redesign Concept'
-  }, [])
 
   return (
     <div className="bg-[#050505] text-[#ededed] min-h-screen font-body">
       <Header />
+      <main id="main">
 
       {/* ===== hero ===== */}
       <section className="relative h-[82svh] min-h-[540px] overflow-hidden flex items-end">
         <div ref={heroImg} className="absolute inset-0 -top-[20%] h-[140%]">
-          <img src="/photos/corp-banquet.jpg" alt="Corporate banquet event at Big Play ATL" className="w-full h-full object-cover" />
+          <img {...photo('/photos/corp-banquet.jpg')} fetchPriority="high" alt="Corporate banquet event at Big Play ATL" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/45 to-[#050505]/30" />
         </div>
         <div className="relative px-5 sm:px-8 pb-12 max-w-6xl mx-auto w-full">
@@ -173,13 +171,13 @@ export default function Events() {
               Recent <span className="text-[#ebff4b]">group events</span>
             </h2>
           </div>
-          <p className="reveal hidden sm:block font-mono-label text-[10px] text-white/40">Swipe →</p>
+          <p className="reveal hidden sm:block font-mono-label text-[10px] text-white/60">Swipe →</p>
         </div>
-        <div className="reveal mt-10 flex gap-3 overflow-x-auto snap-x snap-mandatory px-5 sm:px-8 pb-4">
+        <div tabIndex={0} role="region" aria-label="Group event photo gallery, scroll sideways" className="reveal mt-10 flex gap-3 overflow-x-auto snap-x snap-mandatory px-5 sm:px-8 pb-4">
           {CORP_GALLERY.map((g) => (
             <img
               key={g.src}
-              src={g.src}
+              {...photo(g.src, '600px')}
               alt={g.alt}
               loading="lazy"
               className="h-64 sm:h-80 md:h-96 w-auto shrink-0 snap-center border border-white/10 object-cover"
@@ -216,6 +214,8 @@ export default function Events() {
           </div>
         </div>
       </section>
+
+      </main>
 
       <Footer />
       <ActionBar />

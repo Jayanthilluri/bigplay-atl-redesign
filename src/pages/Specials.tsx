@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import {
   Header, Footer, ActionBar, KineticLine, ArrowIcon, NavAnchor, PlayersClubPopup,
   useReveal, useHeroParallax, VIP_URL, PHONE_DISPLAY, PHONE_TEL, IMG,
@@ -42,13 +42,11 @@ export default function Specials() {
   useHeroParallax(heroImg)
   useReveal()
 
-  useEffect(() => {
-    document.title = 'Specials & Deals — Big Play ATL Redesign Concept'
-  }, [])
 
   return (
     <div className="bg-[#050505] text-[#ededed] min-h-screen font-body">
       <Header />
+      <main id="main">
 
       {/* Hero */}
       <section className="relative h-[70svh] min-h-[480px] overflow-hidden flex items-end">
@@ -76,7 +74,7 @@ export default function Specials() {
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white">
               The week at <span className="text-[#ebff4b]">Big Play</span>
             </h2>
-            <p className="hidden md:block font-mono-label text-[10px] text-white/40 max-w-[220px] text-right">
+            <p className="hidden md:block font-mono-label text-[10px] text-white/60 max-w-[220px] text-right">
               Specials rotate — call ahead or check at the door for this week’s lineup
             </p>
           </div>
@@ -84,10 +82,10 @@ export default function Specials() {
             {WEEKLY.map((d) => (
               <div key={d.day} className={`reveal p-6 sm:p-8 ${d.off ? 'bg-[#0d0d0d]' : 'bg-[#050505]'}`}>
                 <p className="font-mono-label text-[10px] text-[#ff8e4d]">{d.day}</p>
-                <h3 className={`font-display text-2xl sm:text-3xl mt-2 ${d.off ? 'text-white/30' : 'text-white'}`}>
+                <h3 className={`font-display text-2xl sm:text-3xl mt-2 ${d.off ? 'text-white/60' : 'text-white'}`}>
                   {d.deal}
                 </h3>
-                <p className={`mt-3 text-sm leading-relaxed ${d.off ? 'text-white/25' : 'text-white/60'}`}>
+                <p className={`mt-3 text-sm leading-relaxed ${d.off ? 'text-white/60' : 'text-white/60'}`}>
                   {d.desc}
                 </p>
               </div>
@@ -124,6 +122,8 @@ export default function Specials() {
           </div>
         </div>
       </section>
+
+      </main>
 
       <Footer />
       <ActionBar />

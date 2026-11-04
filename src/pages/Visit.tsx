@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import {
-  Header, Footer, ActionBar, KineticLine, ArrowIcon, PhoneIcon, PinIcon, TicketIcon, PlayersClubPopup,
+  Header, photo, Footer, ActionBar, KineticLine, ArrowIcon, PhoneIcon, PinIcon, TicketIcon, PlayersClubPopup,
   useReveal, useHeroParallax, useOpenStatus, BOOK_URL, PHONE_DISPLAY, PHONE_TEL, MAPS_URL, ADDRESS, HOURS,
 } from '../chrome'
 
@@ -40,20 +40,18 @@ export default function Visit() {
   useHeroParallax(heroImg)
   useReveal()
   const status = useOpenStatus()
-  const today = new Date().getDay()
+  const today = status.today
 
-  useEffect(() => {
-    document.title = 'Visit Us — Big Play ATL Redesign Concept'
-  }, [])
 
   return (
     <div className="bg-[#050505] text-[#ededed] min-h-screen font-body">
       <Header />
+      <main id="main">
 
       {/* Hero */}
       <section className="relative h-[60svh] min-h-[420px] overflow-hidden flex items-end">
         <div ref={heroImg} className="absolute inset-0 -top-[20%] h-[140%]">
-          <img src="/photos/venue-exterior.jpg" alt="Big Play Entertainment building exterior" className="w-full h-full object-cover" />
+          <img {...photo('/photos/venue-exterior.jpg')} fetchPriority="high" alt="Big Play Entertainment building exterior" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/50 to-[#050505]/40" />
         </div>
         <div className="relative px-5 sm:px-8 pb-12 max-w-6xl mx-auto w-full">
@@ -125,7 +123,7 @@ export default function Visit() {
                   {h.day}
                   {i === today && <span className="text-[9px] text-black bg-[#ebff4b] px-1.5 py-0.5 font-bold">TODAY</span>}
                 </span>
-                <span className={`font-mono-label text-[11px] ${h.label === 'Closed' ? 'text-white/30' : ''}`}>
+                <span className={`font-mono-label text-[11px] ${h.label === 'Closed' ? 'text-white/60' : ''}`}>
                   {h.label}
                 </span>
               </li>
@@ -164,6 +162,8 @@ export default function Visit() {
           </div>
         </div>
       </section>
+
+      </main>
 
       <Footer />
       <ActionBar />

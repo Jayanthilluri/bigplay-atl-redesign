@@ -7,6 +7,7 @@ import {
 
 /* Real photos from Big Play ATL parties */
 const GALLERY = [
+  { src: '/photos/parties-room.webp', alt: 'Big Play party room set for a birthday, with “Party Time” balloons' },
   { src: '/photos/party-banner-wide.jpg', alt: 'Birthday party table under the Happy Birthday banner' },
   { src: '/photos/party-table-setup.jpg', alt: 'Party table set with hats, cups and plates' },
   { src: '/photos/party-kids-table.jpg', alt: 'Kids eating pizza at a birthday party' },
@@ -113,7 +114,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
         aria-expanded={open}
       >
         <span className="text-white/90 text-sm sm:text-base font-medium">{q}</span>
-        <span className={`shrink-0 text-[#ebff4b] text-xl transition-transform duration-300 ${open ? 'rotate-45' : ''}`}>+</span>
+        <span className={`shrink-0 text-[#42b23c] text-xl transition-transform duration-300 ${open ? 'rotate-45' : ''}`}>+</span>
       </button>
       <div
         className="grid transition-all duration-300 ease-out"
@@ -147,12 +148,12 @@ export default function Parties() {
         </div>
         <div className="relative px-5 sm:px-8 pb-12 max-w-6xl mx-auto w-full">
           <p className="font-mono-label text-[10px] sm:text-xs text-[#ff8e4d] flex items-center gap-2">
-            <span className={`w-2 h-2 rounded-full ${status.open ? 'bg-[#ebff4b] pulse-dot' : 'bg-[#ff8e4d]'}`} />
+            <span className={`w-2 h-2 rounded-full ${status.open ? 'bg-[#42b23c] pulse-dot' : 'bg-[#ff8e4d]'}`} />
             Birthday parties · kids & teens · hosted start to finish
           </p>
           <h1 className="font-display text-[13vw] sm:text-7xl md:text-8xl leading-[0.9] mt-4 text-white">
-            <KineticLine text="Every celebration," />{' '}
-            <span className="text-[#ebff4b]"><KineticLine text="zero stress" base={0.2} /></span>
+            <KineticLine text="We do the work…" />{' '}
+            <span className="text-[#42b23c]"><KineticLine text="You have the fun!" base={0.2} /></span>
           </h1>
           <p className="mt-5 max-w-xl text-white/70 text-sm sm:text-base leading-relaxed">
             Unforgettable fun for kids of all ages — arcade games, laser tag, private party
@@ -163,13 +164,13 @@ export default function Parties() {
               href={BOOK_URL}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-[#ebff4b] text-black font-mono-label text-xs font-bold px-7 py-4 hover:bg-white transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-[#42b23c] text-black font-mono-label text-xs font-bold px-7 py-4 hover:bg-white transition-colors"
             >
               Check dates & book <ArrowIcon />
             </a>
             <a
               href={PHONE_TEL}
-              className="inline-flex items-center justify-center gap-2 border border-white/30 text-white font-mono-label text-xs px-7 py-4 hover:border-[#ebff4b] hover:text-[#ebff4b] transition-colors"
+              className="inline-flex items-center justify-center gap-2 border border-white/30 text-white font-mono-label text-xs px-7 py-4 hover:border-[#42b23c] hover:text-[#42b23c] transition-colors"
             >
               Talk to a party planner
             </a>
@@ -186,7 +187,7 @@ export default function Parties() {
             ['12', 'Guests included'],
           ].map(([v, l]) => (
             <div key={l} className="reveal py-6 sm:py-8 text-center px-2">
-              <p className="font-display text-3xl sm:text-5xl text-[#ebff4b]">{v}</p>
+              <p className="font-display text-3xl sm:text-5xl text-[#42b23c]">{v}</p>
               <p className="font-mono-label text-[9px] sm:text-[10px] text-white/50 mt-2">{l}</p>
             </div>
           ))}
@@ -198,7 +199,7 @@ export default function Parties() {
         <div className="max-w-6xl mx-auto">
           <p className="reveal font-mono-label text-[10px] text-[#ff8e4d]">How it works</p>
           <h2 className="reveal font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white mt-2">
-            Three steps to <span className="text-[#ebff4b]">party hero</span>
+            Three steps to <span className="text-[#42b23c]">party hero</span>
           </h2>
           <div className="mt-10 grid md:grid-cols-3 gap-px bg-white/10 border border-white/10">
             {STEPS.map((s) => (
@@ -213,13 +214,13 @@ export default function Parties() {
       </section>
 
       {/* ===== every party includes ===== */}
-      <section className="bg-[#ebff4b] text-black px-5 sm:px-8 py-14 md:py-20">
+      <section className="bg-[#42b23c] text-black px-5 sm:px-8 py-14 md:py-20">
         <div className="max-w-6xl mx-auto">
           <div className="reveal flex flex-col md:flex-row md:items-end justify-between gap-4">
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9]">
               Every party includes
             </h2>
-            <p className="font-mono-label text-[10px] text-black/60 max-w-[240px] md:text-right">
+            <p className="font-mono-label text-[10px] text-black/85 max-w-[240px] md:text-right">
               No hidden extras — this is the baseline for every single package
             </p>
           </div>
@@ -240,7 +241,7 @@ export default function Parties() {
           <div>
             <p className="reveal font-mono-label text-[10px] text-[#ff8e4d]">Real parties, real photos</p>
             <h2 className="reveal font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white mt-2">
-              Inside a <span className="text-[#ebff4b]">Big Play party</span>
+              Inside a <span className="text-[#42b23c]">Big Play party</span>
             </h2>
           </div>
           <p className="reveal hidden sm:block font-mono-label text-[10px] text-white/60">Swipe →</p>
@@ -263,7 +264,7 @@ export default function Parties() {
         <div className="max-w-6xl mx-auto">
           <p className="reveal font-mono-label text-[10px] text-[#ff8e4d]">Party packages</p>
           <h2 className="reveal font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white mt-2">
-            Pick your <span className="text-[#ebff4b]">package</span>
+            Pick your <span className="text-[#42b23c]">package</span>
           </h2>
           <p className="reveal mt-4 max-w-xl text-white/60 text-sm sm:text-base leading-relaxed">
             All packages include a dedicated party host and 90 minutes of play.
@@ -276,12 +277,12 @@ export default function Parties() {
                 key={p.name}
                 className={`reveal relative flex flex-col border p-6 sm:p-7 ${
                   p.tag
-                    ? 'bg-[#ebff4b] text-black border-[#ebff4b]'
+                    ? 'bg-[#42b23c] text-black border-[#42b23c]'
                     : 'bg-[#0d0d0d] border-white/10 hover:border-white/25 transition-colors'
                 }`}
               >
                 {p.tag && (
-                  <span className="absolute -top-3 left-6 bg-black text-[#ebff4b] font-mono-label text-[9px] font-bold px-3 py-1.5">
+                  <span className="absolute -top-3 left-6 bg-black text-[#42b23c] font-mono-label text-[9px] font-bold px-3 py-1.5">
                     {p.tag}
                   </span>
                 )}
@@ -290,10 +291,10 @@ export default function Parties() {
                   {p.name}
                 </h3>
                 <p className="mt-4 flex items-baseline gap-1.5">
-                  <span className={`font-display text-5xl ${p.tag ? 'text-black' : 'text-[#ebff4b]'}`}>
+                  <span className={`font-display text-5xl ${p.tag ? 'text-black' : 'text-[#42b23c]'}`}>
                     ${p.price}
                   </span>
-                  <span className={`font-mono-label text-[10px] ${p.tag ? 'text-black/60' : 'text-white/60'}`}>
+                  <span className={`font-mono-label text-[10px] ${p.tag ? 'text-black/85' : 'text-white/60'}`}>
                     / party
                   </span>
                 </p>
@@ -305,7 +306,7 @@ export default function Parties() {
                     </li>
                   ))}
                 </ul>
-                <p className={`mt-4 font-mono-label text-[10px] ${p.tag ? 'text-black/60' : 'text-white/60'}`}>
+                <p className={`mt-4 font-mono-label text-[10px] ${p.tag ? 'text-black/85' : 'text-white/60'}`}>
                   +${p.addl} per additional guest
                 </p>
                 <a
@@ -314,8 +315,8 @@ export default function Parties() {
                   rel="noreferrer"
                   className={`mt-5 inline-flex items-center justify-center gap-2 whitespace-nowrap font-mono-label text-[11px] font-bold px-4 py-3.5 transition-colors ${
                     p.tag
-                      ? 'bg-black text-[#ebff4b] hover:bg-[#0d0d0d]'
-                      : 'bg-[#ebff4b] text-black hover:bg-white'
+                      ? 'bg-black text-[#42b23c] hover:bg-[#0d0d0d]'
+                      : 'bg-[#42b23c] text-black hover:bg-white'
                   }`}
                 >
                   Book {p.name.split(' ')[0]} — ${p.price} <ArrowIcon className="w-3.5 h-3.5" />
@@ -335,7 +336,7 @@ export default function Parties() {
                     <th className="text-left px-4 py-3.5 font-normal">🎳 Bowling</th>
                     <th className="text-left px-4 py-3.5 font-normal">🕹️ Arcade</th>
                     <th className="text-left px-4 py-3.5 font-normal">🥈 Silver</th>
-                    <th className="text-left px-4 py-3.5 font-normal text-[#ebff4b]">🥇 Gold</th>
+                    <th className="text-left px-4 py-3.5 font-normal text-[#42b23c]">🥇 Gold</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/10">
@@ -343,7 +344,7 @@ export default function Parties() {
                     <tr key={row.label}>
                       <td className="px-4 py-3.5 text-white/50 font-mono-label text-[10px]">{row.label}</td>
                       {row.values.map((v, i) => (
-                        <td key={i} className={`px-4 py-3.5 ${i === 3 ? 'text-[#ebff4b]' : 'text-white/80'}`}>{v}</td>
+                        <td key={i} className={`px-4 py-3.5 ${i === 3 ? 'text-[#42b23c]' : 'text-white/80'}`}>{v}</td>
                       ))}
                     </tr>
                   ))}
@@ -360,7 +361,7 @@ export default function Parties() {
           <div className="mt-14 grid md:grid-cols-3 gap-px bg-white/10 border border-white/10">
             {UPGRADES.map((u) => (
               <div key={u.name} className="reveal bg-[#050505] p-6 sm:p-7">
-                <p className="font-display text-3xl text-[#ebff4b]">{u.price}</p>
+                <p className="font-display text-3xl text-[#42b23c]">{u.price}</p>
                 <h4 className="font-display text-xl text-white mt-2">{u.name}</h4>
                 <p className="mt-2 text-sm text-white/60 leading-relaxed">{u.desc}</p>
               </div>
@@ -380,7 +381,7 @@ export default function Parties() {
         <div className="max-w-3xl mx-auto">
           <p className="reveal font-mono-label text-[10px] text-[#ff8e4d]">Questions</p>
           <h2 className="reveal font-display text-4xl sm:text-5xl leading-[0.9] text-white mt-2">
-            Parents ask, <span className="text-[#ebff4b]">we answer</span>
+            Parents ask, <span className="text-[#42b23c]">we answer</span>
           </h2>
           <div className="mt-8 border-t border-white/10">
             {PARTY_FAQS.map((f) => (
@@ -389,21 +390,21 @@ export default function Parties() {
           </div>
           <p className="reveal mt-6 text-sm text-white/50">
             Something else on your mind? Call{' '}
-            <a href={PHONE_TEL} className="text-[#ebff4b] u-link">{PHONE_DISPLAY}</a> — a real
+            <a href={PHONE_TEL} className="text-[#42b23c] u-link">{PHONE_DISPLAY}</a> — a real
             human from our events team will pick up.
           </p>
         </div>
       </section>
 
       {/* ===== CTA band ===== */}
-      <section className="bg-[#ebff4b] text-black px-5 sm:px-8 py-16 md:py-20">
+      <section className="bg-[#42b23c] text-black px-5 sm:px-8 py-16 md:py-20">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="reveal">
-            <p className="font-mono-label text-[10px] text-black/60">Dates fill fast on weekends</p>
+            <p className="font-mono-label text-[10px] text-black/85">Dates fill fast on weekends</p>
             <h2 className="font-display text-5xl sm:text-6xl md:text-7xl leading-[0.9] mt-2">
               Ready to lock in your date?
             </h2>
-            <p className="mt-4 max-w-md text-black/70 text-sm sm:text-base">
+            <p className="mt-4 max-w-md text-black/85 text-sm sm:text-base">
               Real-time availability, two-minute booking, and a party host who takes it from there.
             </p>
           </div>
@@ -412,13 +413,13 @@ export default function Parties() {
               href={BOOK_URL}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap bg-black text-[#ebff4b] font-mono-label text-xs font-bold px-7 py-4 hover:bg-[#0d0d0d] transition-colors"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap bg-black text-[#42b23c] font-mono-label text-xs font-bold px-7 py-4 hover:bg-[#0d0d0d] transition-colors"
             >
               Check dates & book <ArrowIcon />
             </a>
             <a
               href={PHONE_TEL}
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap border-2 border-black text-black font-mono-label text-xs font-bold px-7 py-4 hover:bg-black hover:text-[#ebff4b] transition-colors"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap border-2 border-black text-black font-mono-label text-xs font-bold px-7 py-4 hover:bg-black hover:text-[#42b23c] transition-colors"
             >
               {PHONE_DISPLAY}
             </a>

@@ -30,24 +30,14 @@ export const ARCADE_BONUSES = [
   { spend: '$100', bonus: '$30' },
 ]
 
-/* "Play With Your Food" — available all day, every day */
-export const PLAY_WITH_FOOD = {
-  items: ['Big Play Smashburger', 'Philly cheesesteak', 'Chicken tenders', 'Fajita quesadilla', 'Southwestern chicken salad'],
-  combos: [
-    { card: '$10 game card', price: '$19.99' },
-    { card: '$20 game card', price: '$27.99' },
-  ],
-}
-
 /* Weekly specials ("Happy Days!") keyed to getDay(): 0 = Sunday */
-export type DailySpecial = { day: string; name: string; items: string[]; fine?: string; closed?: boolean }
+export type DailySpecial = { day: string; dayIndex: number; name: string; items: string[]; fine?: string; img: string; alt: string }
 
+/* "Happy Days" specials from the in-venue brochure. Closed Mondays; no Saturday special. */
 export const WEEKLY_SPECIALS: DailySpecial[] = [
-  { day: 'Sunday', name: 'Kids eat free', items: ['Kids 12 & under eat free with the purchase of an adult entrée'], fine: 'Some restrictions may apply.' },
-  { day: 'Monday', name: 'Closed', items: ['Closed for private events'], closed: true },
-  { day: 'Tuesday', name: '$2 Tuesday', items: ['$2 bowling (one hour)', '$2 domestic beers'] },
-  { day: 'Wednesday', name: '½-price Wednesday', items: ['Half-price cocktails', 'Half-price arcade games'], fine: 'Excludes ultra-premium cocktails.' },
-  { day: 'Thursday', name: '$5 Thursday', items: ['$5 wings', '$5 house wines', '$5 craft & imported beers'] },
-  { day: 'Friday', name: 'Family night — $60', items: ['1 hour of bowling', '4 shoe rentals', 'One 2-topping pizza', '4 soft drinks'] },
-  { day: 'Saturday', name: 'Open play all day', items: ['Open 11 AM – 11 PM', 'No daily special — the all-day deals below still apply'] },
+  { day: 'Sunday', dayIndex: 0, name: 'Kids eat free', items: ['Kids 12 & under eat free with the purchase of an adult entrée'], fine: 'Some restrictions may apply.', img: '/photos/special-sun.webp', alt: 'A family sharing a meal at Woody’s' },
+  { day: 'Tuesday', dayIndex: 2, name: '$2 Tuesday', items: ['$2 bowling (one hour)', '$2 domestic beers'], img: '/photos/special-tue.webp', alt: 'Bowling balls on the return rack' },
+  { day: 'Wednesday', dayIndex: 3, name: '½-price Wednesday', items: ['Half-price cocktails', 'Half-price arcade games'], fine: 'Excludes ultra-premium cocktails.', img: '/photos/special-wed.webp', alt: 'Two signature cocktails at Woody’s' },
+  { day: 'Thursday', dayIndex: 4, name: '$5 Thursday', items: ['$5 wings', '$5 house wines', '$5 craft & imported beers'], img: '/photos/special-thu.webp', alt: 'A beer and a glass of wine at Woody’s' },
+  { day: 'Friday', dayIndex: 5, name: 'Family night — $60', items: ['1 hour of bowling', '4 shoe rentals', 'One 2-topping pizza', '4 soft drinks'], img: '/photos/special-fri.webp', alt: 'A parent helping a child bowl with a ramp' },
 ]

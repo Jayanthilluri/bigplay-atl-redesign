@@ -178,6 +178,65 @@ export function useHeroParallax(ref: React.RefObject<HTMLElement | null>) {
   }, [ref])
 }
 
+/* Hero video: poster image first (prerendered, fast), then a muted looping montage —
+   portrait cut on phones held upright, landscape everywhere else. Skipped entirely
+   for visitors who ask for reduced motion. Includes a pause control (WCAG 2.2.2). */
+export function HeroVideo({ alt }: { alt: string }) {
+  const ref = useRef<HTMLVideoElement>(null)
+  const [playing, setPlaying] = useState(false)
+  const [enabled, setEnabled] = useState(false)
+
+  useEffect(() => {
+    const v = ref.current
+    if (!v || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const tall = window.matchMedia('(max-width: 767px) and (orientation: portrait)').matches
+    v.src = tall ? '/video/hero-tall.mp4' : '/video/hero-wide.mp4'
+    v.play().catch(() => {})
+  }, [])
+
+  const toggle = () => {
+    const v = ref.current
+    if (!v) return
+    if (v.paused) v.play().catch(() => {})
+    else v.pause()
+  }
+
+  return (
+    <>
+      <picture>
+        <source media="(max-width: 767px) and (orientation: portrait)" srcSet="/video/hero-tall.webp" />
+        <img src="/video/hero-wide.webp" alt={alt} fetchPriority="high" className="absolute inset-0 w-full h-full object-cover" />
+      </picture>
+      <video
+        ref={ref}
+        muted
+        loop
+        playsInline
+        preload="none"
+        aria-hidden="true"
+        onLoadedData={() => setEnabled(true)}
+        onPlaying={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${playing ? 'opacity-100' : 'opacity-0'}`}
+      />
+      {enabled && (
+        <button
+          type="button"
+          onClick={toggle}
+          aria-label={playing ? 'Pause background video' : 'Play background video'}
+          className="absolute z-20 right-4 bottom-24 md:bottom-6 w-11 h-11 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70"
+        >
+          {playing ? (
+            <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden><rect x="3" y="2" width="3.5" height="12" /><rect x="9.5" y="2" width="3.5" height="12" /></svg>
+          ) : (
+            <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden><path d="M4 2l10 6-10 6z" /></svg>
+          )}
+        </button>
+      )}
+    </>
+  )
+}
+
 /* ---------- small pieces ---------- */
 
 export function KineticLine({ text, base = 0, className = '' }: { text: string; base?: number; className?: string }) {
@@ -305,21 +364,21 @@ export function PlayersClubPopup({ delay = 25_000 }: { delay?: number }) {
       />
       {/* panel */}
       <div
-        className={`relative w-full sm:max-w-md bg-[#0d0d0d] border-t-2 sm:border-2 border-[#ebff4b] p-6 sm:p-9 pb-safe transition-transform duration-350 ${closing ? 'translate-y-8 sm:translate-y-4' : 'translate-y-0'}`}
+        className={`relative w-full sm:max-w-md bg-[#0d0d0d] border-t-2 sm:border-2 border-[#42b23c] p-6 sm:p-9 pb-safe transition-transform duration-350 ${closing ? 'translate-y-8 sm:translate-y-4' : 'translate-y-0'}`}
         style={{ transitionDuration: '350ms' }}
       >
         <button
           ref={closeRef}
           onClick={dismiss}
           aria-label="Close popup"
-          className="absolute top-3 right-3 w-11 h-11 flex items-center justify-center text-white/70 hover:text-[#ebff4b] text-2xl leading-none"
+          className="absolute top-3 right-3 w-11 h-11 flex items-center justify-center text-white/70 hover:text-[#42b23c] text-2xl leading-none"
         >
           ×
         </button>
 
         <p className="font-mono-label text-[10px] text-[#ff8e4d]">Free to join · No spam, just perks</p>
         <h2 className="font-display text-3xl sm:text-5xl leading-[0.9] text-white mt-3 pr-10">
-          Join the <span className="text-[#ebff4b]">Player’s Club</span>
+          Join the <span className="text-[#42b23c]">Player’s Club</span>
         </h2>
         <p className="mt-3 sm:mt-4 text-white/70 text-sm leading-relaxed">
           VIP access, members-only deals, exclusive event invites, and first dibs on our
@@ -328,7 +387,7 @@ export function PlayersClubPopup({ delay = 25_000 }: { delay?: number }) {
         <ul className="hidden sm:block mt-4 space-y-2 text-sm text-white/85">
           {['Insider discounts & daily-special alerts', 'First access to events & new attractions', 'Birthday perks for your crew'].map((p) => (
             <li key={p} className="flex gap-2">
-              <span className="text-[#ebff4b]" aria-hidden>✦</span>
+              <span className="text-[#42b23c]" aria-hidden>✦</span>
               <span>{p}</span>
             </li>
           ))}
@@ -339,7 +398,7 @@ export function PlayersClubPopup({ delay = 25_000 }: { delay?: number }) {
           target="_blank"
           rel="noreferrer"
           onClick={dismiss}
-          className="mt-5 sm:mt-6 flex items-center justify-center gap-2 whitespace-nowrap bg-[#ebff4b] text-black font-mono-label text-[11px] sm:text-xs font-bold px-4 sm:px-6 py-4 hover:bg-white transition-colors"
+          className="mt-5 sm:mt-6 flex items-center justify-center gap-2 whitespace-nowrap bg-[#42b23c] text-black font-mono-label text-[11px] sm:text-xs font-bold px-4 sm:px-6 py-4 hover:bg-white transition-colors"
         >
           Join the Player’s Club — free <ArrowIcon />
         </a>
@@ -362,7 +421,7 @@ export function Header() {
     <header className="fixed top-0 inset-x-0 z-50">
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:bg-[#ebff4b] focus:text-black focus:px-4 focus:py-3 font-mono-label text-xs"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:bg-[#42b23c] focus:text-black focus:px-4 focus:py-3 font-mono-label text-xs"
       >
         Skip to content
       </a>
@@ -385,7 +444,7 @@ export function Header() {
             href={BOOK_URL}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center whitespace-nowrap min-h-[44px] bg-[#ebff4b] text-black font-mono-label text-[11px] font-bold px-4 hover:bg-white transition-colors"
+            className="inline-flex items-center whitespace-nowrap min-h-[44px] bg-[#42b23c] text-black font-mono-label text-[11px] font-bold px-4 hover:bg-white transition-colors"
           >
             Book a party
           </a>
@@ -414,7 +473,7 @@ export function Header() {
               {n.label}
             </NavAnchor>
           ))}
-          <a href={PHONE_TEL} className="font-mono-label text-xs text-[#ebff4b] pt-2">
+          <a href={PHONE_TEL} className="font-mono-label text-xs text-[#42b23c] pt-2">
             Call {PHONE_DISPLAY}
           </a>
         </div>
@@ -427,15 +486,15 @@ export function ActionBar() {
   return (
     <nav className="md:hidden fixed bottom-0 inset-x-0 z-50 bg-[#050505]/95 backdrop-blur border-t border-white/10 pb-safe">
       <div className="grid grid-cols-3">
-        <a href={PHONE_TEL} className="flex flex-col items-center gap-1 py-3 text-white/80 active:text-[#ebff4b]">
+        <a href={PHONE_TEL} className="flex flex-col items-center gap-1 py-3 text-white/80 active:text-[#42b23c]">
           <PhoneIcon />
           <span className="font-mono-label text-[9px]">Call</span>
         </a>
-        <a href={BOOK_URL} target="_blank" rel="noreferrer" className="flex flex-col items-center gap-1 py-3 bg-[#ebff4b] text-black">
+        <a href={BOOK_URL} target="_blank" rel="noreferrer" className="flex flex-col items-center gap-1 py-3 bg-[#42b23c] text-black">
           <TicketIcon />
           <span className="font-mono-label text-[9px] font-bold">Book</span>
         </a>
-        <a href={MAPS_URL} target="_blank" rel="noreferrer" className="flex flex-col items-center gap-1 py-3 text-white/80 active:text-[#ebff4b]">
+        <a href={MAPS_URL} target="_blank" rel="noreferrer" className="flex flex-col items-center gap-1 py-3 text-white/80 active:text-[#42b23c]">
           <PinIcon />
           <span className="font-mono-label text-[9px]">Directions</span>
         </a>
@@ -449,7 +508,7 @@ export function Footer() {
     <footer className="border-t border-white/10 px-5 sm:px-8 pt-14 pb-32 md:pb-10 bg-[#0d0d0d]">
       <div className="max-w-6xl mx-auto">
         <a href={BOOK_URL} target="_blank" rel="noreferrer" className="block group">
-          <p className="font-display text-[13vw] md:text-8xl leading-[0.9] text-white group-hover:text-[#ebff4b] transition-colors">
+          <p className="font-display text-[13vw] md:text-8xl leading-[0.9] text-white group-hover:text-[#42b23c] transition-colors">
             Let’s play <span className="text-[#ff8e4d] group-hover:text-white transition-colors">→</span>
           </p>
         </a>

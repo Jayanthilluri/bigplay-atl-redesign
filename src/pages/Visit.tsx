@@ -51,17 +51,17 @@ export default function Visit() {
       {/* Hero */}
       <section className="relative h-[60svh] min-h-[420px] overflow-hidden flex items-end">
         <div ref={heroImg} className="absolute inset-0 -top-[20%] h-[140%]">
-          <img {...photo('/photos/venue-exterior.jpg')} fetchPriority="high" alt="Big Play Entertainment building exterior" className="w-full h-full object-cover" />
+          <img {...photo('/photos/visit-hero.webp')} fetchPriority="high" alt="Big Play Entertainment building exterior" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/50 to-[#050505]/40" />
         </div>
         <div className="relative px-5 sm:px-8 pb-12 max-w-6xl mx-auto w-full">
           <p className="font-mono-label text-[10px] sm:text-xs text-[#ff8e4d] flex items-center gap-2">
-            <span className={`w-2 h-2 rounded-full ${status.open ? 'bg-[#ebff4b] pulse-dot' : 'bg-[#ff8e4d]'}`} />
+            <span className={`w-2 h-2 rounded-full ${status.open ? 'bg-[#42b23c] pulse-dot' : 'bg-[#ff8e4d]'}`} />
             {status.text || 'Dunwoody, GA'}
           </p>
           <h1 className="font-display text-[13vw] sm:text-7xl md:text-8xl leading-[0.9] mt-4 text-white">
             <KineticLine text="Come" />{' '}
-            <span className="text-[#ebff4b]"><KineticLine text="play" base={0.1} /></span>
+            <span className="text-[#42b23c]"><KineticLine text="play" base={0.1} /></span>
           </h1>
         </div>
       </section>
@@ -77,7 +77,7 @@ export default function Visit() {
               rel={c.href.startsWith('http') ? 'noreferrer' : undefined}
               className="reveal group bg-[#050505] p-6 sm:p-8 hover:bg-[#0d0d0d] transition-colors"
             >
-              <span className="text-[#ebff4b]">
+              <span className="text-[#42b23c]">
                 {c.icon === 'pin' && <PinIcon className="w-6 h-6" />}
                 {c.icon === 'phone' && <PhoneIcon className="w-6 h-6" />}
                 {c.icon === 'ticket' && <TicketIcon className="w-6 h-6" />}
@@ -88,7 +88,7 @@ export default function Visit() {
                   <span key={l} className="block">{l}</span>
                 ))}
               </p>
-              <span className="u-link mt-4 inline-flex items-center gap-2 font-mono-label text-[11px] text-[#ebff4b]">
+              <span className="u-link mt-4 inline-flex items-center gap-2 font-mono-label text-[11px] text-[#42b23c]">
                 {c.cta} <ArrowIcon className="w-3.5 h-3.5" />
               </span>
             </a>
@@ -102,14 +102,14 @@ export default function Visit() {
           <div className="reveal">
             <p className="font-mono-label text-[10px] text-[#ff8e4d]">Hours</p>
             <h2 className="font-display text-4xl sm:text-5xl leading-[0.9] text-white mt-2">
-              When the fun <span className="text-[#ebff4b]">happens</span>
+              When the fun <span className="text-[#42b23c]">happens</span>
             </h2>
             <p className="mt-4 text-sm text-white/60 leading-relaxed">
               Holiday hours can shift — if you’re planning around a school break or holiday,
               a quick call saves the trip.
             </p>
             <div className="mt-6 inline-flex items-center gap-3 border border-white/10 px-4 py-3">
-              <span className={`w-2 h-2 rounded-full ${status.open ? 'bg-[#ebff4b] pulse-dot' : 'bg-[#ff8e4d]'}`} />
+              <span className={`w-2 h-2 rounded-full ${status.open ? 'bg-[#42b23c] pulse-dot' : 'bg-[#ff8e4d]'}`} />
               <span className="font-mono-label text-[11px] text-white/80">{status.text}</span>
             </div>
           </div>
@@ -117,11 +117,11 @@ export default function Visit() {
             {HOURS.map((h, i) => (
               <li
                 key={h.day}
-                className={`flex items-center justify-between py-3.5 px-2 ${i === today ? 'text-[#ebff4b]' : 'text-white/75'}`}
+                className={`flex items-center justify-between py-3.5 px-2 ${i === today ? 'text-[#42b23c]' : 'text-white/75'}`}
               >
                 <span className="font-mono-label text-[11px] flex items-center gap-2">
                   {h.day}
-                  {i === today && <span className="text-[9px] text-black bg-[#ebff4b] px-1.5 py-0.5 font-bold">TODAY</span>}
+                  {i === today && <span className="text-[9px] text-black bg-[#42b23c] px-1.5 py-0.5 font-bold">TODAY</span>}
                 </span>
                 <span className={`font-mono-label text-[11px] ${h.label === 'Closed' ? 'text-white/60' : ''}`}>
                   {h.label}
@@ -139,7 +139,7 @@ export default function Visit() {
           <ul className="mt-6 grid sm:grid-cols-2 gap-x-10 gap-y-3 text-sm text-white/75">
             {GOOD_TO_KNOW.map((g) => (
               <li key={g} className="reveal flex gap-2">
-                <span className="text-[#ebff4b]" aria-hidden>✦</span>
+                <span className="text-[#42b23c]" aria-hidden>✦</span>
                 <span>{g}</span>
               </li>
             ))}
@@ -149,13 +149,13 @@ export default function Visit() {
               href={MAPS_URL}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-[#ebff4b] text-black font-mono-label text-xs font-bold px-7 py-4 hover:bg-white transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-[#42b23c] text-black font-mono-label text-xs font-bold px-7 py-4 hover:bg-white transition-colors"
             >
               Directions to {ADDRESS.split(',')[0]} <ArrowIcon />
             </a>
             <a
               href={PHONE_TEL}
-              className="inline-flex items-center justify-center gap-2 border border-white/25 text-white font-mono-label text-xs font-bold px-7 py-4 hover:border-[#ebff4b] hover:text-[#ebff4b] transition-colors"
+              className="inline-flex items-center justify-center gap-2 border border-white/25 text-white font-mono-label text-xs font-bold px-7 py-4 hover:border-[#42b23c] hover:text-[#42b23c] transition-colors"
             >
               {PHONE_DISPLAY}
             </a>

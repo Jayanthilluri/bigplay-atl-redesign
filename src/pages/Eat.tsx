@@ -1,6 +1,5 @@
 import { useRef } from 'react'
 import { FOOD, DRINKS, MENU_FINE_PRINT, type MenuSection, type Tag } from '../content/menu'
-import { PLAY_WITH_FOOD } from '../content/pricing'
 import {
   Header, photo, Footer, ActionBar, KineticLine, ArrowIcon, NavAnchor, PlayersClubPopup,
   useReveal, useHeroParallax, PHONE_DISPLAY, PHONE_TEL,
@@ -8,6 +7,12 @@ import {
 
 /* Real photos from Woody’s kitchen & event catering */
 const FOOD_GALLERY = [
+  { src: '/photos/eat-margaritas.webp', alt: 'Friends with margaritas and beer at Woody’s' },
+  { src: '/photos/eat-pizza.webp', alt: '16-inch pepperoni pizzas fresh from Woody’s kitchen' },
+  { src: '/photos/eat-cocktails.webp', alt: 'Two watermelon signature cocktails' },
+  { src: '/photos/eat-bar.webp', alt: 'A Woody’s bartender pouring a drink' },
+  { src: '/photos/eat-dining.webp', alt: 'Woody’s dining room' },
+  { src: '/photos/eat-beer-wine.webp', alt: 'A beer and a glass of wine at Woody’s' },
   { src: '/photos/food-sliders.jpg', alt: 'Pulled pork slider station with dipping sauces' },
   { src: '/photos/food-salmon.jpg', alt: 'Chargrilled salmon fresh from the kitchen' },
   { src: '/photos/food-fruit-platter.jpg', alt: 'Fresh fruit platter for a catered event' },
@@ -20,6 +25,10 @@ const FOOD_GALLERY = [
 
 const TAG_LABEL: Record<Tag, string> = { V: 'Vegetarian', GF: 'Gluten-free option', FAV: 'House favorite' }
 
+/* Colors from the printed Woody's menu. #42b23c is the menu green; text on white uses a
+   deeper shade (#2b7a27) so it stays readable (WCAG AA). */
+const MENU_GREEN = '#42b23c'
+
 function TagBadges({ tags }: { tags?: Tag[] }) {
   if (!tags?.length) return null
   return (
@@ -28,9 +37,9 @@ function TagBadges({ tags }: { tags?: Tag[] }) {
         <span
           key={t}
           title={TAG_LABEL[t]}
-          className={`ml-2 align-middle inline-block font-mono-label text-[9px] px-1.5 py-0.5 ${t === 'FAV' ? 'bg-[#ebff4b] text-black' : 'border border-[#ebff4b]/60 text-[#ebff4b]'}`}
+          className={`ml-1.5 align-middle inline-flex items-center justify-center text-[10px] font-bold ${t === 'FAV' ? 'text-[#2b7a27]' : 'w-5 h-5 rounded-full border border-[#2b7a27] text-[#2b7a27]'}`}
         >
-          {t === 'FAV' ? 'Fav' : t}
+          {t === 'FAV' ? '♥' : t}
           <span className="sr-only"> ({TAG_LABEL[t]})</span>
         </span>
       ))}
@@ -40,32 +49,32 @@ function TagBadges({ tags }: { tags?: Tag[] }) {
 
 function MenuBlock({ section }: { section: MenuSection }) {
   return (
-    <section id={section.id} className="scroll-mt-24 bg-[#050505] p-6 sm:p-8">
-      <div className="flex items-baseline justify-between gap-4">
-        <h3 className="font-display text-2xl sm:text-3xl text-white">{section.title}</h3>
-        {section.note && <p className="font-mono-label text-[10px] text-[#ff8e4d] text-right">{section.note}</p>}
+    <section id={section.id} className="scroll-mt-24 bg-white p-6 sm:p-8">
+      <div className="flex items-baseline justify-between gap-4 border-b-2 pb-2" style={{ borderColor: MENU_GREEN }}>
+        <h3 className="font-display text-2xl sm:text-3xl tracking-wide text-[#2b7a27]">{section.title}</h3>
+        {section.note && <p className="text-[11px] font-semibold uppercase tracking-wide text-[#231f20]/80 text-right">{section.note}</p>}
       </div>
-      <ul className="mt-5 space-y-4">
+      <ul className="mt-4 space-y-3.5">
         {section.items.map((it) => (
           <li key={it.name}>
             <div className="flex items-baseline gap-3">
-              <span className="text-white font-medium text-sm sm:text-base">
+              <span className="text-[#231f20] font-bold uppercase text-sm tracking-wide">
                 {it.name}
                 <TagBadges tags={it.tags} />
               </span>
               {it.price && (
                 <>
-                  <span className="flex-1 border-b border-dotted border-white/20 translate-y-[-4px]" aria-hidden />
-                  <span className="font-mono-label text-xs text-[#ebff4b] whitespace-nowrap">{it.price}</span>
+                  <span className="flex-1 border-b border-dotted border-[#231f20]/25 translate-y-[-4px]" aria-hidden />
+                  <span className="font-bold text-sm text-[#231f20] whitespace-nowrap">{it.price}</span>
                 </>
               )}
             </div>
-            {it.desc && <p className="mt-1 text-sm text-white/60 leading-relaxed">{it.desc}</p>}
+            {it.desc && <p className="mt-0.5 text-sm text-[#231f20]/75 leading-snug">{it.desc}</p>}
           </li>
         ))}
       </ul>
       {section.extras && (
-        <ul className="mt-5 pt-4 border-t border-white/10 space-y-1.5 text-xs text-white/60">
+        <ul className="mt-5 rounded-xl px-4 py-3 space-y-1 text-xs text-[#231f20]/85 italic" style={{ background: '#d7edc9' }}>
           {section.extras.map((e) => (
             <li key={e}>{e}</li>
           ))}
@@ -89,14 +98,14 @@ export default function Eat() {
       {/* Hero */}
       <section className="relative h-[82svh] min-h-[520px] overflow-hidden flex items-end">
         <div ref={heroImg} className="absolute inset-0 -top-[20%] h-[140%]">
-          <img {...photo('/photos/food-fruit-platter.jpg')} fetchPriority="high" alt="Fresh catering spread from Woody’s kitchen" className="w-full h-full object-cover" />
+          <img {...photo('/photos/eat-hero.webp')} fetchPriority="high" alt="The entrance to Woody’s Restaurant & Bar inside Big Play" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-[#050505]/30" />
         </div>
         <div className="relative px-5 sm:px-8 pb-12 max-w-6xl mx-auto w-full">
           <p className="font-mono-label text-[10px] sm:text-xs text-[#ff8e4d]">Woody’s Restaurant &amp; Bar</p>
           <h1 className="font-display text-[13vw] sm:text-7xl md:text-8xl leading-[0.9] mt-4 text-white">
             <KineticLine text="Fuel for" />{' '}
-            <span className="text-[#ebff4b]"><KineticLine text="the fun" base={0.15} /></span>
+            <span className="text-[#42b23c]"><KineticLine text="the fun" base={0.15} /></span>
           </h1>
           <p className="mt-5 max-w-xl text-white/70 text-sm sm:text-base leading-relaxed">
             A real kitchen, not a snack bar. Woody’s keeps players fed and grown-ups happy —
@@ -105,7 +114,7 @@ export default function Eat() {
           <div className="mt-7 flex flex-col sm:flex-row gap-3">
             <a
               href="#menu"
-              className="inline-flex items-center justify-center gap-2 bg-[#ebff4b] text-black font-mono-label text-xs font-bold px-7 py-4 hover:bg-white transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-[#42b23c] text-black font-mono-label text-xs font-bold px-7 py-4 hover:bg-white transition-colors"
             >
               See the menu <ArrowIcon />
             </a>
@@ -113,7 +122,7 @@ export default function Eat() {
               href="/woodys-menu.pdf"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 border border-white/40 text-white font-mono-label text-xs px-7 py-4 hover:border-[#ebff4b] hover:text-[#ebff4b] transition-colors"
+              className="inline-flex items-center justify-center gap-2 border border-white/40 text-white font-mono-label text-xs px-7 py-4 hover:border-[#42b23c] hover:text-[#42b23c] transition-colors"
             >
               Download menu (PDF)
             </a>
@@ -128,7 +137,7 @@ export default function Eat() {
             <span key={n} className="flex shrink-0">
               {['Full kitchen', 'Full bar', 'Family friendly', 'Party catering', 'Lane-side service'].map((w) => (
                 <span key={w + n} className="mx-6 whitespace-nowrap">
-                  {w} <span className="text-[#ebff4b]">✦</span>
+                  {w} <span className="text-[#42b23c]">✦</span>
                 </span>
               ))}
             </span>
@@ -141,63 +150,54 @@ export default function Eat() {
         <div className="max-w-6xl mx-auto">
           <div className="reveal flex flex-col md:flex-row md:items-end justify-between gap-4">
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white">
-              On the <span className="text-[#ebff4b]">menu</span>
+              On the <span className="text-[#42b23c]">menu</span>
             </h2>
-            <p className="font-mono-label text-[10px] text-white/60 max-w-[300px] md:text-right">
-              V vegetarian · GF gluten-free option · Fav house favorite
-            </p>
+            <a href="/woodys-menu.pdf" target="_blank" rel="noreferrer" className="u-link font-mono-label text-[11px] text-[#42b23c]">
+              Download the printable menu (PDF)
+            </a>
           </div>
 
           <nav aria-label="Menu sections" className="mt-8 flex flex-wrap gap-2">
             {[...FOOD, ...DRINKS].map((m) => (
-              <a key={m.id} href={`#${m.id}`} className="font-mono-label text-[10px] border border-white/20 text-white/80 px-3 py-2.5 hover:border-[#ebff4b] hover:text-[#ebff4b]">
+              <a key={m.id} href={`#${m.id}`} className="font-mono-label text-[10px] border border-white/20 text-white/80 px-3 py-2.5 hover:border-[#42b23c] hover:text-[#42b23c]">
                 {m.title}
               </a>
             ))}
           </nav>
 
-          {/* Play With Your Food combo */}
-          <div className="reveal mt-10 bg-[#ebff4b] text-black p-6 sm:p-8 grid md:grid-cols-[1.2fr_1fr] gap-6 items-center">
-            <div>
-              <p className="font-mono-label text-[10px] text-black/60">All day, every day</p>
-              <h3 className="font-display text-3xl sm:text-4xl leading-[0.95] mt-1">Play with your food</h3>
-              <p className="mt-3 text-sm text-black/75 leading-relaxed">
-                Order any of these and add a game card: {PLAY_WITH_FOOD.items.join(', ')}.
+          <div className="mt-10 bg-white rounded-sm overflow-hidden">
+            <div className="bg-[#2b7a27] text-center py-6 px-4">
+              <p className="font-display text-5xl sm:text-6xl text-[#fff200] tracking-wide leading-none">Woody’s</p>
+              <p className="mt-1 text-white text-lg sm:text-xl font-bold tracking-[0.2em] uppercase">Restaurant &amp; Bar</p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-px" style={{ background: '#d7edc9' }}>
+              {FOOD.map((m) => (
+                <MenuBlock key={m.id} section={m} />
+              ))}
+            </div>
+            <div className="bg-[#2b7a27] text-center py-4 px-4">
+              <p className="font-display text-4xl sm:text-5xl text-[#fff200] tracking-wide leading-none">Cocktails &amp; drinks</p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-px" style={{ background: '#d7edc9' }}>
+              {DRINKS.map((m) => (
+                <MenuBlock key={m.id} section={m} />
+              ))}
+            </div>
+            <div className="px-6 sm:px-8 py-5 space-y-2 text-xs text-[#231f20]/85 leading-relaxed" style={{ background: '#d7edc9' }}>
+              {MENU_FINE_PRINT.map((t) => (
+                <p key={t}>{t}</p>
+              ))}
+              <p>
+                <span className="inline-flex w-5 h-5 rounded-full border border-[#2b7a27] text-[#2b7a27] text-[10px] font-bold items-center justify-center align-middle">V</span> Vegetarian ·{' '}
+                <span className="text-[#2b7a27] font-bold">♥</span> House favorite · GF Gluten-free option
               </p>
             </div>
-            <ul className="grid grid-cols-2 gap-px bg-black border-2 border-black">
-              {PLAY_WITH_FOOD.combos.map((c) => (
-                <li key={c.card} className="bg-[#ebff4b] p-4 text-center">
-                  <p className="font-display text-3xl">{c.price}</p>
-                  <p className="font-mono-label text-[10px] text-black/70 mt-1">meal + {c.card}</p>
-                </li>
-              ))}
-            </ul>
           </div>
 
-          <h3 className="reveal mt-14 font-mono-label text-xs text-[#ff8e4d]">Food</h3>
-          <div className="mt-4 grid md:grid-cols-2 gap-px bg-white/10 border border-white/10">
-            {FOOD.map((m) => (
-              <MenuBlock key={m.id} section={m} />
-            ))}
-          </div>
-
-          <h3 className="reveal mt-14 font-mono-label text-xs text-[#ff8e4d]">Drinks</h3>
-          <div className="mt-4 grid md:grid-cols-2 gap-px bg-white/10 border border-white/10">
-            {DRINKS.map((m) => (
-              <MenuBlock key={m.id} section={m} />
-            ))}
-          </div>
-
-          <div className="mt-8 space-y-2 text-xs text-white/60 max-w-3xl leading-relaxed">
-            {MENU_FINE_PRINT.map((t) => (
-              <p key={t}>{t}</p>
-            ))}
-            <p>
-              Kitchen hours can differ from attraction hours. Planning around a meal? Call{' '}
-              <a href={PHONE_TEL} className="text-[#ebff4b] u-link">{PHONE_DISPLAY}</a>.
-            </p>
-          </div>
+          <p className="mt-6 text-sm text-white/70">
+            Kitchen hours can differ from attraction hours. Planning around a meal? Call{' '}
+            <a href={PHONE_TEL} className="text-[#42b23c] u-link">{PHONE_DISPLAY}</a>.
+          </p>
         </div>
       </section>
 
@@ -207,7 +207,7 @@ export default function Eat() {
           <div>
             <p className="reveal font-mono-label text-[10px] text-[#ff8e4d]">Real plates, real events</p>
             <h2 className="reveal font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white mt-2">
-              Fresh from the <span className="text-[#ebff4b]">kitchen</span>
+              Fresh from the <span className="text-[#42b23c]">kitchen</span>
             </h2>
           </div>
           <p className="reveal hidden sm:block font-mono-label text-[10px] text-white/60">Swipe →</p>
@@ -226,14 +226,14 @@ export default function Eat() {
       </section>
 
       {/* CTA band */}
-      <section className="bg-[#ebff4b] text-black px-5 sm:px-8 py-16 md:py-20">
+      <section className="bg-[#42b23c] text-black px-5 sm:px-8 py-16 md:py-20">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="reveal">
-            <p className="font-mono-label text-[10px] text-black/60">Parties &amp; events</p>
+            <p className="font-mono-label text-[10px] text-black/85">Parties &amp; events</p>
             <h2 className="font-display text-5xl sm:text-6xl md:text-7xl leading-[0.9] mt-2">
               We cater the party too.
             </h2>
-            <p className="mt-4 max-w-md text-black/70 text-sm sm:text-base">
+            <p className="mt-4 max-w-md text-black/85 text-sm sm:text-base">
               Every party package can include food straight from Woody’s kitchen — one less
               thing for you to carry.
             </p>
@@ -241,13 +241,13 @@ export default function Eat() {
           <div className="reveal flex flex-col sm:flex-row md:flex-col gap-3">
             <NavAnchor
               href="/parties"
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap bg-black text-[#ebff4b] font-mono-label text-xs font-bold px-7 py-4 hover:bg-[#0d0d0d] transition-colors"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap bg-black text-[#42b23c] font-mono-label text-xs font-bold px-7 py-4 hover:bg-[#0d0d0d] transition-colors"
             >
               See party packages <ArrowIcon />
             </NavAnchor>
             <NavAnchor
               href="/events"
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap border-2 border-black text-black font-mono-label text-xs font-bold px-7 py-4 hover:bg-black hover:text-[#ebff4b] transition-colors"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap border-2 border-black text-black font-mono-label text-xs font-bold px-7 py-4 hover:bg-black hover:text-[#42b23c] transition-colors"
             >
               Plan a group event <ArrowIcon />
             </NavAnchor>

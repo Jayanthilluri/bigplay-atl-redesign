@@ -1,19 +1,18 @@
-import { useRef } from 'react'
 import { Link } from 'react-router'
 import {
-  Header, photo, Footer, ActionBar, KineticLine, ArrowIcon, PhoneIcon, PinIcon, PlayersClubPopup,
-  useReveal, useOpenStatus, useHeroParallax, BOOK_URL, VIP_URL, PHONE_DISPLAY, PHONE_TEL, MAPS_URL, ADDRESS, HOURS, IMG,
+  Header, HeroVideo, photo, Footer, ActionBar, KineticLine, ArrowIcon, PhoneIcon, PinIcon, PlayersClubPopup,
+  useReveal, useOpenStatus, BOOK_URL, VIP_URL, PHONE_DISPLAY, PHONE_TEL, MAPS_URL, ADDRESS, HOURS, IMG,
 } from '../chrome'
 
 /* ---------- content ---------- */
 
 const ATTRACTIONS = [
-  { img: '/photos/bowl-action-man.jpg', tag: '16 lanes', name: 'Bowling', desc: 'Modern lanes, lounge seating, and lane-side food and drinks from Woody’s.' },
-  { img: '/photos/race-kids.jpg', tag: 'All ages', name: 'Arcade', desc: 'Racing, shooters, classics and prize games — reloadable play cards, no tokens.' },
-  { img: '/photos/golf-cube.jpg', tag: 'Glow in the dark', name: 'Glow mini-golf', desc: 'Our nostalgic 80s glow course. Nine holes of neon, music and bragging rights.' },
+  { img: '/photos/home-bowling.webp', tag: '16 lanes', name: 'Boutique bowling', desc: 'Modern lanes, lounge seating, and lane-side food and drinks from Woody’s.' },
+  { img: '/photos/home-arcade.webp', tag: '75 games', name: 'Arcade', desc: 'Racing, shooters, classics and prize games — reloadable game cards, no tokens.' },
+  { img: '/photos/home-golf.webp', tag: 'Glow in the dark', name: '80s mini golf', desc: 'Our 80s-themed glow course. Nine holes of neon, music and bragging rights.' },
   { img: IMG.vr, tag: 'Mixed reality', name: 'Valo Arena', desc: 'Interactive mixed reality games that react to how you move — team up or go head to head.' },
-  { img: '/photos/laser-tag.jpg', tag: 'Multi-level arena', name: 'Laser tag', desc: 'Suit up for team battles in our glow arena. Every mission is a new story.' },
-  { img: '/photos/woodys-dining.jpg', tag: 'Full kitchen & bar', name: 'Woody’s', desc: 'Smashburgers, wings, flatbreads and 18 oz margaritas — with every game on the screens.' },
+  { img: '/photos/attr-lasertag.webp', tag: 'Multi-level arena', name: 'Laser tag', desc: 'Suit up for team battles in our glow arena. Every mission is a new story.' },
+  { img: '/photos/home-woodys.webp', tag: 'Full kitchen & bar', name: 'Woody’s Restaurant & Bar', desc: 'Smashburgers, wings, flatbreads and 18 oz margaritas — with every game on the screens.' },
 ]
 
 const PARTY_TRACKS = [
@@ -40,8 +39,6 @@ const PARTY_TRACKS = [
 export default function Home() {
   useReveal()
   const status = useOpenStatus()
-  const heroImgRef = useRef<HTMLDivElement>(null)
-  useHeroParallax(heroImgRef)
 
   return (
     <div className="bg-[#050505] text-[#ededed] min-h-screen">
@@ -49,31 +46,25 @@ export default function Home() {
       <main id="main">
       {/* ===== hero ===== */}
       <section id="top" className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
-        <div ref={heroImgRef} className="hero-parallax absolute inset-0 -top-[20%] h-[120%]">
-          <img
-            {...photo('/photos/bowl-lanes-wide.jpg')} fetchPriority="high"
-            alt="Friends bowling under neon lights at Big Play ATL"
-            className="w-full h-full object-cover"
-          />
-        </div>
+        <HeroVideo alt="Bowling, arcade, glow mini golf and dining at Big Play ATL" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-[#050505]/30" />
 
         <div className="relative z-10 px-5 sm:px-8 pb-28 md:pb-16 pt-24 max-w-6xl">
           <div className="flex items-center gap-2 mb-5">
-            <span className={`w-2 h-2 rounded-full ${status.open ? 'bg-[#ebff4b] pulse-dot' : 'bg-[#ff8e4d]'}`} />
+            <span className={`w-2 h-2 rounded-full ${status.open ? 'bg-[#42b23c] pulse-dot' : 'bg-[#ff8e4d]'}`} />
             <span className="font-mono-label text-[11px] text-white/90">{status.text}</span>
             <span className="font-mono-label text-[11px] text-white/50">· Dunwoody, GA</span>
           </div>
 
           <h1 className="font-display leading-[0.9] text-[19vw] sm:text-7xl md:text-8xl lg:text-9xl text-white">
-            <KineticLine text="Eat." base={0.1} className="block" />
-            <KineticLine text="Play." base={0.25} className="block text-[#ebff4b]" />
-            <KineticLine text="Win." base={0.4} className="block" />
+            <KineticLine text="Bowl." base={0.1} className="block" />
+            <KineticLine text="Play." base={0.25} className="block text-[#42b23c]" />
+            <KineticLine text="Eat." base={0.4} className="block" />
           </h1>
 
           <p className="mt-5 max-w-xl text-base sm:text-lg text-white/85 leading-relaxed">
-            42,000 square feet of bowling, laser tag, arcade games, glow mini-golf and mixed
-            reality — plus Woody’s full restaurant and bar. One roof. Zero boredom.
+            16 lanes of boutique bowling, 75 arcade games, 80s-themed mini golf, laser tag
+            and Woody’s Restaurant &amp; Bar.
           </p>
 
           <div className="mt-7 flex flex-col sm:flex-row gap-3 sm:items-center">
@@ -81,13 +72,13 @@ export default function Home() {
               href={BOOK_URL}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-[#ebff4b] text-black font-mono-label text-xs font-bold px-7 py-4 hover:bg-white transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-[#42b23c] text-black font-mono-label text-xs font-bold px-7 py-4 hover:bg-white transition-colors"
             >
               Book a party or event <ArrowIcon />
             </a>
             <a
               href="#attractions"
-              className="inline-flex items-center justify-center gap-2 border border-white/40 text-white font-mono-label text-xs px-7 py-4 hover:border-[#ebff4b] hover:text-[#ebff4b] transition-colors"
+              className="inline-flex items-center justify-center gap-2 border border-white/40 text-white font-mono-label text-xs px-7 py-4 hover:border-[#42b23c] hover:text-[#42b23c] transition-colors"
             >
               Explore the fun
             </a>
@@ -100,11 +91,11 @@ export default function Home() {
         <div className="marquee-track font-display text-xl sm:text-2xl text-white/70">
           {[0, 1].map((r) => (
             <span key={r} className="flex shrink-0">
-              {['Bowling', 'Laser tag', 'Arcade', 'Glow mini-golf', 'Valo Arena', 'Woody’s kitchen & bar'].map(
+              {['Bowling', 'Laser tag', 'Arcade', '80s mini golf', 'Valo Arena', 'Woody’s Restaurant & Bar'].map(
                 (w) => (
                   <span key={w} className="flex items-center">
                     <span className="px-5">{w}</span>
-                    <span className="text-[#ebff4b]">✦</span>
+                    <span className="text-[#42b23c]">✦</span>
                   </span>
                 )
               )}
@@ -132,7 +123,7 @@ export default function Home() {
             ['6', 'days a week'],
           ].map(([n, l]) => (
             <div key={l} className="reveal bg-[#050505] p-6">
-              <div className="font-display text-4xl sm:text-5xl text-[#ebff4b]">{n}</div>
+              <div className="font-display text-4xl sm:text-5xl text-[#42b23c]">{n}</div>
               <div className="mt-2 font-mono-label text-[10px] text-white/60">{l}</div>
             </div>
           ))}
@@ -151,7 +142,7 @@ export default function Home() {
           </div>
           <div className="reveal hidden md:flex items-center gap-6">
             <p className="font-mono-label text-[10px] text-white/60">Swipe →</p>
-            <Link to="/attractions" className="u-link font-mono-label text-[10px] text-[#ebff4b]">View all →</Link>
+            <Link to="/attractions" className="u-link font-mono-label text-[10px] text-[#42b23c]">View all →</Link>
           </div>
         </div>
 
@@ -165,7 +156,7 @@ export default function Home() {
                   loading={i > 1 ? 'lazy' : undefined}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <span className="absolute top-3 left-3 bg-[#050505]/85 backdrop-blur font-mono-label text-[10px] text-[#ebff4b] px-3 py-1.5">
+                <span className="absolute top-3 left-3 bg-[#050505]/85 backdrop-blur font-mono-label text-[10px] text-[#42b23c] px-3 py-1.5">
                   {a.tag}
                 </span>
               </div>
@@ -177,12 +168,12 @@ export default function Home() {
       </section>
 
       {/* ===== parties — acid block ===== */}
-      <section id="parties" className="bg-[#ebff4b] text-black py-16 md:py-24">
+      <section id="parties" className="bg-[#42b23c] text-black py-16 md:py-24">
         <div className="px-5 sm:px-8 max-w-6xl mx-auto">
-          <p className="reveal font-mono-label text-[11px] mb-3 text-black/60">02 — Parties & events</p>
+          <p className="reveal font-mono-label text-[11px] mb-3 text-black/85">02 — Parties & events</p>
           <h2 className="reveal font-display text-[13vw] sm:text-6xl md:text-7xl leading-[0.9]">
-            Every celebration, <br className="hidden sm:block" />
-            zero stress
+            We do the work… <br className="hidden sm:block" />
+            You have the fun!
           </h2>
           <p className="reveal mt-5 max-w-2xl leading-relaxed text-black/80">
             You bring the guests — we bring the unforgettable moments. Our dedicated events team
@@ -191,9 +182,9 @@ export default function Home() {
 
           <div className="mt-10 grid md:grid-cols-3 gap-px bg-black border-2 border-black">
             {PARTY_TRACKS.map((t) => (
-              <div key={t.name} className="reveal bg-[#ebff4b] p-6 sm:p-8 flex flex-col">
+              <div key={t.name} className="reveal bg-[#42b23c] p-6 sm:p-8 flex flex-col">
                 <h3 className="font-display text-3xl">{t.name}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-black/75">{t.desc}</p>
+                <p className="mt-3 text-sm leading-relaxed text-black/85">{t.desc}</p>
                 <ul className="mt-4 space-y-2 text-sm">
                   {t.points.map((p) => (
                     <li key={p} className="flex gap-2">
@@ -228,7 +219,7 @@ export default function Home() {
               href={BOOK_URL}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 bg-black text-[#ebff4b] font-mono-label text-xs font-bold px-8 py-4 hover:bg-[#1a1a1a] transition-colors"
+              className="inline-flex items-center gap-2 bg-black text-[#42b23c] font-mono-label text-xs font-bold px-8 py-4 hover:bg-[#1a1a1a] transition-colors"
             >
               Book your event <ArrowIcon />
             </a>
@@ -238,7 +229,7 @@ export default function Home() {
             >
               Explore party options & FAQs <ArrowIcon className="w-3.5 h-3.5" />
             </Link>
-            <span className="font-mono-label text-[11px] text-black/60">
+            <span className="font-mono-label text-[11px] text-black/85">
               or talk to a human: <a href={PHONE_TEL} className="underline">{PHONE_DISPLAY}</a>
             </span>
           </div>
@@ -261,7 +252,7 @@ export default function Home() {
           <div className="reveal flex flex-col sm:flex-row md:flex-col gap-3">
             <Link
               to="/specials"
-              className="inline-flex items-center justify-center gap-2 border border-white/40 text-white font-mono-label text-xs px-7 py-4 hover:border-[#ebff4b] hover:text-[#ebff4b] transition-colors"
+              className="inline-flex items-center justify-center gap-2 border border-white/40 text-white font-mono-label text-xs px-7 py-4 hover:border-[#42b23c] hover:text-[#42b23c] transition-colors"
             >
               See all specials
             </Link>
@@ -269,7 +260,7 @@ export default function Home() {
               href={VIP_URL}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 text-[#ebff4b] font-mono-label text-xs px-7 py-4 border border-[#ebff4b]/40 hover:bg-[#ebff4b] hover:text-black transition-colors"
+              className="inline-flex items-center justify-center gap-2 text-[#42b23c] font-mono-label text-xs px-7 py-4 border border-[#42b23c]/40 hover:bg-[#42b23c] hover:text-black transition-colors"
             >
               Join the Player’s Club — free
             </a>
@@ -303,7 +294,7 @@ export default function Home() {
               <PhoneIcon /> {PHONE_DISPLAY}
             </a>
             <div className="reveal mt-5">
-              <Link to="/visit" className="u-link font-mono-label text-[11px] text-[#ebff4b]">
+              <Link to="/visit" className="u-link font-mono-label text-[11px] text-[#42b23c]">
                 Hours, directions & contact →
               </Link>
             </div>
@@ -315,7 +306,7 @@ export default function Home() {
                 <div
                   key={d.day}
                   className={`flex justify-between px-5 py-3.5 text-sm border-b border-white/10 last:border-0 ${
-                    isToday ? 'bg-[#ebff4b] text-black font-semibold' : 'text-white/75'
+                    isToday ? 'bg-[#42b23c] text-black font-semibold' : 'text-white/75'
                   }`}
                 >
                   <span className="font-mono-label text-[11px]">{d.day}{isToday ? ' · today' : ''}</span>

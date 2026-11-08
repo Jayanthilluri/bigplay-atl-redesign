@@ -162,6 +162,10 @@ body {
   will-change: transform;
 }
 
+/* Photo slider track: native scrollbar hidden (prev/next buttons + progress bar instead) */
+.slider-track { scrollbar-width: none; }
+.slider-track::-webkit-scrollbar { display: none; }
+
 /* Horizontal snap gallery */
 .snap-gallery {
   scroll-snap-type: x mandatory;

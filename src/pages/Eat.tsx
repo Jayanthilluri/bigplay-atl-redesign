@@ -4,6 +4,7 @@ import {
   Header, photo, Footer, ActionBar, KineticLine, ArrowIcon, NavAnchor, PlayersClubPopup,
   useReveal, useHeroParallax, PHONE_DISPLAY, PHONE_TEL,
 } from '../chrome'
+import PhotoSlider from '../components/PhotoSlider'
 
 /* Real photos from Woody’s kitchen & event catering */
 const FOOD_GALLERY = [
@@ -215,18 +216,9 @@ export default function Eat() {
               Fresh from the <span className="text-[#42b23c]">kitchen</span>
             </h2>
           </div>
-          <p className="reveal hidden sm:block font-mono-label text-[10px] text-white/60">Swipe →</p>
         </div>
-        <div tabIndex={0} role="region" aria-label="Food photo gallery, scroll sideways" className="reveal mt-10 flex gap-3 overflow-x-auto snap-x snap-mandatory px-5 sm:px-8 pb-4">
-          {FOOD_GALLERY.map((g) => (
-            <img
-              key={g.src}
-              {...photo(g.src, '600px')}
-              alt={g.alt}
-              loading="lazy"
-              className="h-64 sm:h-80 md:h-96 w-auto shrink-0 snap-center border border-white/10 object-cover"
-            />
-          ))}
+        <div className="reveal mt-10">
+          <PhotoSlider slides={FOOD_GALLERY} label="Food photo gallery" />
         </div>
       </section>
 

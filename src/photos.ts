@@ -16,6 +16,10 @@ export const PHOTO_SIZES: Record<string, [number, number]> = {
     1600,
     1067
   ],
+  "attr-lasertag": [
+    1600,
+    1067
+  ],
   "attr-woodys": [
     1600,
     1067
@@ -147,10 +151,6 @@ export const PHOTO_SIZES: Record<string, [number, number]> = {
   "home-woodys": [
     1600,
     1067
-  ],
-  "lasertag-action": [
-    1280,
-    720
   ],
   "parties-room": [
     1600,

@@ -3,11 +3,12 @@
 
 export type Tag = 'V' | 'GF' | 'FAV'
 export type MenuItem = { name: string; price?: string; desc?: string; tags?: Tag[] }
-export type MenuSection = { id: string; title: string; note?: string; items: MenuItem[]; extras?: string[] }
+export type MenuSection = { id: string; title: string; note?: string; img?: { src: string; alt: string }; items: MenuItem[]; extras?: string[] }
 
 export const FOOD: MenuSection[] = [
   {
     id: 'starters',
+    img: { src: '/photos/food-nachos.webp', alt: 'Blackened chicken nachos' },
     title: 'Starters',
     items: [
       { name: 'Pulled pork cheese fries', price: '13', desc: 'Pulled pork, BBQ sauce, queso, chives' },
@@ -23,6 +24,7 @@ export const FOOD: MenuSection[] = [
   },
   {
     id: 'salads',
+    img: { src: '/photos/food-salad.webp', alt: 'Strawberry goat cheese salad' },
     title: 'Salads',
     items: [
       { name: 'Grilled chicken Caesar', price: '14', desc: 'Romaine, shaved Parmesan, garlic croutons, Caesar dressing' },
@@ -38,6 +40,7 @@ export const FOOD: MenuSection[] = [
   },
   {
     id: 'smashburgers',
+    img: { src: '/photos/food-burger.webp', alt: 'A Woody’s smashburger with fries' },
     title: 'Woody’s smashburgers',
     note: 'Two smashed patties, served with fries or a side salad',
     items: [
@@ -50,6 +53,7 @@ export const FOOD: MenuSection[] = [
   },
   {
     id: 'handhelds',
+    img: { src: '/photos/food-philly.webp', alt: 'A sandwich with fries from Woody’s' },
     title: 'Handhelds',
     note: 'Served with fries or a side salad',
     items: [
@@ -63,6 +67,7 @@ export const FOOD: MenuSection[] = [
   },
   {
     id: 'flatbreads',
+    img: { src: '/photos/food-pizza.webp', alt: 'A 16-inch pepperoni pizza' },
     title: 'Flatbreads & pizza',
     items: [
       { name: 'Chicken pesto flatbread', price: '13', desc: 'Chargrilled chicken, basil pesto, sun-dried tomato, mozzarella, arugula', tags: ['FAV'] },
@@ -77,6 +82,7 @@ export const FOOD: MenuSection[] = [
   },
   {
     id: 'specialties',
+    img: { src: '/photos/food-salmon-plate.webp', alt: 'A house specialty plate from Woody’s' },
     title: 'House specialties',
     items: [
       { name: 'Atlantic salmon', price: '21', desc: 'Chargrilled Atlantic salmon, mashed potatoes, seasonal veggie' },
@@ -89,6 +95,7 @@ export const FOOD: MenuSection[] = [
   },
   {
     id: 'kids',
+    img: { src: '/photos/food-tenders.webp', alt: 'Crispy chicken tenders with dipping sauces' },
     title: 'Kids',
     note: '12 & under · choice of fries or fruit',
     items: [
@@ -100,6 +107,7 @@ export const FOOD: MenuSection[] = [
   },
   {
     id: 'sides',
+    img: { src: '/photos/food-cheesecake.webp', alt: 'NY-style cheesecake with strawberry' },
     title: 'Sides & dessert',
     items: [
       { name: 'French fries', price: '5', tags: ['V'] },
@@ -119,6 +127,7 @@ export const FOOD: MenuSection[] = [
 export const DRINKS: MenuSection[] = [
   {
     id: 'cocktails',
+    img: { src: '/photos/food-cocktails-bar.webp', alt: 'Signature cocktails and a margarita on the bar' },
     title: 'Signature cocktails',
     note: '13 each',
     items: [

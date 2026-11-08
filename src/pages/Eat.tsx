@@ -7,20 +7,17 @@ import {
 
 /* Real photos from Woody’s kitchen & event catering */
 const FOOD_GALLERY = [
+  { src: '/photos/food-wings.webp', alt: 'Wings with ranch, celery and carrots' },
+  { src: '/photos/food-nachos.webp', alt: 'Blackened chicken nachos' },
+  { src: '/photos/food-burger.webp', alt: 'A Woody’s smashburger with fries' },
+  { src: '/photos/food-pizza.webp', alt: 'A 16-inch pepperoni pizza' },
+  { src: '/photos/food-shrimp.webp', alt: 'Blackened shrimp with Brussels sprouts and peach slaw' },
+  { src: '/photos/food-strip.webp', alt: 'A grilled steak with mashed potatoes' },
+  { src: '/photos/food-quesadilla.webp', alt: 'Fajita quesadilla with salsa and sour cream' },
+  { src: '/photos/food-flatbread.webp', alt: 'A flatbread topped with arugula' },
+  { src: '/photos/food-cocktails-bar.webp', alt: 'Signature cocktails and a margarita on the bar' },
+  { src: '/photos/food-cheesecake.webp', alt: 'NY-style cheesecake with strawberry' },
   { src: '/photos/eat-margaritas.webp', alt: 'Friends with margaritas and beer at Woody’s' },
-  { src: '/photos/eat-pizza.webp', alt: '16-inch pepperoni pizzas fresh from Woody’s kitchen' },
-  { src: '/photos/eat-cocktails.webp', alt: 'Two watermelon signature cocktails' },
-  { src: '/photos/eat-bar.webp', alt: 'A Woody’s bartender pouring a drink' },
-  { src: '/photos/eat-dining.webp', alt: 'Woody’s dining room' },
-  { src: '/photos/eat-beer-wine.webp', alt: 'A beer and a glass of wine at Woody’s' },
-  { src: '/photos/food-sliders.jpg', alt: 'Pulled pork slider station with dipping sauces' },
-  { src: '/photos/food-salmon.jpg', alt: 'Chargrilled salmon fresh from the kitchen' },
-  { src: '/photos/food-fruit-platter.jpg', alt: 'Fresh fruit platter for a catered event' },
-  { src: '/photos/food-hummus.jpg', alt: 'Hummus and veggie platter' },
-  { src: '/photos/food-cupcakes.jpg', alt: 'Assorted cupcakes for a party' },
-  { src: '/photos/food-cookies.jpg', alt: 'Chocolate chip and s’mores cookies' },
-  { src: '/photos/food-mimosas.jpg', alt: 'Mimosas lined up for an event' },
-  { src: '/photos/food-cocktails.jpg', alt: 'Signature cocktails on the bar at Woody’s' },
 ]
 
 const TAG_LABEL: Record<Tag, string> = { V: 'Vegetarian', GF: 'Gluten-free option', FAV: 'House favorite' }
@@ -50,6 +47,14 @@ function TagBadges({ tags }: { tags?: Tag[] }) {
 function MenuBlock({ section }: { section: MenuSection }) {
   return (
     <section id={section.id} className="scroll-mt-24 bg-white p-6 sm:p-8">
+      {section.img && (
+        <img
+          {...photo(section.img.src, '(min-width: 768px) 40vw, 90vw')}
+          alt={section.img.alt}
+          loading="lazy"
+          className="w-full aspect-[16/9] object-cover mb-5"
+        />
+      )}
       <div className="flex items-baseline justify-between gap-4 border-b-2 pb-2" style={{ borderColor: MENU_GREEN }}>
         <h3 className="font-display text-2xl sm:text-3xl tracking-wide text-[#2b7a27]">{section.title}</h3>
         {section.note && <p className="text-[11px] font-semibold uppercase tracking-wide text-[#231f20]/80 text-right">{section.note}</p>}
@@ -98,7 +103,7 @@ export default function Eat() {
       {/* Hero */}
       <section className="relative h-[82svh] min-h-[520px] overflow-hidden flex items-end">
         <div ref={heroImg} className="absolute inset-0 -top-[20%] h-[140%]">
-          <img {...photo('/photos/eat-hero.webp')} fetchPriority="high" alt="The entrance to Woody’s Restaurant & Bar inside Big Play" className="w-full h-full object-cover" />
+          <img {...photo('/photos/food-spread.webp')} fetchPriority="high" alt="A spread of Woody’s dishes: nachos, wings, burgers, salads and more" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-[#050505]/30" />
         </div>
         <div className="relative px-5 sm:px-8 pb-12 max-w-6xl mx-auto w-full">

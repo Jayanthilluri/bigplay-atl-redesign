@@ -37,7 +37,7 @@ export type DailySpecial = { day: string; dayIndex: number; name: string; items:
 export const WEEKLY_SPECIALS: DailySpecial[] = [
   { day: 'Sunday', dayIndex: 0, name: 'Kids eat free', items: ['Kids 12 & under eat free with the purchase of an adult entrée'], fine: 'Some restrictions may apply.', img: '/photos/special-sun.webp', alt: 'A family sharing a meal at Woody’s' },
   { day: 'Tuesday', dayIndex: 2, name: '$2 Tuesday', items: ['$2 bowling (one hour)', '$2 domestic beers'], img: '/photos/special-tue.webp', alt: 'Bowling balls on the return rack' },
-  { day: 'Wednesday', dayIndex: 3, name: '½-price Wednesday', items: ['Half-price cocktails', 'Half-price arcade games'], fine: 'Excludes ultra-premium cocktails.', img: '/photos/special-wed.webp', alt: 'Two friends toasting with cocktails at Woody’s' },
-  { day: 'Thursday', dayIndex: 4, name: '$5 Thursday', items: ['$5 wings', '$5 house wines', '$5 craft & imported beers'], img: '/photos/special-thu.webp', alt: 'A plate of wings with dipping sauce at Woody’s' },
+  { day: 'Wednesday', dayIndex: 3, name: '½-price Wednesday', items: ['Half-price cocktails', 'Half-price arcade games'], fine: 'Excludes ultra-premium cocktails.', img: '/photos/special-wed.webp', alt: 'Signature cocktails, a margarita and red wine on the Woody’s bar' },
+  { day: 'Thursday', dayIndex: 4, name: '$5 Thursday', items: ['$5 wings', '$5 house wines', '$5 craft & imported beers'], img: '/photos/special-thu.webp', alt: 'Two platters of wings with a glass of wine and a draft beer at Woody’s' },
   { day: 'Friday', dayIndex: 5, name: 'Family night — $60', items: ['1 hour of bowling', '4 shoe rentals', 'One 2-topping pizza', '4 soft drinks'], img: '/photos/special-fri.webp', alt: 'A parent helping a child bowl with a ramp' },
 ]

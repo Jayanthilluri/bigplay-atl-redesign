@@ -1,9 +1,5 @@
 /* Generated from public/photos — intrinsic size of each <name>.webp (1600w). An <name>-800.webp sibling exists for small screens. */
 export const PHOTO_SIZES: Record<string, [number, number]> = {
-  "arcade-cards": [
-    1600,
-    1067
-  ],
   "attr-arcade": [
     1600,
     1067
@@ -24,23 +20,7 @@ export const PHOTO_SIZES: Record<string, [number, number]> = {
     1600,
     1067
   ],
-  "bowl-action-man": [
-    1400,
-    1750
-  ],
-  "bowl-glow-girl": [
-    1600,
-    1067
-  ],
-  "bowl-hero-attr": [
-    1600,
-    692
-  ],
   "bowl-lanes-wide": [
-    1600,
-    1067
-  ],
-  "corp-banquet": [
     1600,
     1067
   ],
@@ -48,45 +28,9 @@ export const PHOTO_SIZES: Record<string, [number, number]> = {
     1280,
     1920
   ],
-  "corp-pin-op": [
-    1600,
-    1067
-  ],
-  "corp-table-80s": [
-    1600,
-    1067
-  ],
-  "corp-team-lineup": [
-    1600,
-    1067
-  ],
-  "eat-bar": [
-    1600,
-    2400
-  ],
-  "eat-beer-wine": [
-    1600,
-    1067
-  ],
-  "eat-cocktails": [
-    1600,
-    1067
-  ],
-  "eat-dining": [
-    1600,
-    1067
-  ],
-  "eat-hero": [
-    1600,
-    1067
-  ],
   "eat-margaritas": [
     1600,
     1067
-  ],
-  "eat-pizza": [
-    1600,
-    2400
   ],
   "events-1": [
     1600,
@@ -120,27 +64,43 @@ export const PHOTO_SIZES: Record<string, [number, number]> = {
     1600,
     1067
   ],
+  "food-burger": [
+    1600,
+    1067
+  ],
+  "food-cheesecake": [
+    1600,
+    1067
+  ],
   "food-cocktails": [
     1600,
     1067
   ],
-  "food-cookies": [
+  "food-cocktails-bar": [
     1600,
     1067
   ],
-  "food-cupcakes": [
+  "food-flatbread": [
     1600,
     1067
   ],
-  "food-fruit-platter": [
+  "food-nachos": [
     1600,
     1067
   ],
-  "food-hummus": [
+  "food-philly": [
     1600,
     1067
   ],
-  "food-mimosas": [
+  "food-pizza": [
+    1600,
+    1067
+  ],
+  "food-quesadilla": [
+    1600,
+    1067
+  ],
+  "food-salad": [
     1600,
     1067
   ],
@@ -148,17 +108,29 @@ export const PHOTO_SIZES: Record<string, [number, number]> = {
     1600,
     1067
   ],
-  "food-sliders": [
+  "food-salmon-plate": [
     1600,
     1067
   ],
-  "glow-golf": [
+  "food-shrimp": [
     1600,
-    1200
+    1067
   ],
-  "golf-cube": [
-    1400,
-    1750
+  "food-spread": [
+    1600,
+    1067
+  ],
+  "food-strip": [
+    1600,
+    1067
+  ],
+  "food-tenders": [
+    1600,
+    1067
+  ],
+  "food-wings": [
+    1600,
+    1067
   ],
   "home-arcade": [
     1600,
@@ -173,10 +145,6 @@ export const PHOTO_SIZES: Record<string, [number, number]> = {
     1067
   ],
   "home-woodys": [
-    1600,
-    1067
-  ],
-  "laser-tag": [
     1600,
     1067
   ],
@@ -228,17 +196,9 @@ export const PHOTO_SIZES: Record<string, [number, number]> = {
     1536,
     1920
   ],
-  "race-kids": [
-    1400,
-    1750
-  ],
   "special-fri": [
     1600,
     1600
-  ],
-  "special-sat": [
-    1600,
-    1067
   ],
   "special-sun": [
     1600,
@@ -246,7 +206,7 @@ export const PHOTO_SIZES: Record<string, [number, number]> = {
   ],
   "special-thu": [
     1600,
-    900
+    1067
   ],
   "special-tue": [
     1600,
@@ -254,21 +214,13 @@ export const PHOTO_SIZES: Record<string, [number, number]> = {
   ],
   "special-wed": [
     1600,
-    900
+    1067
   ],
   "specials-hero": [
     1600,
     1067
   ],
-  "venue-exterior": [
-    1600,
-    1067
-  ],
   "visit-hero": [
-    1600,
-    1067
-  ],
-  "woodys-dining": [
     1600,
     1067
   ]

@@ -11,7 +11,7 @@ const ATTRACTIONS = [
   { img: '/photos/home-arcade.webp', tag: '75 games', name: 'Arcade', desc: 'Racing, shooters, classics and prize games — reloadable game cards, no tokens.' },
   { img: '/photos/home-golf.webp', tag: 'Glow in the dark', name: '80s mini golf', desc: 'Our 80s-themed glow course. Nine holes of neon, music and bragging rights.' },
   { img: IMG.vr, tag: 'Mixed reality', name: 'Valo Arena', desc: 'Interactive mixed reality games that react to how you move — team up or go head to head.' },
-  { img: '/photos/attr-lasertag.webp', tag: 'Multi-level arena', name: 'Laser tag', desc: 'Suit up for team battles in our glow arena. Every mission is a new story.' },
+  { img: '/photos/lasertag-action.webp', tag: 'Multi-level arena', name: 'Laser tag', desc: 'Suit up for team battles in our glow arena. Every mission is a new story.' },
   { img: '/photos/home-woodys.webp', tag: 'Full kitchen & bar', name: 'Woody’s Restaurant & Bar', desc: 'Smashburgers, wings, flatbreads and 18 oz margaritas — with every game on the screens.' },
 ]
 

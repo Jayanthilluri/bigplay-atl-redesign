@@ -178,8 +178,8 @@ export function useHeroParallax(ref: React.RefObject<HTMLElement | null>) {
   }, [ref])
 }
 
-/* Hero video: poster image first (prerendered, fast), then a muted looping montage —
-   portrait cut on phones held upright, landscape everywhere else. Skipped entirely
+/* Hero video: poster image first (prerendered, fast), then the muted, looping
+   professional facility video — 480p on phones, 720p elsewhere. Skipped entirely
    for visitors who ask for reduced motion. Includes a pause control (WCAG 2.2.2). */
 export function HeroVideo({ alt }: { alt: string }) {
   const ref = useRef<HTMLVideoElement>(null)
@@ -189,8 +189,10 @@ export function HeroVideo({ alt }: { alt: string }) {
   useEffect(() => {
     const v = ref.current
     if (!v || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const tall = window.matchMedia('(max-width: 767px) and (orientation: portrait)').matches
-    v.src = tall ? '/video/hero-tall.mp4' : '/video/hero-wide.mp4'
+    // Lighter 480p file for small screens and data-saver mode; 720p otherwise.
+    const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection
+    const small = window.matchMedia('(max-width: 767px)').matches || conn?.saveData === true
+    v.src = small ? '/video/hero-sm.mp4' : '/video/hero.mp4'
     v.play().catch(() => {})
   }, [])
 
@@ -203,10 +205,7 @@ export function HeroVideo({ alt }: { alt: string }) {
 
   return (
     <>
-      <picture>
-        <source media="(max-width: 767px) and (orientation: portrait)" srcSet="/video/hero-tall.webp" />
-        <img src="/video/hero-wide.webp" alt={alt} fetchPriority="high" className="absolute inset-0 w-full h-full object-cover" />
-      </picture>
+      <img src="/video/hero-poster.webp" alt={alt} fetchPriority="high" width={1280} height={720} className="absolute inset-0 w-full h-full object-cover" />
       <video
         ref={ref}
         muted
@@ -224,7 +223,7 @@ export function HeroVideo({ alt }: { alt: string }) {
           type="button"
           onClick={toggle}
           aria-label={playing ? 'Pause background video' : 'Play background video'}
-          className="absolute z-20 right-4 bottom-24 md:bottom-6 w-11 h-11 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70"
+          className="absolute z-20 right-4 top-20 md:top-auto md:bottom-6 w-11 h-11 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70"
         >
           {playing ? (
             <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden><rect x="3" y="2" width="3.5" height="12" /><rect x="9.5" y="2" width="3.5" height="12" /></svg>

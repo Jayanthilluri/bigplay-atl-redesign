@@ -17,7 +17,7 @@ const ATTRACTIONS = [
     pricing: ATTRACTION_PRICES.bowling,
   },
   {
-    img: '/photos/attr-lasertag.webp',
+    img: '/photos/lasertag-action.webp',
     tag: 'Multi-level arena',
     name: 'Laser tag',
     desc: 'Suit up and step into the arena. Blacklights, fog, and heart-pounding rounds that turn friends into rivals — and rivals into legends.',

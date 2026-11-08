@@ -47,7 +47,7 @@ export default function Home() {
       {/* ===== hero ===== */}
       <section id="top" className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
         <HeroVideo alt="Bowling, arcade, glow mini golf and dining at Big Play ATL" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-[#050505]/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/45 via-35% to-[#050505]/10" />
 
         <div className="relative z-10 px-5 sm:px-8 pb-28 md:pb-16 pt-24 max-w-6xl">
           <div className="flex items-center gap-2 mb-5">

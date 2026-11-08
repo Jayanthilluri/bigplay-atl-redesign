@@ -246,7 +246,7 @@ export const PHOTO_SIZES: Record<string, [number, number]> = {
   ],
   "special-thu": [
     1600,
-    1067
+    900
   ],
   "special-tue": [
     1600,
@@ -254,7 +254,7 @@ export const PHOTO_SIZES: Record<string, [number, number]> = {
   ],
   "special-wed": [
     1600,
-    1067
+    900
   ],
   "specials-hero": [
     1600,

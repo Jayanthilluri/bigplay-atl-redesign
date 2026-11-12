@@ -15,13 +15,13 @@ export const PAGES: PageMeta[] = [
     path: '/',
     title: 'Big Play ATL | Bowling, Laser Tag, Arcade & Glow Golf in Dunwoody, GA',
     description:
-      'Dunwoody’s 42,000 sq ft entertainment center: 16 bowling lanes, laser tag, arcade, glow mini-golf, mixed reality and Woody’s Restaurant & Bar. Minutes from Perimeter, I-285 and GA-400.',
+      '16 lanes of boutique bowling, 75 arcade games, 80s-themed mini golf, laser tag, Valo Arena mixed reality and Woody’s Restaurant & Bar in Dunwoody, GA. Minutes from Perimeter, I-285 and GA-400.',
   },
   {
     path: '/attractions',
     title: 'Attractions: Bowling, Laser Tag, Arcade & Glow Golf | Big Play ATL Dunwoody',
     description:
-      'Bowling on 16 modern lanes, a multi-level laser tag arena, arcade with reloadable play cards, glow mini-golf and mixed reality — all under one roof in Dunwoody, GA.',
+      'Prices and info: bowling from $20 per lane/hour ($2 Tuesdays), laser tag $9, 80s mini golf $8, arcade game card bonuses and Valo Arena mixed reality — all under one roof in Dunwoody, GA.',
   },
   {
     path: '/parties',
@@ -37,15 +37,15 @@ export const PAGES: PageMeta[] = [
   },
   {
     path: '/specials',
-    title: 'Weekly Specials & Deals | Big Play ATL Dunwoody',
+    title: '$2 Tuesday Bowling & Weekly Specials | Big Play ATL Dunwoody',
     description:
-      'Weekday play deals, family night, glow night and Player’s Club exclusives at Big Play ATL in Dunwoody, GA.',
+      '$2 bowling and $2 domestic beers on Tuesdays, half-price cocktails and arcade on Wednesdays, $5 Thursdays, $60 Friday family night and kids eat free on Sundays.',
   },
   {
     path: '/eat',
     title: 'Woody’s Restaurant & Bar at Big Play ATL | Dunwoody, GA',
     description:
-      'Shareables, pizza, burgers and a full bar inside Big Play ATL. Lane-side service and party catering from Woody’s kitchen in Dunwoody.',
+      'Full menu with prices: smashburgers, wings, flatbreads, 16" pizza, salmon and NY strip, plus signature cocktails, 18 oz margaritas, draft beer and wine. Inside Big Play ATL, Dunwoody.',
   },
   {
     path: '/visit',
@@ -54,6 +54,20 @@ export const PAGES: PageMeta[] = [
       'Big Play ATL hours, address and directions: 2480 Mt Vernon Rd, Dunwoody, GA 30338. Free on-site parking, minutes from I-285 and GA-400. Call (470) 359-5724.',
   },
 ]
+
+PAGES.push({
+  path: '/players-club',
+  title: 'Join the Player’s Club — VIP Deals & Perks | Big Play ATL Dunwoody',
+  description:
+    'Free to join: members-only deals, daily-special alerts, birthday perks and first access to events at Big Play ATL in Dunwoody, GA.',
+})
+
+PAGES.push({
+  path: '/privacy-policy',
+  title: 'Privacy Policy | Big Play ATL',
+  description:
+    'How Big Play Entertainment collects, uses and protects the information you share through our website, booking and inquiry forms, and Player’s Club.',
+})
 
 export const NOT_FOUND: PageMeta = {
   path: '/404',
@@ -76,6 +90,7 @@ export const BUSINESS_JSONLD = {
   image: `${SITE_URL}${OG_IMAGE}`,
   telephone: '+1-470-359-5724',
   priceRange: '$$',
+  hasMenu: `${SITE_URL}/eat`,
   address: {
     '@type': 'PostalAddress',
     streetAddress: '2480 Mt Vernon Rd',
@@ -90,7 +105,7 @@ export const BUSINESS_JSONLD = {
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '11:00', closes: '23:00' },
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Sunday', opens: '11:00', closes: '22:00' },
   ],
-  amenityFeature: ['Bowling', 'Laser tag', 'Arcade', 'Glow mini-golf', 'Mixed reality', 'Restaurant & bar'].map((name) => ({
+  amenityFeature: ['Bowling', 'Laser tag', 'Arcade', '80s mini golf', 'Valo Arena mixed reality', 'Restaurant & bar'].map((name) => ({
     '@type': 'LocationFeatureSpecification',
     name,
     value: true,

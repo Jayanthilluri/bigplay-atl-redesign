@@ -74,13 +74,13 @@
   }
 }
 
-/* ===== Big Play ATL redesign system ===== */
+/* ===== Big Play ATL design system ===== */
 
 :root {
   --bp-black: #050505;
   --bp-ink: #0d0d0d;
   --bp-paper: #ededed;
-  --bp-acid: #ebff4b;
+  --bp-acid: #42b23c;
   --bp-orange: #ff8e4d;
 }
 
@@ -162,6 +162,10 @@ body {
   will-change: transform;
 }
 
+/* Photo slider track: native scrollbar hidden (prev/next buttons + progress bar instead) */
+.slider-track { scrollbar-width: none; }
+.slider-track::-webkit-scrollbar { display: none; }
+
 /* Horizontal snap gallery */
 .snap-gallery {
   scroll-snap-type: x mandatory;
@@ -194,8 +198,8 @@ body {
 
 /* Pulsing "open now" dot */
 @keyframes bp-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(235, 255, 75, 0.55); }
-  60%      { box-shadow: 0 0 0 7px rgba(235, 255, 75, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(66, 178, 60, 0.55); }
+  60%      { box-shadow: 0 0 0 7px rgba(66, 178, 60, 0); }
 }
 .pulse-dot { animation: bp-pulse 2s ease-out infinite; }
 

@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import { useRef } from 'react'
 import {
   Header, photo, Footer, ActionBar, KineticLine, ArrowIcon, NavAnchor, PlayersClubPopup,
@@ -183,7 +184,7 @@ export default function Events() {
 
       {/* ===== inquiry form (Toast) ===== */}
       <section id="inquiry" className="scroll-mt-16 px-5 sm:px-8 py-16 md:py-24 border-b border-white/10">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <p className="reveal font-mono-label text-[10px] text-[#ff8e4d]">Event inquiry</p>
           <h2 className="reveal font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white mt-2">
             Tell us about <span className="text-[#42b23c]">your event</span>
@@ -193,9 +194,13 @@ export default function Events() {
             to you with options and a quote. Prefer to talk? Call{' '}
             <a href={PHONE_TEL} className="text-[#42b23c] u-link">{PHONE_DISPLAY}</a>.
           </p>
-          <div className="mt-8 rounded-sm overflow-hidden bg-white">
-            <EmbedFrame src={EVENT_INQUIRY_URL} title="Big Play ATL event inquiry form" className="h-[1100px] sm:h-[800px]" />
+          <div className="mt-8 -mx-1 sm:mx-0 rounded-sm bg-white p-2 sm:p-8">
+            <EmbedFrame src={EVENT_INQUIRY_URL} title="Big Play ATL event inquiry form" className="h-[1500px] sm:h-[1080px]" />
           </div>
+          <p className="mt-3 text-xs text-white/60">
+            By submitting this form you agree to be contacted about your event. See our{' '}
+            <Link to="/privacy-policy" className="u-link text-white/80">Privacy Policy</Link>.
+          </p>
         </div>
       </section>
 

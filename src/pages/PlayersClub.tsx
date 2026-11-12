@@ -4,6 +4,7 @@ import {
   useReveal, useHeroParallax, PLAYERS_CLUB_FORM_ID,
 } from '../chrome'
 import EmbedFrame from '../components/EmbedFrame'
+import { Link } from 'react-router'
 
 const PERKS = [
   'Insider discounts & daily-special alerts',
@@ -58,7 +59,8 @@ export default function PlayersClub() {
             </ul>
           </div>
 
-          <div className="reveal bg-white rounded-sm overflow-hidden">
+          <div className="reveal">
+          <div className="bg-white rounded-sm overflow-hidden">
             <EmbedFrame
               src={`https://api.leadconnectorhq.com/widget/form/${PLAYERS_CLUB_FORM_ID}`}
               title="Join The V.I.P Club!"
@@ -79,6 +81,12 @@ export default function PlayersClub() {
                 'data-form-id': PLAYERS_CLUB_FORM_ID,
               }}
             />
+          </div>
+          <p className="mt-3 text-xs text-white/60">
+            By joining you agree to receive Player’s Club offers and updates. You can
+            unsubscribe at any time. See our{' '}
+            <Link to="/privacy-policy" className="u-link text-white/80">Privacy Policy</Link>.
+          </p>
           </div>
         </div>
       </section>

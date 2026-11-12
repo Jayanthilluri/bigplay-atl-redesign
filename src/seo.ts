@@ -62,6 +62,13 @@ PAGES.push({
     'Free to join: members-only deals, daily-special alerts, birthday perks and first access to events at Big Play ATL in Dunwoody, GA.',
 })
 
+PAGES.push({
+  path: '/privacy-policy',
+  title: 'Privacy Policy | Big Play ATL',
+  description:
+    'How Big Play Entertainment collects, uses and protects the information you share through our website, booking and inquiry forms, and Player’s Club.',
+})
+
 export const NOT_FOUND: PageMeta = {
   path: '/404',
   title: 'Page not found | Big Play ATL',

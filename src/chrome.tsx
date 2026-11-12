@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import { PHOTO_SIZES } from './photos'
 
 /* Internal router link for /parties (avoids full reload to a sub-route in static preview) */
-const INTERNAL_ROUTES = ['/parties', '/events', '/attractions', '/specials', '/eat', '/visit', '/players-club']
+const INTERNAL_ROUTES = ['/parties', '/events', '/attractions', '/specials', '/eat', '/visit', '/players-club', '/privacy-policy']
 
 export function NavAnchor({ href, className, children, onClick }: { href: string; className?: string; children: React.ReactNode; onClick?: () => void }) {
   if (INTERNAL_ROUTES.includes(href)) {
@@ -581,6 +581,8 @@ export function Footer() {
           <div className="flex items-center gap-3">
             <img src={IMG.logo} alt="" className="h-7 w-auto" width={145} height={28} />
             <span>© {new Date().getFullYear()} Big Play Entertainment{STAGING ? ' — redesign concept' : ''}</span>
+            <span aria-hidden="true">·</span>
+            <Link to="/privacy-policy" className="u-link text-white/70 py-2">Privacy policy</Link>
           </div>
           <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-1">
             {NAV.map((n) => (

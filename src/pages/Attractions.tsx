@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import {
   Header, photo, Footer, ActionBar, KineticLine, ArrowIcon, NavAnchor, PlayersClubPopup,
-  useReveal, useHeroParallax, useOpenStatus, BOOK_URL, PHONE_DISPLAY, PHONE_TEL, IMG,
+  useReveal, useHeroParallax, useOpenStatus, BOOK_URL, BOWLING_URL, PHONE_DISPLAY, PHONE_TEL, IMG,
 } from '../chrome'
 import { ATTRACTION_PRICES, BOWLING_RATES, SHOE_RENTAL } from '../content/pricing'
 import GameCardChart from '../components/GameCardChart'
@@ -138,6 +138,18 @@ export default function Attractions() {
                     )}
                   </div>
                 ) : null}
+                {a.name === 'Boutique bowling' && (
+                  <div>
+                    <a
+                    href={BOWLING_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-6 inline-flex items-center gap-2 bg-[#42b23c] text-black font-mono-label text-xs font-bold px-6 py-3.5 hover:bg-white transition-colors"
+                  >
+                    Reserve a lane <ArrowIcon className="w-3.5 h-3.5" />
+                  </a>
+                  </div>
+                )}
                 {'href' in a && a.href ? (
                   <NavAnchor href={a.href} className="u-link mt-6 inline-flex items-center gap-2 font-mono-label text-[11px] text-[#42b23c]">
                     See what’s cooking <ArrowIcon className="w-3.5 h-3.5" />
@@ -161,6 +173,14 @@ export default function Attractions() {
               Priced per lane, per hour. Shoe rental is{' '}
               {SHOE_RENTAL}. Closed Mondays.
             </p>
+            <a
+              href={BOWLING_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-6 inline-flex items-center gap-2 bg-[#42b23c] text-black font-mono-label text-xs font-bold px-6 py-3.5 hover:bg-white transition-colors"
+            >
+              Reserve a lane online <ArrowIcon className="w-3.5 h-3.5" />
+            </a>
           </div>
           <div className="reveal border border-white/10 overflow-x-auto" tabIndex={0} role="region" aria-label="Bowling rates by day">
             <table className="w-full text-sm">

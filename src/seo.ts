@@ -55,6 +55,13 @@ export const PAGES: PageMeta[] = [
   },
 ]
 
+PAGES.push({
+  path: '/players-club',
+  title: 'Join the Player’s Club — VIP Deals & Perks | Big Play ATL Dunwoody',
+  description:
+    'Free to join: members-only deals, daily-special alerts, birthday perks and first access to events at Big Play ATL in Dunwoody, GA.',
+})
+
 export const NOT_FOUND: PageMeta = {
   path: '/404',
   title: 'Page not found | Big Play ATL',

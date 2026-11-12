@@ -1,7 +1,7 @@
 import { Link } from 'react-router'
 import {
   Header, HeroVideo, photo, Footer, ActionBar, KineticLine, ArrowIcon, PhoneIcon, PinIcon, PlayersClubPopup,
-  useReveal, useOpenStatus, BOOK_URL, VIP_URL, PHONE_DISPLAY, PHONE_TEL, MAPS_URL, ADDRESS, HOURS, IMG,
+  useReveal, useOpenStatus, BOOK_URL, BOWLING_URL, VIP_URL, PHONE_DISPLAY, PHONE_TEL, MAPS_URL, ADDRESS, HOURS, IMG,
 } from '../chrome'
 
 /* ---------- content ---------- */
@@ -12,7 +12,7 @@ const ATTRACTIONS = [
   { img: '/photos/home-golf.webp', tag: 'Glow in the dark', name: '80s mini golf', desc: 'Our 80s-themed glow course. Nine holes of neon, music and bragging rights.' },
   { img: IMG.vr, tag: 'Mixed reality', name: 'Valo Arena', desc: 'Interactive mixed reality games that react to how you move — team up or go head to head.' },
   { img: '/photos/attr-lasertag.webp', tag: 'Multi-level arena', name: 'Laser tag', desc: 'Suit up for team battles in our glow arena. Every mission is a new story.' },
-  { img: '/photos/home-woodys.webp', tag: 'Full kitchen & bar', name: 'Woody’s Restaurant & Bar', desc: 'Smashburgers, wings, flatbreads and 18 oz margaritas — with every game on the screens.' },
+  { img: '/photos/food-spread.webp', tag: 'Full kitchen & bar', name: 'Woody’s Restaurant & Bar', desc: 'Smashburgers, wings, flatbreads and 18 oz margaritas — with every game on the screens.' },
 ]
 
 const PARTY_TRACKS = [
@@ -69,18 +69,23 @@ export default function Home() {
 
           <div className="mt-7 flex flex-col sm:flex-row gap-3 sm:items-center">
             <a
-              href={BOOK_URL}
+              href={BOWLING_URL}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-[#42b23c] text-black font-mono-label text-xs font-bold px-7 py-4 hover:bg-white transition-colors"
             >
-              Book a party or event <ArrowIcon />
+              Reserve a lane <ArrowIcon />
             </a>
             <a
-              href="#attractions"
+              href={BOOK_URL}
+              target="_blank"
+              rel="noreferrer"
               className="inline-flex items-center justify-center gap-2 border border-white/40 text-white font-mono-label text-xs px-7 py-4 hover:border-[#42b23c] hover:text-[#42b23c] transition-colors"
             >
-              Explore the fun
+              Book a party or event
+            </a>
+            <a href="#attractions" className="u-link self-center sm:self-auto font-mono-label text-[11px] text-white/85 py-3 sm:px-2">
+              Explore the fun ↓
             </a>
           </div>
         </div>
@@ -256,14 +261,12 @@ export default function Home() {
             >
               See all specials
             </Link>
-            <a
-              href={VIP_URL}
-              target="_blank"
-              rel="noreferrer"
+            <Link
+              to={VIP_URL}
               className="inline-flex items-center justify-center gap-2 text-[#42b23c] font-mono-label text-xs px-7 py-4 border border-[#42b23c]/40 hover:bg-[#42b23c] hover:text-black transition-colors"
             >
               Join the Player’s Club — free
-            </a>
+            </Link>
           </div>
         </div>
       </section>

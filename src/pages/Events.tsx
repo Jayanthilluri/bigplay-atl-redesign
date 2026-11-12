@@ -1,9 +1,10 @@
 import { useRef } from 'react'
 import {
   Header, photo, Footer, ActionBar, KineticLine, ArrowIcon, NavAnchor, PlayersClubPopup,
-  useReveal, useHeroParallax, useOpenStatus, PHONE_DISPLAY, PHONE_TEL,
+  useReveal, useHeroParallax, useOpenStatus, PHONE_DISPLAY, PHONE_TEL, EVENT_INQUIRY_URL,
 } from '../chrome'
 import PhotoSlider from '../components/PhotoSlider'
+import EmbedFrame from '../components/EmbedFrame'
 
 /* Real photos from corporate events & group buyouts at Big Play ATL */
 const CORP_GALLERY = [
@@ -38,7 +39,7 @@ const HOSTS = [
 ]
 
 const EVENT_STEPS = [
-  { n: '01', name: 'Tell us about your group', desc: 'Date, headcount and the vibe you’re after — a quick call is all it takes to get started.' },
+  { n: '01', name: 'Tell us about your group', desc: 'Date, headcount and the vibe you’re after — send the inquiry form below or give us a call.' },
   { n: '02', name: 'We build the package', desc: 'Attractions, food and drinks from Woody’s, and the right spaces — bundled into one proposal.' },
   { n: '03', name: 'You show up', desc: 'Your event host runs the day — setup, food, games, cleanup. You take the credit.' },
 ]
@@ -77,17 +78,17 @@ export default function Events() {
           </p>
           <div className="mt-7 flex flex-col sm:flex-row gap-3">
             <a
-              href={PHONE_TEL}
+              href="#inquiry"
               className="inline-flex items-center justify-center gap-2 whitespace-nowrap bg-[#42b23c] text-black font-mono-label text-xs font-bold px-7 py-4 hover:bg-white transition-colors"
             >
-              Plan an event: {PHONE_DISPLAY} <ArrowIcon />
+              Request a quote <ArrowIcon />
             </a>
-            <NavAnchor
-              href="/attractions"
+            <a
+              href={PHONE_TEL}
               className="inline-flex items-center justify-center gap-2 whitespace-nowrap border border-white/30 text-white font-mono-label text-xs px-7 py-4 hover:border-[#42b23c] hover:text-[#42b23c] transition-colors"
             >
-              Explore the attractions
-            </NavAnchor>
+              Call {PHONE_DISPLAY}
+            </a>
           </div>
         </div>
       </section>
@@ -180,6 +181,24 @@ export default function Events() {
         </div>
       </section>
 
+      {/* ===== inquiry form (Toast) ===== */}
+      <section id="inquiry" className="scroll-mt-16 px-5 sm:px-8 py-16 md:py-24 border-b border-white/10">
+        <div className="max-w-4xl mx-auto">
+          <p className="reveal font-mono-label text-[10px] text-[#ff8e4d]">Event inquiry</p>
+          <h2 className="reveal font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white mt-2">
+            Tell us about <span className="text-[#42b23c]">your event</span>
+          </h2>
+          <p className="reveal mt-4 text-white/70 leading-relaxed max-w-2xl">
+            Share your date, headcount and what you have in mind — our events team will get back
+            to you with options and a quote. Prefer to talk? Call{' '}
+            <a href={PHONE_TEL} className="text-[#42b23c] u-link">{PHONE_DISPLAY}</a>.
+          </p>
+          <div className="mt-8 rounded-sm overflow-hidden bg-white">
+            <EmbedFrame src={EVENT_INQUIRY_URL} title="Big Play ATL event inquiry form" className="h-[1100px] sm:h-[800px]" />
+          </div>
+        </div>
+      </section>
+
       {/* ===== CTA band ===== */}
       <section className="bg-[#42b23c] text-black px-5 sm:px-8 py-16 md:py-24">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
@@ -194,10 +213,16 @@ export default function Events() {
           </div>
           <div className="reveal flex flex-col sm:flex-row md:flex-col gap-3">
             <a
-              href={PHONE_TEL}
+              href="#inquiry"
               className="inline-flex items-center justify-center gap-2 whitespace-nowrap bg-black text-[#42b23c] font-mono-label text-xs font-bold px-7 py-4 hover:bg-[#1a1a1a] transition-colors"
             >
-              {PHONE_DISPLAY} <ArrowIcon />
+              Send an inquiry <ArrowIcon />
+            </a>
+            <a
+              href={PHONE_TEL}
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap border-2 border-black text-black font-mono-label text-xs font-bold px-7 py-4 hover:bg-black hover:text-[#42b23c] transition-colors"
+            >
+              Call {PHONE_DISPLAY}
             </a>
             <NavAnchor
               href="/eat"

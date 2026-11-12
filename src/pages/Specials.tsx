@@ -98,6 +98,16 @@ export default function Specials() {
                       ))}
                     </ul>
                     {d.fine && <p className="mt-2 text-xs text-white/60">{d.fine}</p>}
+                    {d.cta && (
+                      <a
+                        href={d.cta.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-4 self-start inline-flex items-center gap-2 bg-[#42b23c] text-black font-mono-label text-[11px] font-bold px-5 py-3 hover:bg-white transition-colors"
+                      >
+                        {d.cta.label} <ArrowIcon className="w-3.5 h-3.5" />
+                      </a>
+                    )}
                   </div>
                 </li>
               )

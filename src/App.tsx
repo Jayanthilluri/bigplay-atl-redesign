@@ -8,6 +8,7 @@ import Specials from './pages/Specials'
 import Eat from './pages/Eat'
 import Visit from './pages/Visit'
 import NotFound from './pages/NotFound'
+import PlayersClub from './pages/PlayersClub'
 import { metaFor, SITE_URL } from './seo'
 
 /* Keeps <title>, description and canonical in sync on client-side navigation.
@@ -36,6 +37,7 @@ export default function App() {
         <Route path="/specials" element={<Specials />} />
         <Route path="/eat" element={<Eat />} />
         <Route path="/visit" element={<Visit />} />
+        <Route path="/players-club" element={<PlayersClub />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

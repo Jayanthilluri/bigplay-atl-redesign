@@ -20,10 +20,8 @@ export function NavAnchor({ href, className, children, onClick }: { href: string
   )
 }
 
-/* Shared constants, hooks and chrome (header/footer/action bar) for Big Play ATL redesign */
+/* Shared constants, hooks and chrome (header/footer/action bar) for the Big Play ATL website */
 
-/* Set to false on launch day to drop the "redesign concept" footer label. */
-export const STAGING = true
 
 export const BOOK_URL = 'https://bigplayusa.intercardinc.com/OnlineScheduler/home/NjU2OQ%3D%3D/l/1011'
 export const VIP_URL = '/players-club'
@@ -31,7 +29,7 @@ export const VIP_URL = '/players-club'
 export const BOWLING_URL = 'https://reservations.meriq.com/bigplayentertainment/'
 /* Group/corporate event inquiry form (Toast) */
 export const EVENT_INQUIRY_URL =
-  'https://www.toasttab.com/invoice/lead?rx=d768e2ae-dc93-4e01-812c-29a139decb4f&ot=8e2401b6-684c-4e77-aee1-59c5bad8b070&form=1'
+  'https://www.toasttab.com/invoice/lead?rx=d768e2ae-dc93-4e01-812c-29a139decb4f&ot=4c56652e-9fa4-42c5-a93e-544f9eacfb76&form=1'
 /* Player's Club sign-up form (LeadConnector / GoHighLevel — same form as the old site) */
 export const PLAYERS_CLUB_FORM_ID = 'aOyL3jjOgJE4dMDtOkDo'
 export const SPECIALS_URL = 'https://bigplayatl.com/specials/'
@@ -580,7 +578,7 @@ export function Footer() {
         <div className="mt-8 flex flex-col md:flex-row justify-between gap-6 font-mono-label text-[11px] text-white/60">
           <div className="flex items-center gap-3">
             <img src={IMG.logo} alt="" className="h-7 w-auto" width={145} height={28} />
-            <span>© {new Date().getFullYear()} Big Play Entertainment{STAGING ? ' — redesign concept' : ''}</span>
+            <span>© {new Date().getFullYear()} Big Play Entertainment</span>
             <span aria-hidden="true">·</span>
             <Link to="/privacy-policy" className="u-link text-white/70 py-2">Privacy policy</Link>
           </div>

@@ -43,7 +43,6 @@ Export a JPG, then create `name.webp` (max 1600px wide) and `name-800.webp` (800
 
 ## Launch checklist
 
-- [ ] Set `STAGING = false` in `src/chrome.tsx` (removes "redesign concept" from the footer).
 - [ ] Move the logo, favicon and the two remaining images still served from
       `pub-…r2.dev` (see `IMG` in `src/chrome.tsx` and the favicon in `index.html`) into
       `public/` — Cloudflare's `r2.dev` URLs are rate-limited and not meant for production.

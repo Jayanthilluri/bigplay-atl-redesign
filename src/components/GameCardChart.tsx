@@ -8,7 +8,7 @@ export default function GameCardChart({ className = '' }: { className?: string }
         <table className="w-full text-sm">
           <caption className="sr-only">Game card bonus play by amount loaded</caption>
           <thead>
-            <tr className="bg-[#42b23c] text-black font-mono-label text-[10px]">
+            <tr className="bg-[#42b23c] text-black font-mono-label text-[12px]">
               <th scope="col" className="text-left px-4 py-3 font-bold">Load</th>
               <th scope="col" className="text-right px-4 py-3 font-bold">Bonus play</th>
               <th scope="col" className="text-right px-4 py-3 font-bold">Total play</th>

@@ -1,3 +1,61 @@
+/* Self-hosted fonts (SIL Open Font License) — faster than Google Fonts and no layout jump. */
+@font-face {
+  font-family: 'Anton';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/anton-400.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/inter-400.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/inter-500.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/inter-600.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/inter-700.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/space-mono-400.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/space-mono-700.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -180,11 +238,20 @@ body {
 /* Underline hover (scaleX from bottom-left) */
 .u-link {
   position: relative;
+  /* Bigger tap/click area (WCAG 2.2 target size) without moving the layout. */
+  padding-block: 10px;
+  margin-block: -10px;
+}
+/* Links that already set their own vertical padding (e.g. footer menu) keep their
+   space in the layout so wrapped rows don't overlap. */
+.u-link:is([class^="py-"], [class*=" py-"]) {
+  padding-block: 0.75rem;
+  margin-block: 0;
 }
 .u-link::after {
   content: '';
   position: absolute;
-  left: 0; right: 0; bottom: -3px;
+  left: 0; right: 0; bottom: 7px;
   height: 2px;
   background: currentColor;
   transform: scaleX(0);
@@ -212,3 +279,17 @@ body {
   .js .reveal { opacity: 1; transform: none; transition: none; }
   .hero-parallax { transform: none !important; }
 }
+
+/* Long-form legal documents */
+.legal-prose { color: rgb(237 237 237 / 0.82); line-height: 1.7; }
+.legal-prose h2, .legal-prose h3 { font-family: 'Anton', 'Arial Narrow', sans-serif; text-transform: uppercase; color: #fff; line-height: 1.1; }
+.legal-prose h2 { font-size: 1.75rem; margin: 2.5rem 0 0.75rem; }
+.legal-prose h3 { font-size: 1.25rem; margin: 1.75rem 0 0.5rem; }
+.legal-prose p { margin: 0.75rem 0; }
+.legal-prose ul, .legal-prose ol { margin: 0.75rem 0; padding-left: 1.25rem; }
+.legal-prose ul { list-style: disc; }
+.legal-prose ol { list-style: decimal; }
+.legal-prose li { margin: 0.35rem 0; }
+.legal-prose li::marker { color: #42b23c; }
+.legal-prose strong { color: #fff; }
+.legal-prose a { color: #42b23c; text-decoration: underline; text-underline-offset: 3px; }

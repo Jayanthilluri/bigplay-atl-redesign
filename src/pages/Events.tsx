@@ -64,7 +64,7 @@ export default function Events() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/45 to-[#050505]/30" />
         </div>
         <div className="relative px-5 sm:px-8 pb-12 max-w-6xl mx-auto w-full">
-          <p className="font-mono-label text-[10px] sm:text-xs text-[#ff8e4d] flex items-center gap-2">
+          <p className="font-mono-label text-[12px] sm:text-xs text-[#ff8e4d] flex items-center gap-2">
             <span className={`w-2 h-2 rounded-full ${status.open ? 'bg-[#42b23c] pulse-dot' : 'bg-[#ff8e4d]'}`} />
             Corporate events · team building · full buyouts
           </p>
@@ -104,7 +104,7 @@ export default function Events() {
           ].map(([v, l]) => (
             <div key={l} className="px-4 py-6 sm:py-8 text-center">
               <p className="font-display text-3xl sm:text-5xl text-[#42b23c]">{v}</p>
-              <p className="font-mono-label text-[9px] sm:text-[10px] text-white/50 mt-1">{l}</p>
+              <p className="font-mono-label text-[12px] sm:text-[12px] text-white/50 mt-1">{l}</p>
             </div>
           ))}
         </div>
@@ -113,7 +113,7 @@ export default function Events() {
       {/* ===== what we host ===== */}
       <section id="host" className="px-5 sm:px-8 py-16 md:py-24 border-b border-white/10">
         <div className="max-w-6xl mx-auto">
-          <p className="reveal font-mono-label text-[10px] text-[#ff8e4d]">What we host</p>
+          <p className="reveal font-mono-label text-[12px] text-[#ff8e4d]">What we host</p>
           <h2 className="reveal font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white mt-2">
             One venue, <span className="text-[#42b23c]">every kind of gathering</span>
           </h2>
@@ -131,14 +131,14 @@ export default function Events() {
       {/* ===== how it works ===== */}
       <section className="px-5 sm:px-8 py-16 md:py-24 border-b border-white/10">
         <div className="max-w-6xl mx-auto">
-          <p className="reveal font-mono-label text-[10px] text-[#ff8e4d]">How it works</p>
+          <p className="reveal font-mono-label text-[12px] text-[#ff8e4d]">How it works</p>
           <h2 className="reveal font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white mt-2">
             You bring the people, <span className="text-[#42b23c]">we do the rest</span>
           </h2>
           <div className="mt-10 grid md:grid-cols-3 gap-px bg-white/10 border border-white/10">
             {EVENT_STEPS.map((s) => (
               <div key={s.n} className="reveal bg-[#050505] p-6 sm:p-8">
-                <p className="font-mono-label text-[10px] text-[#ff8e4d]">{s.n}</p>
+                <p className="font-mono-label text-[12px] text-[#ff8e4d]">{s.n}</p>
                 <h3 className="font-display text-2xl sm:text-3xl text-white mt-2">{s.name}</h3>
                 <p className="mt-3 text-sm text-white/70 leading-relaxed">{s.desc}</p>
               </div>
@@ -151,7 +151,7 @@ export default function Events() {
       <section className="bg-[#42b23c] text-black px-5 sm:px-8 py-16 md:py-20">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="reveal">
-            <p className="font-mono-label text-[10px] text-black/85">Every event includes</p>
+            <p className="font-mono-label text-[12px] text-black/85">Every event includes</p>
             <h2 className="font-display text-5xl sm:text-6xl md:text-7xl leading-[0.9] mt-2">
               One call plans it all.
             </h2>
@@ -171,7 +171,7 @@ export default function Events() {
       <section className="py-16 md:py-24 border-b border-white/10">
         <div className="px-5 sm:px-8 max-w-6xl mx-auto flex items-end justify-between gap-6">
           <div>
-            <p className="reveal font-mono-label text-[10px] text-[#ff8e4d]">Real events, real photos</p>
+            <p className="reveal font-mono-label text-[12px] text-[#ff8e4d]">Real events, real photos</p>
             <h2 className="reveal font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white mt-2">
               Recent <span className="text-[#42b23c]">group events</span>
             </h2>
@@ -185,7 +185,7 @@ export default function Events() {
       {/* ===== inquiry form (Toast) ===== */}
       <section id="inquiry" className="scroll-mt-16 px-5 sm:px-8 py-16 md:py-24 border-b border-white/10">
         <div className="max-w-5xl mx-auto">
-          <p className="reveal font-mono-label text-[10px] text-[#ff8e4d]">Event inquiry</p>
+          <p className="reveal font-mono-label text-[12px] text-[#ff8e4d]">Event inquiry</p>
           <h2 className="reveal font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white mt-2">
             Tell us about <span className="text-[#42b23c]">your event</span>
           </h2>
@@ -208,7 +208,7 @@ export default function Events() {
       <section className="bg-[#42b23c] text-black px-5 sm:px-8 py-16 md:py-24">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="reveal">
-            <p className="font-mono-label text-[10px] text-black/85">Dates fill fast — especially Q4</p>
+            <p className="font-mono-label text-[12px] text-black/85">Dates fill fast — especially Q4</p>
             <h2 className="font-display text-5xl sm:text-6xl md:text-7xl leading-[0.9] mt-2">
               Let’s plan your event.
             </h2>

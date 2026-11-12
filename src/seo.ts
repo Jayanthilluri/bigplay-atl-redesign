@@ -6,34 +6,34 @@ import { PARTY_FAQS } from './content/partyFaqs'
 
 export const SITE_URL = 'https://bigplayatl.com'
 export const SITE_NAME = 'Big Play ATL'
-export const OG_IMAGE = '/photos/bowl-lanes-wide.webp'
+export const OG_IMAGE = '/og-image.jpg' // 1200×630 JPG — works on Facebook, LinkedIn, iMessage, Slack
 
 export type PageMeta = { path: string; title: string; description: string }
 
 export const PAGES: PageMeta[] = [
   {
     path: '/',
-    title: 'Big Play ATL | Bowling, Laser Tag, Arcade & Glow Golf in Dunwoody, GA',
+    title: 'Big Play ATL | Bowling, Arcade & Laser Tag in Dunwoody, GA',
     description:
-      '16 lanes of boutique bowling, 75 arcade games, 80s-themed mini golf, laser tag, Valo Arena mixed reality and Woody’s Restaurant & Bar in Dunwoody, GA. Minutes from Perimeter, I-285 and GA-400.',
+      '16 lanes of boutique bowling, 75 arcade games, 80s mini golf, laser tag, Valo Arena and Woody’s Restaurant & Bar in Dunwoody, GA. Minutes from Perimeter.',
   },
   {
     path: '/attractions',
-    title: 'Attractions: Bowling, Laser Tag, Arcade & Glow Golf | Big Play ATL Dunwoody',
+    title: 'Bowling, Laser Tag, Arcade & Mini Golf Prices | Big Play ATL',
     description:
-      'Prices and info: bowling from $20 per lane/hour ($2 Tuesdays), laser tag $9, 80s mini golf $8, arcade game card bonuses and Valo Arena mixed reality — all under one roof in Dunwoody, GA.',
+      'Bowling from $20 per lane/hour ($2 Tuesdays), laser tag $9, 80s mini golf $8, arcade game card bonuses and Valo Arena — all under one roof in Dunwoody.',
   },
   {
     path: '/parties',
-    title: 'Kids Birthday Parties in Dunwoody, GA | Packages from $350 | Big Play ATL',
+    title: 'Kids Birthday Parties in Dunwoody, GA | Big Play ATL',
     description:
-      'Hosted birthday parties with bowling, laser tag, arcade and glow golf. Packages from $350 include a party host, pizza, drinks and 90 minutes of play. Book online.',
+      'Hosted birthday parties with bowling, laser tag, arcade and glow golf. Packages from $350 include a host, pizza, drinks and 90 minutes of play.',
   },
   {
     path: '/events',
-    title: 'Corporate Events & Team Building near Perimeter Center | Big Play ATL',
+    title: 'Corporate Events & Team Building in Dunwoody | Big Play ATL',
     description:
-      'Team building, holiday parties and full venue buyouts in Dunwoody. Bowling, laser tag, catering from Woody’s kitchen and a full bar — planned by our events team.',
+      'Team building, holiday parties and group events near Perimeter Center: bowling, laser tag, Woody’s catering and a full bar. Request a quote online.',
   },
   {
     path: '/specials',
@@ -43,13 +43,13 @@ export const PAGES: PageMeta[] = [
   },
   {
     path: '/eat',
-    title: 'Woody’s Restaurant & Bar at Big Play ATL | Dunwoody, GA',
+    title: 'Woody’s Restaurant & Bar Menu | Big Play ATL Dunwoody',
     description:
-      'Full menu with prices: smashburgers, wings, flatbreads, 16" pizza, salmon and NY strip, plus signature cocktails, 18 oz margaritas, draft beer and wine. Inside Big Play ATL, Dunwoody.',
+      'Woody’s full menu with prices: smashburgers, wings, flatbreads, 16" pizza, salmon and steak, plus cocktails, 18 oz margaritas, beer and wine.',
   },
   {
     path: '/visit',
-    title: 'Hours, Directions & Parking | Big Play ATL, 2480 Mt Vernon Rd, Dunwoody',
+    title: 'Hours & Directions | Big Play ATL, Dunwoody, GA',
     description:
       'Big Play ATL hours, address and directions: 2480 Mt Vernon Rd, Dunwoody, GA 30338. Free on-site parking, minutes from I-285 and GA-400. Call (470) 359-5724.',
   },
@@ -57,7 +57,7 @@ export const PAGES: PageMeta[] = [
 
 PAGES.push({
   path: '/players-club',
-  title: 'Join the Player’s Club — VIP Deals & Perks | Big Play ATL Dunwoody',
+  title: 'Join the Player’s Club — VIP Deals | Big Play ATL',
   description:
     'Free to join: members-only deals, daily-special alerts, birthday perks and first access to events at Big Play ATL in Dunwoody, GA.',
 })
@@ -68,6 +68,19 @@ PAGES.push({
   description:
     'How Big Play Entertainment collects, uses and protects the information you share through our website, booking and inquiry forms, and Player’s Club.',
 })
+
+PAGES.push(
+  {
+    path: '/terms-and-conditions',
+    title: 'Terms and Conditions | Big Play ATL',
+    description: 'Terms of use for the Big Play ATL website, bigplayatl.com, operated by Big Play Entertainment in Dunwoody, GA.',
+  },
+  {
+    path: '/accessibility',
+    title: 'Accessibility Statement | Big Play ATL',
+    description: 'Big Play Entertainment’s commitment to an accessible website and venue, how to get help, and how to share accessibility feedback.',
+  },
+)
 
 export const NOT_FOUND: PageMeta = {
   path: '/404',

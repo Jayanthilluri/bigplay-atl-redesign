@@ -55,7 +55,7 @@ export default function Visit() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/50 to-[#050505]/40" />
         </div>
         <div className="relative px-5 sm:px-8 pb-12 max-w-6xl mx-auto w-full">
-          <p className="font-mono-label text-[10px] sm:text-xs text-[#ff8e4d] flex items-center gap-2">
+          <p className="font-mono-label text-[12px] sm:text-xs text-[#ff8e4d] flex items-center gap-2">
             <span className={`w-2 h-2 rounded-full ${status.open ? 'bg-[#42b23c] pulse-dot' : 'bg-[#ff8e4d]'}`} />
             {status.text || 'Dunwoody, GA'}
           </p>
@@ -100,7 +100,7 @@ export default function Visit() {
       <section className="px-5 sm:px-8 pb-16 md:pb-20">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16">
           <div className="reveal">
-            <p className="font-mono-label text-[10px] text-[#ff8e4d]">Hours</p>
+            <p className="font-mono-label text-[12px] text-[#ff8e4d]">Hours</p>
             <h2 className="font-display text-4xl sm:text-5xl leading-[0.9] text-white mt-2">
               When the fun <span className="text-[#42b23c]">happens</span>
             </h2>
@@ -121,7 +121,7 @@ export default function Visit() {
               >
                 <span className="font-mono-label text-[11px] flex items-center gap-2">
                   {h.day}
-                  {i === today && <span className="text-[9px] text-black bg-[#42b23c] px-1.5 py-0.5 font-bold">TODAY</span>}
+                  {i === today && <span className="text-[12px] text-black bg-[#42b23c] px-1.5 py-0.5 font-bold">TODAY</span>}
                 </span>
                 <span className={`font-mono-label text-[11px] ${h.label === 'Closed' ? 'text-white/60' : ''}`}>
                   {h.label}

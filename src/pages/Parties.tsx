@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useId, useRef, useState } from 'react'
 import { PARTY_FAQS } from '../content/partyFaqs'
 import {
   Header, photo, Footer, ActionBar, KineticLine, ArrowIcon, PlayersClubPopup,
@@ -107,19 +107,23 @@ const UPGRADES = [
 
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false)
+  const id = useId()
   return (
     <div className="reveal border-b border-white/10">
       <button
         className="w-full flex items-center justify-between gap-6 py-5 text-left"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
+        aria-controls={id}
       >
         <span className="text-white/90 text-sm sm:text-base font-medium">{q}</span>
         <span className={`shrink-0 text-[#42b23c] text-xl transition-transform duration-300 ${open ? 'rotate-45' : ''}`}>+</span>
       </button>
       <div
+        id={id}
         className="grid transition-all duration-300 ease-out"
         style={{ gridTemplateRows: open ? '1fr' : '0fr' }}
+        aria-hidden={!open}
       >
         <div className="overflow-hidden">
           <p className="pb-5 pr-10 text-sm text-white/60 leading-relaxed">{a}</p>
@@ -148,7 +152,7 @@ export default function Parties() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/45 to-[#050505]/30" />
         </div>
         <div className="relative px-5 sm:px-8 pb-12 max-w-6xl mx-auto w-full">
-          <p className="font-mono-label text-[10px] sm:text-xs text-[#ff8e4d] flex items-center gap-2">
+          <p className="font-mono-label text-[12px] sm:text-xs text-[#ff8e4d] flex items-center gap-2">
             <span className={`w-2 h-2 rounded-full ${status.open ? 'bg-[#42b23c] pulse-dot' : 'bg-[#ff8e4d]'}`} />
             Birthday parties · kids & teens · hosted start to finish
           </p>
@@ -189,7 +193,7 @@ export default function Parties() {
           ].map(([v, l]) => (
             <div key={l} className="reveal py-6 sm:py-8 text-center px-2">
               <p className="font-display text-3xl sm:text-5xl text-[#42b23c]">{v}</p>
-              <p className="font-mono-label text-[9px] sm:text-[10px] text-white/50 mt-2">{l}</p>
+              <p className="font-mono-label text-[12px] sm:text-[12px] text-white/50 mt-2">{l}</p>
             </div>
           ))}
         </div>
@@ -198,14 +202,14 @@ export default function Parties() {
       {/* ===== how it works ===== */}
       <section className="px-5 sm:px-8 py-16 md:py-24">
         <div className="max-w-6xl mx-auto">
-          <p className="reveal font-mono-label text-[10px] text-[#ff8e4d]">How it works</p>
+          <p className="reveal font-mono-label text-[12px] text-[#ff8e4d]">How it works</p>
           <h2 className="reveal font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white mt-2">
             Three steps to <span className="text-[#42b23c]">party hero</span>
           </h2>
           <div className="mt-10 grid md:grid-cols-3 gap-px bg-white/10 border border-white/10">
             {STEPS.map((s) => (
               <div key={s.n} className="reveal bg-[#050505] p-6 sm:p-8">
-                <p className="font-mono-label text-[10px] text-[#ff8e4d]">{s.n}</p>
+                <p className="font-mono-label text-[12px] text-[#ff8e4d]">{s.n}</p>
                 <h3 className="font-display text-2xl sm:text-3xl text-white mt-2">{s.name}</h3>
                 <p className="mt-3 text-sm text-white/60 leading-relaxed">{s.desc}</p>
               </div>
@@ -221,7 +225,7 @@ export default function Parties() {
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9]">
               Every party includes
             </h2>
-            <p className="font-mono-label text-[10px] text-black/85 max-w-[240px] md:text-right">
+            <p className="font-mono-label text-[12px] text-black/85 max-w-[240px] md:text-right">
               No hidden extras — this is the baseline for every single package
             </p>
           </div>
@@ -240,7 +244,7 @@ export default function Parties() {
       <section className="py-16 md:py-24 border-b border-white/10">
         <div className="px-5 sm:px-8 max-w-6xl mx-auto flex items-end justify-between gap-6">
           <div>
-            <p className="reveal font-mono-label text-[10px] text-[#ff8e4d]">Real parties, real photos</p>
+            <p className="reveal font-mono-label text-[12px] text-[#ff8e4d]">Real parties, real photos</p>
             <h2 className="reveal font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white mt-2">
               Inside a <span className="text-[#42b23c]">Big Play party</span>
             </h2>
@@ -254,7 +258,7 @@ export default function Parties() {
       {/* ===== packages ===== */}
       <section className="px-5 sm:px-8 py-16 md:py-24">
         <div className="max-w-6xl mx-auto">
-          <p className="reveal font-mono-label text-[10px] text-[#ff8e4d]">Party packages</p>
+          <p className="reveal font-mono-label text-[12px] text-[#ff8e4d]">Party packages</p>
           <h2 className="reveal font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white mt-2">
             Pick your <span className="text-[#42b23c]">package</span>
           </h2>
@@ -274,7 +278,7 @@ export default function Parties() {
                 }`}
               >
                 {p.tag && (
-                  <span className="absolute -top-3 left-6 bg-black text-[#42b23c] font-mono-label text-[9px] font-bold px-3 py-1.5">
+                  <span className="absolute -top-3 left-6 bg-black text-[#42b23c] font-mono-label text-[12px] font-bold px-3 py-1.5">
                     {p.tag}
                   </span>
                 )}
@@ -286,7 +290,7 @@ export default function Parties() {
                   <span className={`font-display text-5xl ${p.tag ? 'text-black' : 'text-[#42b23c]'}`}>
                     ${p.price}
                   </span>
-                  <span className={`font-mono-label text-[10px] ${p.tag ? 'text-black/85' : 'text-white/60'}`}>
+                  <span className={`font-mono-label text-[12px] ${p.tag ? 'text-black/85' : 'text-white/60'}`}>
                     / party
                   </span>
                 </p>
@@ -298,7 +302,7 @@ export default function Parties() {
                     </li>
                   ))}
                 </ul>
-                <p className={`mt-4 font-mono-label text-[10px] ${p.tag ? 'text-black/85' : 'text-white/60'}`}>
+                <p className={`mt-4 font-mono-label text-[12px] ${p.tag ? 'text-black/85' : 'text-white/60'}`}>
                   +${p.addl} per additional guest
                 </p>
                 <a
@@ -323,7 +327,7 @@ export default function Parties() {
             <div tabIndex={0} role="region" aria-label="Package comparison table, scroll sideways" className="mt-5 overflow-x-auto border border-white/10">
               <table className="w-full min-w-[640px] text-sm">
                 <thead>
-                  <tr className="bg-[#0d0d0d] font-mono-label text-[10px] text-white/50">
+                  <tr className="bg-[#0d0d0d] font-mono-label text-[12px] text-white/50">
                     <th className="text-left px-4 py-3.5 font-normal">Feature</th>
                     <th className="text-left px-4 py-3.5 font-normal">🎳 Bowling</th>
                     <th className="text-left px-4 py-3.5 font-normal">🕹️ Arcade</th>
@@ -334,14 +338,14 @@ export default function Parties() {
                 <tbody className="divide-y divide-white/10">
                   {COMPARE.map((row) => (
                     <tr key={row.label}>
-                      <td className="px-4 py-3.5 text-white/50 font-mono-label text-[10px]">{row.label}</td>
+                      <td className="px-4 py-3.5 text-white/50 font-mono-label text-[12px]">{row.label}</td>
                       {row.values.map((v, i) => (
                         <td key={i} className={`px-4 py-3.5 ${i === 3 ? 'text-[#42b23c]' : 'text-white/80'}`}>{v}</td>
                       ))}
                     </tr>
                   ))}
                   <tr>
-                    <td className="px-4 py-3.5 text-white/50 font-mono-label text-[10px]">Food, drinks & host</td>
+                    <td className="px-4 py-3.5 text-white/50 font-mono-label text-[12px]">Food, drinks & host</td>
                     <td colSpan={4} className="px-4 py-3.5 text-white/80">Included in every package ✦</td>
                   </tr>
                 </tbody>
@@ -371,7 +375,7 @@ export default function Parties() {
       {/* ===== FAQ ===== */}
       <section className="px-5 sm:px-8 pb-16 md:pb-24">
         <div className="max-w-3xl mx-auto">
-          <p className="reveal font-mono-label text-[10px] text-[#ff8e4d]">Questions</p>
+          <p className="reveal font-mono-label text-[12px] text-[#ff8e4d]">Questions</p>
           <h2 className="reveal font-display text-4xl sm:text-5xl leading-[0.9] text-white mt-2">
             Parents ask, <span className="text-[#42b23c]">we answer</span>
           </h2>
@@ -392,7 +396,7 @@ export default function Parties() {
       <section className="bg-[#42b23c] text-black px-5 sm:px-8 py-16 md:py-20">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="reveal">
-            <p className="font-mono-label text-[10px] text-black/85">Dates fill fast on weekends</p>
+            <p className="font-mono-label text-[12px] text-black/85">Dates fill fast on weekends</p>
             <h2 className="font-display text-5xl sm:text-6xl md:text-7xl leading-[0.9] mt-2">
               Ready to lock in your date?
             </h2>

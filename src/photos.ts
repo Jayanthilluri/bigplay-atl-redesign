@@ -24,10 +24,6 @@ export const PHOTO_SIZES: Record<string, [number, number]> = {
     1600,
     1067
   ],
-  "bowl-lanes-wide": [
-    1600,
-    1067
-  ],
   "corp-buffet-line": [
     1280,
     1920
@@ -219,6 +215,10 @@ export const PHOTO_SIZES: Record<string, [number, number]> = {
   "specials-hero": [
     1600,
     1067
+  ],
+  "valo-placeholder": [
+    1600,
+    1068
   ],
   "visit-hero": [
     1600,

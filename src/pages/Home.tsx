@@ -50,10 +50,14 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/45 via-35% to-[#050505]/10" />
 
         <div className="relative z-10 px-5 sm:px-8 pb-28 md:pb-16 pt-24 max-w-6xl">
-          <div className="flex items-center gap-2 mb-5">
-            <span className={`w-2 h-2 rounded-full ${status.open ? 'bg-[#42b23c] pulse-dot' : 'bg-[#ff8e4d]'}`} />
-            <span className="font-mono-label text-[11px] text-white/90">{status.text}</span>
-            <span className="font-mono-label text-[11px] text-white/50">· Dunwoody, GA</span>
+          {/* Status text is filled in after load (it depends on the time), so reserve its
+              space up front — otherwise the hero jumps when it appears. */}
+          <div className="flex items-start gap-2 mb-5 min-h-[2.6em] sm:min-h-[1.3em]">
+            <span className={`mt-[0.35em] w-2 h-2 shrink-0 rounded-full ${status.open ? 'bg-[#42b23c] pulse-dot' : 'bg-[#ff8e4d]'}`} />
+            <span className="font-mono-label text-[11px] text-white/90">
+              {status.text}
+              <span className="hidden sm:inline text-white/60"> · Dunwoody, GA</span>
+            </span>
           </div>
 
           <h1 className="font-display leading-[0.9] text-[19vw] sm:text-7xl md:text-8xl lg:text-9xl text-white">
@@ -129,11 +133,11 @@ export default function Home() {
           ].map(([n, l]) => (
             <div key={l} className="reveal bg-[#050505] p-6">
               <div className="font-display text-4xl sm:text-5xl text-[#42b23c]">{n}</div>
-              <div className="mt-2 font-mono-label text-[10px] text-white/60">{l}</div>
+              <div className="mt-2 font-mono-label text-[12px] text-white/60">{l}</div>
             </div>
           ))}
         </div>
-        <p className="mt-3 font-mono-label text-[10px] text-white/60">Closed Mondays for private events & deep cleans</p>
+        <p className="mt-3 font-mono-label text-[12px] text-white/60">Closed Mondays for private events & deep cleans</p>
       </section>
 
       {/* ===== attractions ===== */}
@@ -146,8 +150,8 @@ export default function Home() {
             </h2>
           </div>
           <div className="reveal hidden md:flex items-center gap-6">
-            <p className="font-mono-label text-[10px] text-white/60">Swipe →</p>
-            <Link to="/attractions" className="u-link font-mono-label text-[10px] text-[#42b23c]">View all →</Link>
+            <p className="font-mono-label text-[12px] text-white/60">Swipe →</p>
+            <Link to="/attractions" className="u-link font-mono-label text-[12px] text-[#42b23c]">View all →</Link>
           </div>
         </div>
 
@@ -161,7 +165,7 @@ export default function Home() {
                   loading={i > 1 ? 'lazy' : undefined}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <span className="absolute top-3 left-3 bg-[#050505]/85 backdrop-blur font-mono-label text-[10px] text-[#42b23c] px-3 py-1.5">
+                <span className="absolute top-3 left-3 bg-[#050505]/85 backdrop-blur font-mono-label text-[12px] text-[#42b23c] px-3 py-1.5">
                   {a.tag}
                 </span>
               </div>

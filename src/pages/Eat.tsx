@@ -35,7 +35,7 @@ function TagBadges({ tags }: { tags?: Tag[] }) {
         <span
           key={t}
           title={TAG_LABEL[t]}
-          className={`ml-1.5 align-middle inline-flex items-center justify-center text-[10px] font-bold ${t === 'FAV' ? 'text-[#2b7a27]' : 'w-5 h-5 rounded-full border border-[#2b7a27] text-[#2b7a27]'}`}
+          className={`ml-1.5 align-middle inline-flex items-center justify-center text-[12px] font-bold ${t === 'FAV' ? 'text-[#2b7a27]' : 'w-5 h-5 rounded-full border border-[#2b7a27] text-[#2b7a27]'}`}
         >
           {t === 'FAV' ? '♥' : t}
           <span className="sr-only"> ({TAG_LABEL[t]})</span>
@@ -108,7 +108,7 @@ export default function Eat() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-[#050505]/30" />
         </div>
         <div className="relative px-5 sm:px-8 pb-12 max-w-6xl mx-auto w-full">
-          <p className="font-mono-label text-[10px] sm:text-xs text-[#ff8e4d]">Woody’s Restaurant &amp; Bar</p>
+          <p className="font-mono-label text-[12px] sm:text-xs text-[#ff8e4d]">Woody’s Restaurant &amp; Bar</p>
           <h1 className="font-display text-[13vw] sm:text-7xl md:text-8xl leading-[0.9] mt-4 text-white">
             <KineticLine text="Fuel for" />{' '}
             <span className="text-[#42b23c]"><KineticLine text="the fun" base={0.15} /></span>
@@ -138,7 +138,7 @@ export default function Eat() {
 
       {/* Marquee */}
       <div className="border-y border-white/10 overflow-hidden py-3 bg-[#0d0d0d]">
-        <div className="marquee-track font-mono-label text-[10px] sm:text-xs text-white/50">
+        <div className="marquee-track font-mono-label text-[12px] sm:text-xs text-white/50">
           {[0, 1].map((n) => (
             <span key={n} className="flex shrink-0">
               {['Full kitchen', 'Full bar', 'Family friendly', 'Party catering', 'Lane-side service'].map((w) => (
@@ -165,7 +165,7 @@ export default function Eat() {
 
           <nav aria-label="Menu sections" className="mt-8 flex flex-wrap gap-2">
             {[...FOOD, ...DRINKS].map((m) => (
-              <a key={m.id} href={`#${m.id}`} className="font-mono-label text-[10px] border border-white/20 text-white/80 px-3 py-2.5 hover:border-[#42b23c] hover:text-[#42b23c]">
+              <a key={m.id} href={`#${m.id}`} className="font-mono-label text-[12px] border border-white/20 text-white/80 px-3 py-2.5 hover:border-[#42b23c] hover:text-[#42b23c]">
                 {m.title}
               </a>
             ))}
@@ -194,7 +194,7 @@ export default function Eat() {
                 <p key={t}>{t}</p>
               ))}
               <p>
-                <span className="inline-flex w-5 h-5 rounded-full border border-[#2b7a27] text-[#2b7a27] text-[10px] font-bold items-center justify-center align-middle">V</span> Vegetarian ·{' '}
+                <span className="inline-flex w-5 h-5 rounded-full border border-[#2b7a27] text-[#2b7a27] text-[12px] font-bold items-center justify-center align-middle">V</span> Vegetarian ·{' '}
                 <span className="text-[#2b7a27] font-bold">♥</span> House favorite · GF Gluten-free option
               </p>
             </div>
@@ -211,7 +211,7 @@ export default function Eat() {
       <section className="py-16 md:py-24 border-t border-white/10">
         <div className="px-5 sm:px-8 max-w-6xl mx-auto flex items-end justify-between gap-6">
           <div>
-            <p className="reveal font-mono-label text-[10px] text-[#ff8e4d]">Real plates, real events</p>
+            <p className="reveal font-mono-label text-[12px] text-[#ff8e4d]">Real plates, real events</p>
             <h2 className="reveal font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white mt-2">
               Fresh from the <span className="text-[#42b23c]">kitchen</span>
             </h2>
@@ -226,7 +226,7 @@ export default function Eat() {
       <section className="bg-[#42b23c] text-black px-5 sm:px-8 py-16 md:py-20">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="reveal">
-            <p className="font-mono-label text-[10px] text-black/85">Parties &amp; events</p>
+            <p className="font-mono-label text-[12px] text-black/85">Parties &amp; events</p>
             <h2 className="font-display text-5xl sm:text-6xl md:text-7xl leading-[0.9] mt-2">
               We cater the party too.
             </h2>

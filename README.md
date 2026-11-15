@@ -32,6 +32,7 @@ Node version comes from `.node-version` (22).
 | Pages | `src/pages/*.tsx` |
 | Photos (WebP, 1600w + `-800` variant) | `public/photos/` — sizes in `src/photos.ts` |
 | Prerender + sitemap | `scripts/prerender.mjs` |
+| Reviews widget (Home + Parties) | `src/components/ReviewsSection.tsx` — colors/layout are set in GoHighLevel → Reputation → Widgets |
 
 If you change opening hours, update **both** `HOURS` in `src/chrome.tsx` and
 `openingHoursSpecification` in `src/seo.ts`. "Open now" is always computed in Atlanta time.
@@ -43,18 +44,17 @@ Export a JPG, then create `name.webp` (max 1600px wide) and `name-800.webp` (800
 
 ## Launch checklist
 
-- [ ] Move the logo, favicon and the two remaining images still served from
-      `pub-…r2.dev` (see `IMG` in `src/chrome.tsx` and the favicon in `index.html`) into
-      `public/` — Cloudflare's `r2.dev` URLs are rate-limited and not meant for production.
-- [ ] Replace the stock mixed-reality photo (`IMG.vr`) with a real photo of the ValoArena.
-- [ ] Add 301 redirects from every old bigplayatl.com URL to its new page (host config).
-- [ ] Point bigplayatl.com DNS at the host; submit `https://bigplayatl.com/sitemap.xml`
-      in Google Search Console; confirm the Google Business Profile website link and hours.
-- [ ] Add analytics (GA4 / Meta Pixel) with events for Book, Call and Directions clicks.
+- [x] Old WordPress URLs redirect (`public/_redirects`, 301s); legal pages carried over.
+- [x] Logo, favicon and all images served from this site (no `r2.dev`); fonts self-hosted.
+- [x] Google Tag Manager `GTM-N6GMJQDS` (in `index.html`; loads only on bigplayatl.com). In GTM, make
+      GA4 page views fire on **History Change** too — the site navigates without full page loads.
+- [ ] Cloudflare Pages → Custom domains: add `bigplayatl.com` (and `www`), then point DNS.
+- [ ] Google Search Console: submit `https://bigplayatl.com/sitemap.xml`; watch for 404s.
+- [ ] Google Business Profile: confirm website link and hours.
+- [ ] Replace the stock Valo Arena placeholder (`public/photos/valo-placeholder*.webp`).
 
 ## Content still needed from the business
 
 - Walk-in prices for bowling, laser tag, glow golf and mixed reality.
 - This week's actual specials (e.g. the $2 Tuesday bowling) for `/specials`.
 - Woody's real menu with prices and kitchen hours for `/eat`.
-- Real Google reviews to show on `/parties` (the AI-written testimonials were removed).

@@ -30,7 +30,7 @@ export default function PlayersClub() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/50 to-[#050505]/30" />
         </div>
         <div className="relative px-5 sm:px-8 pb-12 max-w-6xl mx-auto w-full">
-          <p className="font-mono-label text-[10px] sm:text-xs text-[#ff8e4d]">Free to join · No spam, just perks</p>
+          <p className="font-mono-label text-[12px] sm:text-xs text-[#ff8e4d]">Free to join · No spam, just perks</p>
           <h1 className="font-display text-[13vw] sm:text-7xl md:text-8xl leading-[0.9] mt-4 text-white">
             <KineticLine text="Join the" />{' '}
             <span className="text-[#42b23c]"><KineticLine text="Player’s Club" base={0.15} /></span>

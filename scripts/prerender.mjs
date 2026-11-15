@@ -26,6 +26,10 @@ function head(meta, { indexable }) {
     `<meta property="og:description" content="${attr(meta.description)}" />`,
     `<meta property="og:url" content="${url}" />`,
     `<meta property="og:image" content="${SITE_URL}${OG_IMAGE}" />`,
+    `<meta property="og:image:width" content="1200" />`,
+    `<meta property="og:image:height" content="630" />`,
+    `<meta property="og:image:alt" content="Big Play Entertainment building in Dunwoody, GA — Bowl. Play. Eat." />`,
+    `<meta name="twitter:image" content="${SITE_URL}${OG_IMAGE}" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
     ...(indexable ? jsonLdFor(meta.path).map((o) => `<script type="application/ld+json">${json(o)}</script>`) : []),
   ]

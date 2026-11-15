@@ -8,6 +8,7 @@ export default function EmbedFrame({
   title,
   id,
   className = '',
+  background = 'bg-white',
   script,
   attrs = {},
 }: {
@@ -15,6 +16,7 @@ export default function EmbedFrame({
   title: string
   id?: string
   className?: string
+  background?: string
   script?: string
   attrs?: Record<string, string>
 }) {
@@ -32,7 +34,7 @@ export default function EmbedFrame({
       title={title}
       id={id}
       loading="lazy"
-      className={`block w-full border-0 bg-white ${className}`}
+      className={`block w-full border-0 ${background} ${className}`}
       {...attrs}
     />
   )

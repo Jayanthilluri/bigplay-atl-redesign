@@ -10,6 +10,7 @@ import Visit from './pages/Visit'
 import NotFound from './pages/NotFound'
 import PlayersClub from './pages/PlayersClub'
 import Privacy from './pages/Privacy'
+import LegalPage from './pages/LegalPage'
 import { metaFor, SITE_URL } from './seo'
 
 /* Keeps <title>, description and canonical in sync on client-side navigation.
@@ -40,6 +41,8 @@ export default function App() {
         <Route path="/visit" element={<Visit />} />
         <Route path="/players-club" element={<PlayersClub />} />
         <Route path="/privacy-policy" element={<Privacy />} />
+        <Route path="/terms-and-conditions" element={<LegalPage doc="terms" />} />
+        <Route path="/accessibility" element={<LegalPage doc="accessibility" />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

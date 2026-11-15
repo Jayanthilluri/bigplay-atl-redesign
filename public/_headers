@@ -8,6 +8,16 @@ https://:project.pages.dev/*
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
+# Photos, video, fonts and brand images: cache for a week; browsers revalidate after.
+/photos/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+/video/*
+  Cache-Control: public, max-age=604800
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+/brand/*
+  Cache-Control: public, max-age=604800
+
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin

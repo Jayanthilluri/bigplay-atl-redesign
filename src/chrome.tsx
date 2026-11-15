@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import { PHOTO_SIZES } from './photos'
 
 /* Internal router link for /parties (avoids full reload to a sub-route in static preview) */
-const INTERNAL_ROUTES = ['/parties', '/events', '/attractions', '/specials', '/eat', '/visit', '/players-club', '/privacy-policy']
+const INTERNAL_ROUTES = ['/parties', '/events', '/attractions', '/specials', '/eat', '/visit', '/players-club', '/privacy-policy', '/terms-and-conditions', '/accessibility']
 
 export function NavAnchor({ href, className, children, onClick }: { href: string; className?: string; children: React.ReactNode; onClick?: () => void }) {
   if (INTERNAL_ROUTES.includes(href)) {
@@ -53,17 +53,10 @@ export function photo(src: string, sizes = '100vw') {
   }
 }
 
-export const CDN = 'https://pub-2b78141871694e5facc5a50443bed6f5.r2.dev'
+/* All images are served from this site (public/). The old r2.dev storage is rate-limited. */
 export const IMG = {
-  logo: `${CDN}/2026/07/BP-logo-scaled.png`,
-  hero: `${CDN}/2025/03/silhouettes-of-four-young-people-standing-by-bowli-2023-11-27-04-54-38-utc-scaled.jpg.webp`,
-  bowling: `${CDN}/2025/03/atlanta-bowling-and-arcade-12.png.webp`,
-  arcade: `${CDN}/2025/04/joyful-friends-playing-in-a-lively-arcade-environment.jpg.webp`,
-  kidsArcade: `${CDN}/2025/04/young-boy-and-his-friends-playing-a-motorcycle-race-arcade-game.jpg.webp`,
-  golf: `${CDN}/2025/04/mini-golf-yellow-ball-with-a-bat-at-sunset-2025-03-07-17-20-34-utc-scaled.jpg.webp`,
-  vr: `${CDN}/2025/03/a-team-of-young-friends-using-virtual-reality-vr-e-2025-02-18-18-33-25-utc-scaled.jpg.webp`,
-  vrSolo: `${CDN}/2025/03/man-vr-gaming-innovation-and-controller-for-metav-2023-11-27-04-58-38-utc-scaled.jpg.webp`,
-  food: `${CDN}/2025/03/two-cheerful-adolescent-girls-eating-pizza-and-wat-2025-03-14-17-06-24-utc-1-scaled.jpg.webp`,
+  logo: '/brand/logo.webp', // 372×135 (2.76:1), shown 36px tall
+  vr: '/photos/valo-placeholder.webp', // stock placeholder until a real Valo Arena photo arrives
 }
 
 export const HOURS: { day: string; open: number | null; close: number | null; label: string }[] = [
@@ -320,6 +313,7 @@ export function PlayersClubPopup({ delay = 25_000 }: { delay?: number }) {
   const [visible, setVisible] = useState(false)
   const [closing, setClosing] = useState(false)
   const closeRef = useRef<HTMLButtonElement>(null)
+  const dialogRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (popupSnoozed()) return
@@ -355,16 +349,33 @@ export function PlayersClubPopup({ delay = 25_000 }: { delay?: number }) {
 
   useEffect(() => {
     if (!visible) return
+    const previouslyFocused = document.activeElement as HTMLElement | null
     closeRef.current?.focus()
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && dismiss()
+    // Modal behaviour: lock page scroll, close on Escape, keep Tab inside the dialog.
+    const prevOverflow = document.documentElement.style.overflow
+    document.documentElement.style.overflow = 'hidden'
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') return dismiss()
+      if (e.key !== 'Tab' || !dialogRef.current) return
+      const items = Array.from(dialogRef.current.querySelectorAll<HTMLElement>('a[href], button:not([tabindex="-1"])'))
+      if (!items.length) return
+      const first = items[0], last = items[items.length - 1]
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus() }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus() }
+    }
     window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.documentElement.style.overflow = prevOverflow
+      previouslyFocused?.focus?.()
+    }
   }, [visible])
 
   if (!visible) return null
 
   return (
     <div
+      ref={dialogRef}
       className={`fixed inset-0 z-[100] flex items-end sm:items-center justify-center transition-opacity duration-300 ${closing ? 'opacity-0' : 'opacity-100'}`}
       role="dialog"
       aria-modal="true"
@@ -391,7 +402,7 @@ export function PlayersClubPopup({ delay = 25_000 }: { delay?: number }) {
           ×
         </button>
 
-        <p className="font-mono-label text-[10px] text-[#ff8e4d]">Free to join · No spam, just perks</p>
+        <p className="font-mono-label text-[12px] text-[#ff8e4d]">Free to join · No spam, just perks</p>
         <h2 className="font-display text-3xl sm:text-5xl leading-[0.9] text-white mt-3 pr-10">
           Join the <span className="text-[#42b23c]">Player’s Club</span>
         </h2>
@@ -430,6 +441,12 @@ export function PlayersClubPopup({ delay = 25_000 }: { delay?: number }) {
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setMenuOpen(false)
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [menuOpen])
   return (
     <header className="fixed top-0 inset-x-0 z-50">
       <a
@@ -440,9 +457,9 @@ export function Header() {
       </a>
       <div className="flex items-center justify-between px-4 sm:px-6 h-16 bg-gradient-to-b from-black/80 to-transparent">
         <Link to="/" className="flex items-center min-h-[44px]" aria-label="Big Play ATL home">
-          <img src={IMG.logo} alt="Big Play Entertainment" className="h-7 sm:h-9 w-auto max-w-[150px] sm:max-w-none" width={186} height={36} />
+          <img src={IMG.logo} alt="Big Play Entertainment" className="h-7 sm:h-9 w-auto" width={99} height={36} />
         </Link>
-        <nav className="hidden lg:flex items-center gap-5 2xl:gap-8 font-mono-label text-[10px] 2xl:text-[11px] text-white/90 whitespace-nowrap">
+        <nav className="hidden lg:flex items-center gap-5 2xl:gap-8 font-mono-label text-[11px] 2xl:text-[12px] text-white/90 whitespace-nowrap">
           {NAV.map((n) => (
             <NavAnchor key={n.href} href={n.href} className="u-link">
               {n.label}
@@ -520,19 +537,19 @@ export function ActionBar() {
       <div className="grid grid-cols-4">
         <a href={PHONE_TEL} className="flex flex-col items-center gap-1 py-3 text-white/80 active:text-[#42b23c]">
           <PhoneIcon />
-          <span className="font-mono-label text-[9px]">Call</span>
+          <span className="font-mono-label text-[11px]" style={{ letterSpacing: '0.04em' }}>Call</span>
         </a>
         <a href={BOWLING_URL} target="_blank" rel="noreferrer" className="flex flex-col items-center gap-1 py-3 bg-[#42b23c] text-black border-r border-black/20">
           <BowlingIcon />
-          <span className="font-mono-label text-[9px] font-bold">Bowl</span>
+          <span className="font-mono-label text-[11px] font-bold" style={{ letterSpacing: '0.04em' }}>Bowl</span>
         </a>
         <a href={BOOK_URL} target="_blank" rel="noreferrer" className="flex flex-col items-center gap-1 py-3 bg-[#42b23c] text-black">
           <TicketIcon />
-          <span className="font-mono-label text-[9px] font-bold">Party</span>
+          <span className="font-mono-label text-[11px] font-bold" style={{ letterSpacing: '0.04em' }}>Party</span>
         </a>
         <a href={MAPS_URL} target="_blank" rel="noreferrer" className="flex flex-col items-center gap-1 py-3 text-white/80 active:text-[#42b23c]">
           <PinIcon />
-          <span className="font-mono-label text-[9px]">Directions</span>
+          <span className="font-mono-label text-[11px]" style={{ letterSpacing: '0.04em' }}>Directions</span>
         </a>
       </div>
     </nav>
@@ -576,11 +593,16 @@ export function Footer() {
           </Link>
         </div>
         <div className="mt-8 flex flex-col md:flex-row justify-between gap-6 font-mono-label text-[11px] text-white/60">
-          <div className="flex items-center gap-3">
-            <img src={IMG.logo} alt="" className="h-7 w-auto" width={145} height={28} />
-            <span>© {new Date().getFullYear()} Big Play Entertainment</span>
-            <span aria-hidden="true">·</span>
-            <Link to="/privacy-policy" className="u-link text-white/70 py-2">Privacy policy</Link>
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center gap-3">
+              <img src={IMG.logo} alt="" className="h-7 w-auto" width={77} height={28} />
+              <span>© {new Date().getFullYear()} Big Play Entertainment</span>
+            </div>
+            <nav aria-label="Legal" className="flex flex-wrap gap-x-5">
+              <Link to="/privacy-policy" className="u-link text-white/70 py-2">Privacy policy</Link>
+              <Link to="/terms-and-conditions" className="u-link text-white/70 py-2">Terms</Link>
+              <Link to="/accessibility" className="u-link text-white/70 py-2">Accessibility</Link>
+            </nav>
           </div>
           <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-1">
             {NAV.map((n) => (

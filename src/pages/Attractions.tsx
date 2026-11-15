@@ -77,7 +77,7 @@ export default function Attractions() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-[#050505]/30" />
         </div>
         <div className="relative px-5 sm:px-8 pb-12 max-w-6xl mx-auto w-full">
-          <p className="font-mono-label text-[10px] sm:text-xs text-[#ff8e4d] flex items-center gap-2">
+          <p className="font-mono-label text-[12px] sm:text-xs text-[#ff8e4d] flex items-center gap-2">
             <span className={`w-2 h-2 rounded-full ${status.open ? 'bg-[#42b23c] pulse-dot' : 'bg-[#ff8e4d]'}`} />
             {status.text || '42,000 sq ft of play'}
           </p>
@@ -107,12 +107,12 @@ export default function Attractions() {
                   loading="lazy"
                   className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <span className="absolute top-3 left-3 bg-[#050505]/85 backdrop-blur px-3 py-1.5 font-mono-label text-[10px] text-[#42b23c]">
+                <span className="absolute top-3 left-3 bg-[#050505]/85 backdrop-blur px-3 py-1.5 font-mono-label text-[12px] text-[#42b23c]">
                   {a.tag}
                 </span>
               </div>
               <div>
-                <p className="font-mono-label text-[10px] text-[#ff8e4d]">{String(i + 1).padStart(2, '0')}</p>
+                <p className="font-mono-label text-[12px] text-[#ff8e4d]">{String(i + 1).padStart(2, '0')}</p>
                 <h2 className="font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white mt-2">
                   {a.name}
                 </h2>
@@ -128,7 +128,7 @@ export default function Attractions() {
                 {'pricing' in a && a.pricing ? (
                   <div className="mt-6 inline-flex flex-wrap items-baseline gap-x-4 gap-y-1 border border-[#42b23c]/40 px-4 py-3">
                     <span className="font-display text-3xl text-[#42b23c]">{a.pricing.price}</span>
-                    <span className="font-mono-label text-[10px] text-white/70">{a.pricing.unit}</span>
+                    <span className="font-mono-label text-[12px] text-white/70">{a.pricing.unit}</span>
                     {a.pricing.notes.length > 0 && (
                       <ul className="basis-full text-xs text-white/70 space-y-0.5 mt-1">
                         {a.pricing.notes.map((n) => (
@@ -165,7 +165,7 @@ export default function Attractions() {
       <section id="prices" className="scroll-mt-20 px-5 sm:px-8 pb-16 md:pb-24">
         <div className="max-w-6xl mx-auto grid md:grid-cols-[1fr_1.2fr] gap-10 md:gap-16 items-start">
           <div className="reveal">
-            <p className="font-mono-label text-[10px] text-[#ff8e4d]">Prices</p>
+            <p className="font-mono-label text-[12px] text-[#ff8e4d]">Prices</p>
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white mt-2">
               Bowling <span className="text-[#42b23c]">rates</span>
             </h2>
@@ -186,7 +186,7 @@ export default function Attractions() {
             <table className="w-full text-sm">
               <caption className="sr-only">Bowling price per lane per hour, by day and time</caption>
               <thead>
-                <tr className="bg-[#0d0d0d] font-mono-label text-[10px] text-white/70">
+                <tr className="bg-[#0d0d0d] font-mono-label text-[12px] text-white/70">
                   <th scope="col" className="text-left px-4 py-3 font-normal">Day</th>
                   <th scope="col" className="text-right px-4 py-3 font-normal">Before 5 PM</th>
                   <th scope="col" className="text-right px-4 py-3 font-normal">After 5 PM</th>
@@ -210,7 +210,7 @@ export default function Attractions() {
       <section id="game-cards" className="scroll-mt-20 px-5 sm:px-8 pb-16 md:pb-24">
         <div className="max-w-6xl mx-auto grid md:grid-cols-[1fr_1.2fr] gap-10 md:gap-16 items-start">
           <div className="reveal">
-            <p className="font-mono-label text-[10px] text-[#ff8e4d]">Prices</p>
+            <p className="font-mono-label text-[12px] text-[#ff8e4d]">Prices</p>
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white mt-2">
               Game card <span className="text-[#42b23c]">bonuses</span>
             </h2>
@@ -226,7 +226,7 @@ export default function Attractions() {
       <section className="bg-[#42b23c] text-black px-5 sm:px-8 py-16 md:py-20">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="reveal">
-            <p className="font-mono-label text-[10px] text-black/85">Can’t pick just one?</p>
+            <p className="font-mono-label text-[12px] text-black/85">Can’t pick just one?</p>
             <h2 className="font-display text-5xl sm:text-6xl md:text-7xl leading-[0.9] mt-2">
               Play everything.
             </h2>

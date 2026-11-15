@@ -1,4 +1,5 @@
 import { Link } from 'react-router'
+import ReviewsSection from '../components/ReviewsSection'
 import {
   Header, HeroVideo, photo, Footer, ActionBar, KineticLine, ArrowIcon, PhoneIcon, PinIcon, PlayersClubPopup,
   useReveal, useOpenStatus, BOOK_URL, BOWLING_URL, VIP_URL, PHONE_DISPLAY, PHONE_TEL, MAPS_URL, ADDRESS, HOURS, IMG,
@@ -50,10 +51,14 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/45 via-35% to-[#050505]/10" />
 
         <div className="relative z-10 px-5 sm:px-8 pb-28 md:pb-16 pt-24 max-w-6xl">
-          <div className="flex items-center gap-2 mb-5">
-            <span className={`w-2 h-2 rounded-full ${status.open ? 'bg-[#42b23c] pulse-dot' : 'bg-[#ff8e4d]'}`} />
-            <span className="font-mono-label text-[11px] text-white/90">{status.text}</span>
-            <span className="font-mono-label text-[11px] text-white/50">· Dunwoody, GA</span>
+          {/* Status text is filled in after load (it depends on the time), so reserve its
+              space up front — otherwise the hero jumps when it appears. */}
+          <div className="flex items-start gap-2 mb-5 min-h-[2.6em] sm:min-h-[1.3em]">
+            <span className={`mt-[0.35em] w-2 h-2 shrink-0 rounded-full ${status.open ? 'bg-[#42b23c] pulse-dot' : 'bg-[#ff8e4d]'}`} />
+            <span className="font-mono-label text-[11px] text-white/90">
+              {status.text}
+              <span className="hidden sm:inline text-white/60"> · Dunwoody, GA</span>
+            </span>
           </div>
 
           <h1 className="font-display leading-[0.9] text-[19vw] sm:text-7xl md:text-8xl lg:text-9xl text-white">
@@ -129,11 +134,11 @@ export default function Home() {
           ].map(([n, l]) => (
             <div key={l} className="reveal bg-[#050505] p-6">
               <div className="font-display text-4xl sm:text-5xl text-[#42b23c]">{n}</div>
-              <div className="mt-2 font-mono-label text-[10px] text-white/60">{l}</div>
+              <div className="mt-2 font-mono-label text-[12px] text-white/60">{l}</div>
             </div>
           ))}
         </div>
-        <p className="mt-3 font-mono-label text-[10px] text-white/60">Closed Mondays for private events & deep cleans</p>
+        <p className="mt-3 font-mono-label text-[12px] text-white/60">Closed Mondays for private events & deep cleans</p>
       </section>
 
       {/* ===== attractions ===== */}
@@ -146,8 +151,8 @@ export default function Home() {
             </h2>
           </div>
           <div className="reveal hidden md:flex items-center gap-6">
-            <p className="font-mono-label text-[10px] text-white/60">Swipe →</p>
-            <Link to="/attractions" className="u-link font-mono-label text-[10px] text-[#42b23c]">View all →</Link>
+            <p className="font-mono-label text-[12px] text-white/60">Swipe →</p>
+            <Link to="/attractions" className="u-link font-mono-label text-[12px] text-[#42b23c]">View all →</Link>
           </div>
         </div>
 
@@ -161,7 +166,7 @@ export default function Home() {
                   loading={i > 1 ? 'lazy' : undefined}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <span className="absolute top-3 left-3 bg-[#050505]/85 backdrop-blur font-mono-label text-[10px] text-[#42b23c] px-3 py-1.5">
+                <span className="absolute top-3 left-3 bg-[#050505]/85 backdrop-blur font-mono-label text-[12px] text-[#42b23c] px-3 py-1.5">
                   {a.tag}
                 </span>
               </div>
@@ -241,17 +246,69 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===== bowling ===== */}
+      <section id="bowling" className="py-16 md:py-24 px-5 sm:px-8 border-t border-white/10">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-14 items-center">
+          <div className="reveal relative overflow-hidden">
+            <img
+              {...photo('/photos/attr-bowling.webp', '(min-width: 768px) 50vw, 100vw')}
+              alt="Big Play’s 16 bowling lanes under neon lights"
+              loading="lazy"
+              className="w-full aspect-[4/3] object-cover"
+            />
+          </div>
+          <div>
+            <p className="reveal font-mono-label text-[11px] text-[#ff8e4d] mb-3">03 — Bowling</p>
+            <h2 className="reveal font-display text-4xl sm:text-5xl md:text-6xl text-white leading-[0.95]">
+              16 lanes of <span className="text-[#42b23c]">boutique bowling</span>
+            </h2>
+            <p className="reveal mt-4 text-white/70 leading-relaxed max-w-md">
+              Modern lanes, lounge seating and lane-side food and drinks from Woody’s. Skip the
+              wait — reserve your lane online.
+            </p>
+            <ul className="reveal mt-6 grid grid-cols-3 gap-px bg-white/10 border border-white/10 text-center">
+              {[
+                ['From $20', 'per lane / hour'],
+                ['$2', 'all day Tuesday'],
+                ['$5', 'shoe rental'],
+              ].map(([v, l]) => (
+                <li key={l} className="bg-[#050505] px-2 py-4">
+                  <p className="font-display text-2xl sm:text-3xl text-[#42b23c]">{v}</p>
+                  <p className="mt-1 font-mono-label text-[11px] text-white/70">{l}</p>
+                </li>
+              ))}
+            </ul>
+            <div className="reveal mt-7 flex flex-col sm:flex-row gap-3 sm:items-center">
+              <a
+                href={BOWLING_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2 bg-[#42b23c] text-black font-mono-label text-xs font-bold px-7 py-4 hover:bg-white transition-colors"
+              >
+                Reserve a lane <ArrowIcon />
+              </a>
+              <Link
+                to="/attractions#prices"
+                className="inline-flex items-center justify-center gap-2 border border-white/40 text-white font-mono-label text-xs px-7 py-4 hover:border-[#42b23c] hover:text-[#42b23c] transition-colors"
+              >
+                See all bowling rates
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ===== specials strip ===== */}
       <section id="specials" className="py-16 md:py-20 px-5 sm:px-8 border-b border-white/10">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-end gap-8 justify-between">
           <div className="max-w-xl">
-            <p className="reveal font-mono-label text-[11px] text-[#ff8e4d] mb-3">03 — Daily specials</p>
+            <p className="reveal font-mono-label text-[11px] text-[#ff8e4d] mb-3">04 — Happy Days specials</p>
             <h2 className="reveal font-display text-4xl sm:text-5xl text-white leading-[0.95]">
               Big fun. Bigger savings. All week long.
             </h2>
             <p className="reveal mt-4 text-white/70 leading-relaxed">
-              $2 bowling and $2 domestic beers on Tuesdays, half-price cocktails and arcade on
-              Wednesdays, $5 Thursdays, a $60 Friday family night — and kids eat free on Sundays.
+              $2 bowling and $2 domestic beers on Tuesdays, half-price cocktails, wine and arcade
+              on Wednesdays, $5 Thursdays, a $60 Friday family night — and kids eat free on Sundays.
             </p>
           </div>
           <div className="reveal flex flex-col sm:flex-row md:flex-col gap-3">
@@ -271,11 +328,14 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===== reviews ===== */}
+      <ReviewsSection eyebrow="Real guests, real reviews" />
+
       {/* ===== visit ===== */}
       <section id="visit" className="py-16 md:py-24 px-5 sm:px-8">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
           <div>
-            <p className="reveal font-mono-label text-[11px] text-[#ff8e4d] mb-3">04 — Visit us</p>
+            <p className="reveal font-mono-label text-[11px] text-[#ff8e4d] mb-3">05 — Visit us</p>
             <h2 className="reveal font-display text-4xl sm:text-5xl text-white leading-[0.95]">
               Find the fun
             </h2>

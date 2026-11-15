@@ -45,7 +45,7 @@ export default function Specials() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-[#050505]/30" />
         </div>
         <div className="relative px-5 sm:px-8 pb-12 max-w-6xl mx-auto w-full">
-          <p className="font-mono-label text-[10px] sm:text-xs text-[#ff8e4d]">Deals & weekly specials</p>
+          <p className="font-mono-label text-[12px] sm:text-xs text-[#ff8e4d]">Deals & weekly specials</p>
           <h1 className="font-display text-[13vw] sm:text-7xl md:text-8xl leading-[0.9] mt-4 text-white">
             <KineticLine text="Big Play." />{' '}
             <span className="text-[#42b23c]"><KineticLine text="Big Value." base={0.15} /></span>
@@ -64,7 +64,7 @@ export default function Specials() {
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl leading-[0.9] text-white">
               Happy Days <span className="text-[#42b23c]">Specials</span>
             </h2>
-            <p className="hidden md:block font-mono-label text-[10px] text-white/60 max-w-[220px] text-right">
+            <p className="hidden md:block font-mono-label text-[12px] text-white/60 max-w-[220px] text-right">
               Specials can change on holidays — call ahead if you’re planning around one
             </p>
           </div>
@@ -86,7 +86,7 @@ export default function Specials() {
                   <div className="p-6 sm:p-8 flex flex-col justify-center">
                     <p className="font-mono-label text-[11px] text-[#ff8e4d] flex items-center gap-2">
                       {d.day}
-                      {isToday && <span className="bg-[#42b23c] text-black px-1.5 py-0.5 text-[9px] font-bold">TODAY</span>}
+                      {isToday && <span className="bg-[#42b23c] text-black px-1.5 py-0.5 text-[12px] font-bold">TODAY</span>}
                     </p>
                     <h3 className="font-display text-3xl sm:text-4xl text-white mt-2">{d.name}</h3>
                     <ul className="mt-3 space-y-1 text-sm sm:text-base text-white/80">
@@ -121,7 +121,7 @@ export default function Specials() {
       <section id="game-cards" className="scroll-mt-20 px-5 sm:px-8 pb-16 md:pb-24">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-start">
           <div className="reveal">
-            <p className="font-mono-label text-[10px] text-[#ff8e4d]">Arcade</p>
+            <p className="font-mono-label text-[12px] text-[#ff8e4d]">Arcade</p>
             <h2 className="font-display text-4xl sm:text-5xl leading-[0.9] text-white mt-2">
               Game card <span className="text-[#42b23c]">bonuses</span>
             </h2>

@@ -32,6 +32,7 @@ Node version comes from `.node-version` (22).
 | Pages | `src/pages/*.tsx` |
 | Photos (WebP, 1600w + `-800` variant) | `public/photos/` — sizes in `src/photos.ts` |
 | Prerender + sitemap | `scripts/prerender.mjs` |
+| Reviews widget (Home + Parties) | `src/components/ReviewsSection.tsx` — colors/layout are set in GoHighLevel → Reputation → Widgets |
 
 If you change opening hours, update **both** `HOURS` in `src/chrome.tsx` and
 `openingHoursSpecification` in `src/seo.ts`. "Open now" is always computed in Atlanta time.
@@ -57,4 +58,3 @@ Export a JPG, then create `name.webp` (max 1600px wide) and `name-800.webp` (800
 - Walk-in prices for bowling, laser tag, glow golf and mixed reality.
 - This week's actual specials (e.g. the $2 Tuesday bowling) for `/specials`.
 - Woody's real menu with prices and kitchen hours for `/eat`.
-- Real Google reviews to show on `/parties` (the AI-written testimonials were removed).

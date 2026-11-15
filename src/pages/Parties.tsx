@@ -1,5 +1,6 @@
 import { useId, useRef, useState } from 'react'
 import { PARTY_FAQS } from '../content/partyFaqs'
+import ReviewsSection from '../components/ReviewsSection'
 import {
   Header, photo, Footer, ActionBar, KineticLine, ArrowIcon, PlayersClubPopup,
   useReveal, useHeroParallax, useOpenStatus, BOOK_URL, PHONE_DISPLAY, PHONE_TEL,
@@ -371,6 +372,9 @@ export default function Parties() {
           </p>
         </div>
       </section>
+
+      {/* ===== reviews ===== */}
+      <ReviewsSection eyebrow="Happy families" title="What parents are saying" />
 
       {/* ===== FAQ ===== */}
       <section className="px-5 sm:px-8 pb-16 md:pb-24">

@@ -1,4 +1,5 @@
 import { Link } from 'react-router'
+import ReviewsSection from '../components/ReviewsSection'
 import {
   Header, HeroVideo, photo, Footer, ActionBar, KineticLine, ArrowIcon, PhoneIcon, PinIcon, PlayersClubPopup,
   useReveal, useOpenStatus, BOOK_URL, BOWLING_URL, VIP_URL, PHONE_DISPLAY, PHONE_TEL, MAPS_URL, ADDRESS, HOURS, IMG,
@@ -326,6 +327,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ===== reviews ===== */}
+      <ReviewsSection eyebrow="Real guests, real reviews" />
 
       {/* ===== visit ===== */}
       <section id="visit" className="py-16 md:py-24 px-5 sm:px-8">

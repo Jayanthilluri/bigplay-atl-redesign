@@ -4,7 +4,7 @@ import EmbedFrame from './EmbedFrame'
    Colors, fonts and which reviews show are set in GoHighLevel:
    Reputation → Widgets → this widget → Customize. */
 const REVIEWS_WIDGET_SRC =
-  'https://reputationhub.site/reputation/widgets/review_widget/6oWVUr5GVo8EzTzJCIl0?widgetId=6855696adf99e9bc68ad5ff1'
+  'https://reputationhub.site/reputation/widgets/review_widget/6oWVUr5GVo8EzTzJCIl0'
 const REVIEWS_WIDGET_SCRIPT = 'https://reputationhub.site/reputation/assets/review-widget.js'
 
 export default function ReviewsSection({

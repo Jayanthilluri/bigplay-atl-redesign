@@ -192,10 +192,6 @@ export const PHOTO_SIZES: Record<string, [number, number]> = {
     1536,
     1920
   ],
-  "special-fri": [
-    1600,
-    1600
-  ],
   "special-sun": [
     1600,
     1067

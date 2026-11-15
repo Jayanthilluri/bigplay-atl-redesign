@@ -46,7 +46,7 @@ Export a JPG, then create `name.webp` (max 1600px wide) and `name-800.webp` (800
 
 - [x] Old WordPress URLs redirect (`public/_redirects`, 301s); legal pages carried over.
 - [x] Logo, favicon and all images served from this site (no `r2.dev`); fonts self-hosted.
-- [x] Google Tag Manager `GTM-N6GMJQDS` (in `index.html`; loads only on bigplayatl.com). In GTM, make
+- [x] Google Tag Manager `GTM-M6NCPZLR` (replaced the old site’s `GTM-N6GMJQDS`) (in `index.html`; loads only on bigplayatl.com). In GTM, make
       GA4 page views fire on **History Change** too — the site navigates without full page loads.
 - [ ] Cloudflare Pages → Custom domains: add `bigplayatl.com` (and `www`), then point DNS.
 - [ ] Google Search Console: submit `https://bigplayatl.com/sitemap.xml`; watch for 404s.

@@ -39,7 +39,7 @@ export const PAGES: PageMeta[] = [
     path: '/specials',
     title: '$2 Tuesday Bowling & Weekly Specials | Big Play ATL Dunwoody',
     description:
-      '$2 bowling and $2 domestic beers on Tuesdays, half-price cocktails and arcade on Wednesdays, $5 Thursdays, $60 Friday family night and kids eat free on Sundays.',
+      '$2 bowling and beers on Tuesdays, half-price cocktails, wine and arcade on Wednesdays, $5 Thursdays, $60 Friday family night and kids eat free on Sundays.',
   },
   {
     path: '/eat',

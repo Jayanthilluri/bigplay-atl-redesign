@@ -30,7 +30,7 @@ const CONTACTS = [
 
 const GOOD_TO_KNOW = [
   'Free on-site parking — the lot is right at the door',
-  'Socks required for some play areas — bring a pair or grab some at the counter',
+  'Socks are required for bowling',
   'Outside cakes welcome with any booked birthday package',
   'The whole building is climate controlled — perfect for Georgia summers',
 ]
